@@ -7,1025 +7,522 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gold: #F5B800;
-      --gold-dark: #C49400;
-      --gold-light: #FFF3B0;
-      --black: #0D0D0D;
-      --surface: #161616;
-      --surface2: #1E1E1E;
-      --surface3: #262626;
-      --border: rgba(255,255,255,0.08);
-      --border-gold: rgba(245,184,0,0.3);
-      --text: #F0F0F0;
-      --muted: #666;
-      --muted2: #999;
-      --green: #22C55E;
-      --red: #EF4444;
-      --blue: #60A5FA;
-      --radius: 10px;
-      --radius-lg: 14px;
+      --gold: #F5B800; --gold-dark: #C49400; --black: #0D0D0D;
+      --surface: #161616; --surface2: #1E1E1E; --surface3: #262626;
+      --border: rgba(255,255,255,0.08); --border-gold: rgba(245,184,0,0.3);
+      --text: #F0F0F0; --muted: #666; --muted2: #999;
+      --green: #22C55E; --red: #EF4444; --blue: #60A5FA;
+      --radius: 10px; --radius-lg: 14px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--black);
-      color: var(--text);
-      font-family: 'DM Sans', system-ui, sans-serif;
-      font-size: 14px;
-      line-height: 1.5;
-      min-height: 100vh;
-    }
-
-    /* SCROLLBAR */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--surface); }
-    ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
-
-    /* LAYOUT */
+    body { background: var(--black); color: var(--text); font-family: 'DM Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.5; min-height: 100vh; }
+    ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--surface); } ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
     .app { display: flex; flex-direction: column; min-height: 100vh; }
-
-    /* NAV */
-    .nav {
-      background: var(--surface);
-      border-bottom: 1.5px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1.5rem;
-      height: 60px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+    .nav { background: var(--surface); border-bottom: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; height: 60px; position: sticky; top: 0; z-index: 100; }
     .nav-logo { display: flex; align-items: center; gap: 12px; }
-    .logo-mark {
-      width: 40px; height: 40px;
-      background: var(--gold);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px; color: var(--black);
-      letter-spacing: 1px;
-    }
-    .logo-info { display: flex; flex-direction: column; }
-    .logo-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px;
-      color: var(--gold);
-      letter-spacing: 1.5px;
-      line-height: 1;
-    }
+    .logo-mark { width: 40px; height: 40px; background: var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--black); }
+    .logo-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--gold); letter-spacing: 1.5px; line-height: 1; }
     .logo-sub { font-size: 10px; color: var(--muted); letter-spacing: 0.5px; margin-top: 2px; }
     .nav-tabs { display: flex; gap: 4px; }
-    .nav-tab {
-      background: none; border: none;
-      color: var(--muted2);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      padding: 7px 14px;
-      border-radius: 7px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
+    .nav-tab { background: none; border: none; color: var(--muted2); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 7px 14px; border-radius: 7px; cursor: pointer; transition: all 0.15s; }
     .nav-tab.active { background: var(--gold); color: var(--black); font-weight: 600; }
     .nav-tab:hover:not(.active) { background: var(--surface3); color: var(--text); }
-    .nav-badge {
-      display: inline-flex; align-items: center; justify-content: center;
-      background: var(--red); color: white;
-      font-size: 10px; font-weight: 600;
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      margin-left: 4px;
-      vertical-align: middle;
-    }
-
-    /* MAIN */
+    .nav-badge { display: inline-flex; align-items: center; justify-content: center; background: var(--red); color: white; font-size: 10px; font-weight: 600; width: 16px; height: 16px; border-radius: 50%; margin-left: 4px; vertical-align: middle; }
     .main { flex: 1; padding: 1.5rem; max-width: 1100px; margin: 0 auto; width: 100%; }
-    .screen { display: none; }
-    .screen.active { display: block; }
-
-    /* PAGE HEADER */
+    .screen { display: none; } .screen.active { display: block; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
     .page-header { margin-bottom: 1.5rem; }
-    .page-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      color: var(--text);
-      letter-spacing: 1px;
-      line-height: 1;
-    }
+    .page-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--text); letter-spacing: 1px; line-height: 1; }
     .page-title span { color: var(--gold); }
     .page-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
-
-    /* CARDS */
-    .card {
-      background: var(--surface);
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.25rem;
-      margin-bottom: 1rem;
-    }
-    .card-title {
-      font-size: 11px;
-      color: var(--gold);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 1rem;
-    }
-    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-
-    /* STAT CARDS */
+    .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1rem; }
+    .card-title { font-size: 11px; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 1rem; }
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 1rem; }
-    .stat-card {
-      background: var(--surface2);
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px; height: 100%;
-      background: var(--gold);
-    }
+    .stat-card { background: var(--surface2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem; position: relative; overflow: hidden; }
+    .stat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--gold); }
     .stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
     .stat-value { font-size: 24px; font-weight: 600; color: var(--gold); line-height: 1; }
-    .stat-value.green { color: var(--green); }
-    .stat-value.red { color: var(--red); }
-    .stat-value.white { color: var(--text); }
+    .stat-value.green { color: var(--green); } .stat-value.red { color: var(--red); } .stat-value.white { color: var(--text); }
     .stat-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
-
-    /* FORMS */
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .form-grid.cols3 { grid-template-columns: 1fr 1fr 1fr; }
     .form-group { display: flex; flex-direction: column; gap: 5px; }
     .form-group.full { grid-column: 1 / -1; }
     label { font-size: 11px; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.4px; }
-    input, select, textarea {
-      background: var(--surface3);
-      border: 0.5px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-size: 14px;
-      font-family: 'DM Sans', sans-serif;
-      padding: 9px 12px;
-      outline: none;
-      transition: border-color 0.15s;
-      width: 100%;
-    }
+    input, select, textarea { background: var(--surface3); border: 0.5px solid var(--border); border-radius: 8px; color: var(--text); font-size: 14px; font-family: 'DM Sans', sans-serif; padding: 9px 12px; outline: none; transition: border-color 0.15s; width: 100%; }
     input:focus, select:focus, textarea:focus { border-color: var(--gold); }
-    select option { background: var(--surface3); }
-    textarea { resize: vertical; min-height: 80px; }
-    input[type="checkbox"] { width: auto; accent-color: var(--gold); }
-
-    /* BUTTONS */
-    .btn {
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 9px 18px;
-      transition: all 0.15s;
-      white-space: nowrap;
-    }
-    .btn-gold { background: var(--gold); color: var(--black); font-weight: 600; }
-    .btn-gold:hover { background: var(--gold-dark); transform: translateY(-1px); }
-    .btn-outline { background: transparent; border: 0.5px solid var(--gold); color: var(--gold); }
-    .btn-outline:hover { background: var(--gold); color: var(--black); }
-    .btn-ghost { background: transparent; border: 0.5px solid var(--border); color: var(--muted2); }
-    .btn-ghost:hover { border-color: var(--muted2); color: var(--text); }
-    .btn-danger { background: transparent; border: 0.5px solid var(--red); color: var(--red); }
-    .btn-danger:hover { background: var(--red); color: white; }
-    .btn-sm { padding: 5px 10px; font-size: 12px; }
+    select option { background: var(--surface3); } textarea { resize: vertical; min-height: 80px; }
+    .btn { border: none; border-radius: 8px; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 9px 18px; transition: all 0.15s; white-space: nowrap; }
+    .btn-gold { background: var(--gold); color: var(--black); font-weight: 600; } .btn-gold:hover { background: var(--gold-dark); }
+    .btn-outline { background: transparent; border: 0.5px solid var(--gold); color: var(--gold); } .btn-outline:hover { background: var(--gold); color: var(--black); }
+    .btn-ghost { background: transparent; border: 0.5px solid var(--border); color: var(--muted2); } .btn-ghost:hover { border-color: var(--muted2); color: var(--text); }
+    .btn-danger { background: transparent; border: 0.5px solid var(--red); color: var(--red); } .btn-danger:hover { background: var(--red); color: white; }
+    .btn-sm { padding: 5px 10px; font-size: 12px; } .btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-row { display: flex; gap: 8px; margin-top: 1rem; flex-wrap: wrap; }
-
-    /* TABLE */
-    .table-wrap { overflow-x: auto; border-radius: var(--radius); }
+    .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 600px; }
-    th {
-      text-align: left;
-      color: var(--gold);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--border-gold);
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    td {
-      padding: 11px 12px;
-      border-bottom: 0.5px solid var(--border);
-      color: var(--text);
-      vertical-align: middle;
-    }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: var(--surface2); }
-
-    /* BADGES */
+    th { text-align: left; color: var(--gold); font-size: 10px; text-transform: uppercase; letter-spacing: 0.7px; padding: 10px 12px; border-bottom: 1px solid var(--border-gold); font-weight: 600; white-space: nowrap; }
+    td { padding: 11px 12px; border-bottom: 0.5px solid var(--border); color: var(--text); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; } tr:hover td { background: var(--surface2); }
     .badge { display: inline-block; padding: 3px 9px; border-radius: 5px; font-size: 11px; font-weight: 600; white-space: nowrap; }
     .badge-gold { background: rgba(245,184,0,0.15); color: var(--gold); border: 0.5px solid rgba(245,184,0,0.3); }
     .badge-green { background: rgba(34,197,94,0.1); color: var(--green); border: 0.5px solid rgba(34,197,94,0.3); }
     .badge-red { background: rgba(239,68,68,0.1); color: var(--red); border: 0.5px solid rgba(239,68,68,0.3); }
     .badge-blue { background: rgba(96,165,250,0.1); color: var(--blue); border: 0.5px solid rgba(96,165,250,0.3); }
     .badge-gray { background: var(--surface3); color: var(--muted2); border: 0.5px solid var(--border); }
-
-    /* INGREDIENT SELECTOR */
     .ing-section-title { font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.6px; margin: 12px 0 6px; font-weight: 600; }
     .ing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 6px; }
-    .ing-item {
-      display: flex; align-items: center; gap: 8px;
-      background: var(--surface2);
-      border: 0.5px solid var(--border);
-      border-radius: 8px;
-      padding: 8px 10px;
-      cursor: pointer;
-      transition: border-color 0.15s;
-    }
-    .ing-item:hover { border-color: var(--border-gold); }
-    .ing-item.selected { border-color: var(--gold); background: rgba(245,184,0,0.07); }
+    .ing-item { display: flex; align-items: center; gap: 8px; background: var(--surface2); border: 0.5px solid var(--border); border-radius: 8px; padding: 8px 10px; cursor: pointer; transition: border-color 0.15s; }
+    .ing-item:hover { border-color: var(--border-gold); } .ing-item.selected { border-color: var(--gold); background: rgba(245,184,0,0.07); }
     .ing-item label { cursor: pointer; font-size: 13px; color: var(--text); text-transform: none; letter-spacing: 0; flex: 1; }
     .ing-cost-pill { font-size: 11px; color: var(--gold); background: rgba(245,184,0,0.1); padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
-
-    /* BUDGET PREVIEW */
+    .svc-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem; }
+    .svc-item { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: var(--surface2); border: 0.5px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.15s; user-select: none; }
+    .svc-item.active { border-color: var(--gold); background: rgba(245,184,0,0.08); }
+    .svc-item label { cursor: pointer; font-size: 13px; font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--text); }
     .preview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1rem; }
     .budget-bar-wrap { margin: 10px 0; }
     .budget-bar-bg { background: var(--surface3); border-radius: 4px; height: 10px; overflow: hidden; }
     .budget-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease, background 0.3s; }
     .budget-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 5px; }
-
-    /* SERVICES */
-    .svc-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem; }
-    .svc-item {
-      display: flex; align-items: center; gap: 8px;
-      padding: 8px 14px;
-      background: var(--surface2);
-      border: 0.5px solid var(--border);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.15s;
-      user-select: none;
-    }
-    .svc-item.active { border-color: var(--gold); background: rgba(245,184,0,0.08); }
-    .svc-item label { cursor: pointer; font-size: 13px; font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--text); }
-    .svc-icon { font-size: 16px; }
-
-    /* EVENT DETAIL */
-    .detail-hero {
-      background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
-      border: 0.5px solid var(--border-gold);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-      display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;
-    }
-    .detail-client-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 32px;
-      color: var(--text);
-      letter-spacing: 1px;
-      line-height: 1;
-    }
+    .detail-hero { background: var(--surface); border: 0.5px solid var(--border-gold); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; }
+    .detail-client-name { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--text); letter-spacing: 1px; line-height: 1; }
     .detail-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
     .meta-pill { font-size: 12px; color: var(--muted2); background: var(--surface3); padding: 4px 10px; border-radius: 20px; }
-
-    /* FILTERS */
     .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; align-items: center; }
     .filters select { width: auto; font-size: 12px; padding: 6px 10px; }
-
-    /* EMPTY */
     .empty { text-align: center; padding: 4rem 1rem; color: var(--muted); }
     .empty-icon { font-size: 48px; margin-bottom: 1rem; opacity: 0.5; }
-    .empty-text { font-size: 15px; }
-    .empty-sub { font-size: 13px; margin-top: 6px; }
-
-    /* TOAST */
-    .toast {
-      position: fixed;
-      bottom: 24px; right: 24px;
-      background: var(--gold);
-      color: var(--black);
-      padding: 11px 20px;
-      border-radius: 10px;
-      font-size: 13px; font-weight: 600;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.25s, transform 0.25s;
-      pointer-events: none;
-      z-index: 9999;
-    }
-    .toast.show { opacity: 1; transform: translateY(0); }
-    .toast.error { background: var(--red); color: white; }
-
-    /* DIVIDER */
-    .divider { border: none; border-top: 0.5px solid var(--border); margin: 1rem 0; }
-
-    /* STATUS SELECT */
-    .status-select {
-      background: var(--surface3);
-      border: 0.5px solid var(--border);
-      border-radius: 6px;
-      color: var(--text);
-      font-size: 12px;
-      padding: 4px 8px;
-      cursor: pointer;
-    }
-
-    /* MENU LIST */
-    .menu-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 12px;
-      background: var(--surface2);
-      border: 0.5px solid var(--border);
-      border-radius: 8px;
-      margin-bottom: 6px;
-    }
+    .empty-text { font-size: 15px; } .empty-sub { font-size: 13px; margin-top: 6px; }
+    .loading { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 2rem; color: var(--muted); font-size: 13px; }
+    .spinner { width: 20px; height: 20px; border: 2px solid var(--surface3); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .toast { position: fixed; bottom: 24px; right: 24px; background: var(--gold); color: var(--black); padding: 11px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; opacity: 0; transform: translateY(10px); transition: opacity 0.25s, transform 0.25s; pointer-events: none; z-index: 9999; }
+    .toast.show { opacity: 1; transform: translateY(0); } .toast.error { background: var(--red); color: white; }
+    .menu-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--surface2); border: 0.5px solid var(--border); border-radius: 8px; margin-bottom: 6px; }
     .menu-item-name { flex: 1; font-size: 13px; font-weight: 500; }
     .menu-item-cat { font-size: 11px; color: var(--muted); }
     .menu-item-cost { font-size: 13px; color: var(--gold); font-weight: 600; min-width: 80px; text-align: right; }
-
-    /* REPORT */
-    .report-section { margin-bottom: 1.5rem; }
+    .status-select { background: var(--surface3); border: 0.5px solid var(--border); border-radius: 6px; color: var(--text); font-size: 12px; padding: 4px 8px; cursor: pointer; }
+    .back-btn { display: flex; align-items: center; gap: 6px; background: none; border: 0.5px solid var(--border); border-radius: 7px; color: var(--muted2); font-size: 12px; font-family: 'DM Sans', sans-serif; padding: 5px 12px; cursor: pointer; transition: all 0.15s; }
+    .back-btn:hover { border-color: var(--gold); color: var(--gold); }
     .report-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 0.5px solid var(--border); font-size: 13px; }
     .report-row:last-child { border-bottom: none; }
     .report-total { display: flex; justify-content: space-between; padding: 12px 0; font-size: 15px; font-weight: 600; color: var(--gold); border-top: 1px solid var(--border-gold); }
-
-    /* BACK BTN */
-    .back-btn {
-      display: flex; align-items: center; gap: 6px;
-      background: none; border: 0.5px solid var(--border);
-      border-radius: 7px; color: var(--muted2);
-      font-size: 12px; font-family: 'DM Sans', sans-serif;
-      padding: 5px 12px; cursor: pointer;
-      transition: all 0.15s;
-    }
-    .back-btn:hover { border-color: var(--gold); color: var(--gold); }
-
-    /* RESPONSIVE */
     @media (max-width: 640px) {
-      .nav-tabs { gap: 2px; }
-      .nav-tab { padding: 6px 10px; font-size: 12px; }
-      .form-grid { grid-template-columns: 1fr; }
-      .form-grid.cols3 { grid-template-columns: 1fr 1fr; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .main { padding: 1rem; }
+      .nav-tabs { gap: 2px; } .nav-tab { padding: 6px 8px; font-size: 11px; }
+      .form-grid { grid-template-columns: 1fr; } .form-grid.cols3 { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; } .main { padding: 1rem; }
     }
-
-    /* ANIMATIONS */
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-    .screen.active { animation: fadeIn 0.2s ease; }
   </style>
 </head>
 <body>
-<div class="app" id="app">
+<div class="app">
   <div class="toast" id="toast"></div>
-
   <nav class="nav">
     <div class="nav-logo">
       <div class="logo-mark">M</div>
-      <div class="logo-info">
-        <div class="logo-name">Maikels Pizzería</div>
-        <div class="logo-sub">Sistema de Catering</div>
-      </div>
+      <div><div class="logo-name">Maikels Pizzería</div><div class="logo-sub">Sistema de Catering</div></div>
     </div>
     <div class="nav-tabs">
       <button class="nav-tab active" onclick="showScreen('dashboard')">Resumen</button>
       <button class="nav-tab" onclick="showScreen('nuevo')">+ Evento</button>
-      <button class="nav-tab" onclick="showScreen('eventos')">Eventos <span class="nav-badge" id="badge-pendientes" style="display:none">0</span></button>
+      <button class="nav-tab" onclick="showScreen('eventos')">Eventos <span class="nav-badge" id="badge-p" style="display:none">0</span></button>
       <button class="nav-tab" onclick="showScreen('menu')">Menú</button>
     </div>
   </nav>
-
   <div class="main">
 
-    <!-- ============ DASHBOARD ============ -->
+    <!-- DASHBOARD -->
     <div class="screen active" id="screen-dashboard">
       <div class="page-header">
         <div class="page-title">Panel de <span>Control</span></div>
         <div class="page-sub" id="dash-date"></div>
       </div>
-      <div class="stats-grid" id="dash-stats"></div>
+      <div class="stats-grid" id="dash-stats"><div class="loading"><div class="spinner"></div> Cargando...</div></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-        <div class="card">
-          <div class="card-title">Próximos eventos</div>
-          <div id="dash-upcoming"></div>
-        </div>
-        <div class="card">
-          <div class="card-title">Resumen financiero</div>
-          <div id="dash-finance"></div>
-        </div>
+        <div class="card"><div class="card-title">Próximos eventos</div><div id="dash-upcoming"><div class="loading"><div class="spinner"></div></div></div></div>
+        <div class="card"><div class="card-title">Resumen financiero</div><div id="dash-finance"><div class="loading"><div class="spinner"></div></div></div></div>
       </div>
     </div>
 
-    <!-- ============ NUEVO EVENTO ============ -->
+    <!-- NUEVO -->
     <div class="screen" id="screen-nuevo">
-      <div class="page-header">
-        <div class="page-title">Nuevo <span>Presupuesto</span></div>
-        <div class="page-sub">Calcula el costo y registra el evento de catering</div>
-      </div>
-
+      <div class="page-header"><div class="page-title">Nuevo <span>Presupuesto</span></div><div class="page-sub">Calcula el costo y registra el evento</div></div>
       <div class="card">
         <div class="card-title">Información del cliente</div>
         <div class="form-grid">
-          <div class="form-group">
-            <label>Nombre del cliente *</label>
-            <input type="text" id="f-cliente" placeholder="Empresa o nombre del cliente">
-          </div>
-          <div class="form-group">
-            <label>Tipo de evento *</label>
-            <select id="f-tipo">
-              <option value="social">Social (cumpleaños, boda, quinceaños…)</option>
-              <option value="corporativo">Corporativo (empresa, conferencia…)</option>
-              <option value="graduacion">Graduación</option>
-              <option value="otro">Otro</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Fecha del evento *</label>
-            <input type="date" id="f-fecha">
-          </div>
-          <div class="form-group">
-            <label>Teléfono de contacto</label>
-            <input type="tel" id="f-telefono" placeholder="+58 000 000 0000">
-          </div>
-          <div class="form-group">
-            <label>Número de personas *</label>
-            <input type="number" id="f-personas" placeholder="0" min="1" oninput="updatePreview()">
-          </div>
-          <div class="form-group">
-            <label>Porciones por persona</label>
-            <input type="number" id="f-porciones" value="2" min="1" max="10" oninput="updatePreview()">
-          </div>
-          <div class="form-group">
-            <label>Presupuesto del cliente ($) *</label>
-            <input type="number" id="f-budget" placeholder="0.00" step="0.01" oninput="updatePreview()">
-          </div>
-          <div class="form-group">
-            <label>Lugar del evento</label>
-            <input type="text" id="f-lugar" placeholder="Dirección o nombre del lugar">
-          </div>
-          <div class="form-group full">
-            <label>Notas especiales</label>
-            <textarea id="f-notas" placeholder="Alergias, requisitos especiales, preferencias de presentación..."></textarea>
-          </div>
+          <div class="form-group"><label>Nombre del cliente *</label><input type="text" id="f-cliente" placeholder="Empresa o nombre"></div>
+          <div class="form-group"><label>Tipo de evento *</label><select id="f-tipo"><option value="social">Social (cumpleaños, boda…)</option><option value="corporativo">Corporativo</option><option value="graduacion">Graduación</option><option value="otro">Otro</option></select></div>
+          <div class="form-group"><label>Fecha del evento *</label><input type="date" id="f-fecha"></div>
+          <div class="form-group"><label>Teléfono</label><input type="tel" id="f-tel" placeholder="+58 000 000 0000"></div>
+          <div class="form-group"><label>Número de personas *</label><input type="number" id="f-personas" placeholder="0" min="1" oninput="updatePreview()"></div>
+          <div class="form-group"><label>Porciones por persona</label><input type="number" id="f-porciones" value="2" min="1" max="10" oninput="updatePreview()"></div>
+          <div class="form-group"><label>Presupuesto cliente ($) *</label><input type="number" id="f-budget" placeholder="0.00" step="0.01" oninput="updatePreview()"></div>
+          <div class="form-group"><label>Lugar del evento</label><input type="text" id="f-lugar" placeholder="Dirección o nombre del lugar"></div>
+          <div class="form-group full"><label>Notas especiales</label><textarea id="f-notas" placeholder="Alergias, requisitos especiales..."></textarea></div>
         </div>
       </div>
-
       <div class="card">
         <div class="card-title">Servicios incluidos</div>
-        <div class="svc-grid" id="svc-grid">
-          <div class="svc-item active" id="svc-pizza" onclick="toggleSvc('pizza')">
-            <span class="svc-icon">🍕</span>
-            <input type="checkbox" id="chk-pizza" checked onchange="updatePreview()">
-            <label for="chk-pizza">Porciones de pizza</label>
-          </div>
-          <div class="svc-item" id="svc-entrada" onclick="toggleSvc('entrada')">
-            <span class="svc-icon">🥗</span>
-            <input type="checkbox" id="chk-entrada" onchange="updatePreview()">
-            <label for="chk-entrada">Entradas</label>
-          </div>
-          <div class="svc-item" id="svc-postre" onclick="toggleSvc('postre')">
-            <span class="svc-icon">🍰</span>
-            <input type="checkbox" id="chk-postre" onchange="updatePreview()">
-            <label for="chk-postre">Postres</label>
-          </div>
-          <div class="svc-item" id="svc-bebida" onclick="toggleSvc('bebida')">
-            <span class="svc-icon">🥤</span>
-            <input type="checkbox" id="chk-bebida" onchange="updatePreview()">
-            <label for="chk-bebida">Bebidas</label>
-          </div>
+        <div class="svc-grid">
+          <div class="svc-item active" id="svc-pizza" onclick="toggleSvc('pizza')"><span style="font-size:16px">🍕</span><input type="checkbox" id="chk-pizza" checked onchange="updatePreview()"><label for="chk-pizza">Porciones de pizza</label></div>
+          <div class="svc-item" id="svc-entrada" onclick="toggleSvc('entrada')"><span style="font-size:16px">🥗</span><input type="checkbox" id="chk-entrada" onchange="updatePreview()"><label for="chk-entrada">Entradas</label></div>
+          <div class="svc-item" id="svc-postre" onclick="toggleSvc('postre')"><span style="font-size:16px">🍰</span><input type="checkbox" id="chk-postre" onchange="updatePreview()"><label for="chk-postre">Postres</label></div>
+          <div class="svc-item" id="svc-bebida" onclick="toggleSvc('bebida')"><span style="font-size:16px">🥤</span><input type="checkbox" id="chk-bebida" onchange="updatePreview()"><label for="chk-bebida">Bebidas</label></div>
         </div>
       </div>
-
+      <div class="card"><div class="card-title">Toppings e ingredientes</div><div id="ing-selector"><div class="loading"><div class="spinner"></div> Cargando menú...</div></div></div>
       <div class="card">
-        <div class="card-title">Toppings e ingredientes personalizados</div>
-        <div id="ing-selector"></div>
-      </div>
-
-      <div class="card" id="preview-card">
         <div class="card-title">Resumen del presupuesto</div>
-        <div id="preview-body">
-          <div class="empty" style="padding:2rem;">
-            <div class="empty-text">Completa los datos para ver el presupuesto</div>
-          </div>
-        </div>
+        <div id="preview-body"><div class="empty" style="padding:1.5rem;"><div class="empty-text">Completa los datos para ver el presupuesto</div></div></div>
         <div class="btn-row">
-          <button class="btn btn-gold" onclick="guardarEvento()">Guardar evento</button>
+          <button class="btn btn-gold" id="btn-guardar" onclick="guardarEvento()">Guardar evento</button>
           <button class="btn btn-ghost" onclick="limpiarForm()">Limpiar</button>
         </div>
       </div>
     </div>
 
-    <!-- ============ EVENTOS ============ -->
+    <!-- EVENTOS -->
     <div class="screen" id="screen-eventos">
-      <div class="page-header">
-        <div class="page-title">Todos los <span>Eventos</span></div>
-      </div>
+      <div class="page-header"><div class="page-title">Todos los <span>Eventos</span></div></div>
       <div class="filters">
-        <select id="fil-estado" onchange="renderEventos()" style="width:auto;">
-          <option value="">Todos los estados</option>
-          <option value="pendiente">Pendiente</option>
-          <option value="confirmado">Confirmado</option>
-          <option value="completado">Completado</option>
-          <option value="cancelado">Cancelado</option>
-        </select>
-        <select id="fil-tipo" onchange="renderEventos()" style="width:auto;">
-          <option value="">Todos los tipos</option>
-          <option value="social">Social</option>
-          <option value="corporativo">Corporativo</option>
-          <option value="graduacion">Graduación</option>
-          <option value="otro">Otro</option>
-        </select>
+        <select id="fil-estado" onchange="renderEventos()" style="width:auto;"><option value="">Todos los estados</option><option value="pendiente">Pendiente</option><option value="confirmado">Confirmado</option><option value="completado">Completado</option><option value="cancelado">Cancelado</option></select>
+        <select id="fil-tipo" onchange="renderEventos()" style="width:auto;"><option value="">Todos los tipos</option><option value="social">Social</option><option value="corporativo">Corporativo</option><option value="graduacion">Graduación</option><option value="otro">Otro</option></select>
         <input type="text" id="fil-buscar" placeholder="Buscar cliente..." oninput="renderEventos()" style="width:180px;">
       </div>
       <div class="card" style="padding:0;overflow:hidden;">
         <div class="table-wrap">
           <table>
-            <thead>
-              <tr>
-                <th>Cliente</th>
-                <th>Tipo</th>
-                <th>Fecha</th>
-                <th>Personas</th>
-                <th>Costo est.</th>
-                <th>Presupuesto</th>
-                <th>Margen</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Cliente</th><th>Tipo</th><th>Fecha</th><th>Personas</th><th>Costo est.</th><th>Presupuesto</th><th>Margen</th><th>Estado</th><th>Acciones</th></tr></thead>
             <tbody id="ev-tbody"></tbody>
           </table>
         </div>
-        <div id="ev-empty" class="empty" style="display:none;">
-          <div class="empty-icon">📋</div>
-          <div class="empty-text">Sin eventos registrados</div>
-          <div class="empty-sub">Crea tu primer presupuesto de catering</div>
-        </div>
+        <div id="ev-loading" class="loading"><div class="spinner"></div> Cargando eventos...</div>
+        <div id="ev-empty" class="empty" style="display:none;"><div class="empty-icon">📋</div><div class="empty-text">Sin eventos registrados</div><div class="empty-sub">Crea tu primer presupuesto</div></div>
       </div>
     </div>
 
-    <!-- ============ DETALLE ============ -->
-    <div class="screen" id="screen-detalle">
-      <div id="detalle-body"></div>
-    </div>
+    <!-- DETALLE -->
+    <div class="screen" id="screen-detalle"><div id="detalle-body"></div></div>
 
-    <!-- ============ MENÚ ============ -->
+    <!-- MENÚ -->
     <div class="screen" id="screen-menu">
-      <div class="page-header">
-        <div class="page-title">Gestión de <span>Menú</span></div>
-        <div class="page-sub">Administra los ingredientes y precios por porción</div>
-      </div>
+      <div class="page-header"><div class="page-title">Gestión de <span>Menú</span></div><div class="page-sub">Administra ingredientes y precios</div></div>
       <div class="card">
         <div class="card-title">Agregar ingrediente</div>
         <div class="form-grid cols3">
-          <div class="form-group">
-            <label>Nombre del ingrediente</label>
-            <input type="text" id="mi-nombre" placeholder="Ej. Pepperoni extra">
-          </div>
-          <div class="form-group">
-            <label>Categoría</label>
-            <select id="mi-cat">
-              <option value="topping">Topping de pizza</option>
-              <option value="base">Base / Salsa</option>
-              <option value="entrada">Entrada</option>
-              <option value="postre">Postre</option>
-              <option value="bebida">Bebida</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Costo por porción ($)</label>
-            <input type="number" id="mi-costo" placeholder="0.00" step="0.01" min="0">
-          </div>
+          <div class="form-group"><label>Nombre</label><input type="text" id="mi-nombre" placeholder="Ej. Pepperoni extra"></div>
+          <div class="form-group"><label>Categoría</label><select id="mi-cat"><option value="topping">Topping de pizza</option><option value="base">Base / Salsa</option><option value="entrada">Entrada</option><option value="postre">Postre</option><option value="bebida">Bebida</option></select></div>
+          <div class="form-group"><label>Costo por porción ($)</label><input type="number" id="mi-costo" placeholder="0.00" step="0.01" min="0"></div>
         </div>
-        <div class="btn-row">
-          <button class="btn btn-gold" onclick="addIngrediente()">Agregar al menú</button>
-        </div>
+        <div class="btn-row"><button class="btn btn-gold" onclick="addIngrediente()">Agregar al menú</button></div>
       </div>
-      <div class="card">
-        <div class="card-title">Ingredientes actuales</div>
-        <div id="menu-body"></div>
-      </div>
+      <div class="card"><div class="card-title">Ingredientes actuales</div><div id="menu-body"><div class="loading"><div class="spinner"></div></div></div></div>
     </div>
 
   </div>
 </div>
 
 <script>
-// ============ DATABASE ============
-const DB_EV = 'mk2_eventos';
-const DB_ING = 'mk2_ingredientes';
-let DB = { eventos: [], ingredientes: [] };
+const SUPA_URL = 'https://oajmytptnivekxjawjow.supabase.co';
+const SUPA_KEY = 'sb_publishable_uP2fZf9XP6a9AQAb1UZdYg_rwCO2jPT';
+const H = { 'Content-Type': 'application/json', 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` };
 
-function loadDB() {
-  try {
-    const ev = localStorage.getItem(DB_EV);
-    const ing = localStorage.getItem(DB_ING);
-    if (ev) DB.eventos = JSON.parse(ev);
-    if (ing) DB.ingredientes = JSON.parse(ing);
-  } catch(e) { console.warn('DB load error', e); }
-  if (!DB.ingredientes.length) seedDB();
-}
+async function sbGet(t, q='') { const r = await fetch(`${SUPA_URL}/rest/v1/${t}?${q}`, {headers:H}); if(!r.ok) throw new Error(await r.text()); return r.json(); }
+async function sbPost(t, d) { const r = await fetch(`${SUPA_URL}/rest/v1/${t}`, {method:'POST',headers:{...H,'Prefer':'return=representation'},body:JSON.stringify(d)}); if(!r.ok) throw new Error(await r.text()); return r.json(); }
+async function sbPatch(t, id, d) { const r = await fetch(`${SUPA_URL}/rest/v1/${t}?id=eq.${id}`, {method:'PATCH',headers:{...H,'Prefer':'return=representation'},body:JSON.stringify(d)}); if(!r.ok) throw new Error(await r.text()); return r.json(); }
+async function sbDelete(t, id) { const r = await fetch(`${SUPA_URL}/rest/v1/${t}?id=eq.${id}`, {method:'DELETE',headers:H}); if(!r.ok) throw new Error(await r.text()); return true; }
 
-function saveDB() {
-  try {
-    localStorage.setItem(DB_EV, JSON.stringify(DB.eventos));
-    localStorage.setItem(DB_ING, JSON.stringify(DB.ingredientes));
-  } catch(e) {}
-}
+let ingredientes = [], eventos = [];
 
-function seedDB() {
-  DB.ingredientes = [
-    { id:1, nombre:'Pepperoni', cat:'topping', costo:0.80 },
-    { id:2, nombre:'Champiñones', cat:'topping', costo:0.50 },
-    { id:3, nombre:'Jamón', cat:'topping', costo:0.70 },
-    { id:4, nombre:'Pimentón rojo', cat:'topping', costo:0.40 },
-    { id:5, nombre:'Aceitunas', cat:'topping', costo:0.60 },
-    { id:6, nombre:'Queso extra', cat:'topping', costo:0.90 },
-    { id:7, nombre:'Cebolla caramelizada', cat:'topping', costo:0.45 },
-    { id:8, nombre:'Tocineta', cat:'topping', costo:0.85 },
-    { id:9, nombre:'Masa tradicional', cat:'base', costo:1.50 },
-    { id:10, nombre:'Masa integral', cat:'base', costo:1.80 },
-    { id:11, nombre:'Salsa tomate', cat:'base', costo:0.30 },
-    { id:12, nombre:'Salsa blanca', cat:'base', costo:0.50 },
-    { id:13, nombre:'Ensalada Caesar', cat:'entrada', costo:2.50 },
-    { id:14, nombre:'Pan de ajo', cat:'entrada', costo:1.20 },
-    { id:15, nombre:'Bruschetta', cat:'entrada', costo:1.80 },
-    { id:16, nombre:'Tiramisú', cat:'postre', costo:2.00 },
-    { id:17, nombre:'Brownie con helado', cat:'postre', costo:1.80 },
-    { id:18, nombre:'Panna cotta', cat:'postre', costo:1.60 },
-    { id:19, nombre:'Refresco', cat:'bebida', costo:1.00 },
-    { id:20, nombre:'Agua mineral', cat:'bebida', costo:0.60 },
-    { id:21, nombre:'Jugo natural', cat:'bebida', costo:1.50 },
-  ];
-  saveDB();
-}
-
-// ============ HELPERS ============
 function toast(msg, type='') {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (type ? ' ' + type : '');
-  clearTimeout(t._t);
-  t._t = setTimeout(() => t.classList.remove('show'), 2500);
+  t.textContent = msg; t.className = 'toast show'+(type?' '+type:'');
+  clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove('show'), 2500);
 }
 
-function fecha(f) {
-  if (!f) return '—';
-  const [y,m,d] = f.split('-');
-  const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-  return `${d} ${months[parseInt(m)-1]} ${y}`;
+function fechaFmt(f) {
+  if(!f) return '—';
+  const s = f.split('T')[0].split('-');
+  const months=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  return `${s[2]} ${months[parseInt(s[1])-1]} ${s[0]}`;
 }
 
-function tipoLabel(t) {
-  return {social:'Social',corporativo:'Corporativo',graduacion:'Graduación',otro:'Otro'}[t] || t;
-}
+function tipoLabel(t) { return {social:'Social',corporativo:'Corporativo',graduacion:'Graduación',otro:'Otro'}[t]||t; }
 
 function estadoBadge(e) {
-  const cls = {pendiente:'badge-gold',confirmado:'badge-blue',completado:'badge-green',cancelado:'badge-red'};
-  const labels = {pendiente:'Pendiente',confirmado:'Confirmado',completado:'Completado',cancelado:'Cancelado'};
-  return `<span class="badge ${cls[e]||'badge-gray'}">${labels[e]||e}</span>`;
-}
-
-function calcEvento(ev) {
-  const ings = (ev.ingredientes||[]).map(id => DB.ingredientes.find(i=>i.id===id)).filter(Boolean);
-  const costoBase = 3.50;
-  const costoToppings = ings.filter(i=>i.cat==='topping'||i.cat==='base').reduce((s,i)=>s+i.costo,0);
-  const svcs = ev.servicios || [];
-  const costoEntradas = svcs.includes('entrada') ? DB.ingredientes.filter(i=>i.cat==='entrada').slice(0,1).reduce((s,i)=>s+i.costo,0) || 2.50 : 0;
-  const costoPostres = svcs.includes('postre') ? 2.00 : 0;
-  const costoBebidas = svcs.includes('bebida') ? 1.00 : 0;
-  const cpp = (costoBase + costoToppings) * (ev.porciones||2) + costoEntradas + costoPostres + costoBebidas;
-  const total = cpp * (ev.personas||0);
-  return { cpp, total };
+  const cls={pendiente:'badge-gold',confirmado:'badge-blue',completado:'badge-green',cancelado:'badge-red'};
+  const lbl={pendiente:'Pendiente',confirmado:'Confirmado',completado:'Completado',cancelado:'Cancelado'};
+  return `<span class="badge ${cls[e]||'badge-gray'}">${lbl[e]||e}</span>`;
 }
 
 function updateBadge() {
-  const n = DB.eventos.filter(e=>e.estado==='pendiente').length;
-  const b = document.getElementById('badge-pendientes');
-  if (b) { b.textContent = n; b.style.display = n ? 'inline-flex' : 'none'; }
+  const n = eventos.filter(e=>e.estado==='pendiente').length;
+  const b = document.getElementById('badge-p');
+  if(b){b.textContent=n;b.style.display=n?'inline-flex':'none';}
 }
 
-// ============ SCREENS ============
 function showScreen(name) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  const s = document.getElementById('screen-'+name);
-  if (s) s.classList.add('active');
-  const map = {dashboard:0,nuevo:1,eventos:2,menu:3};
-  const tabs = document.querySelectorAll('.nav-tab');
-  if (map[name]!==undefined) tabs[map[name]].classList.add('active');
-  if (name==='dashboard') renderDashboard();
-  if (name==='eventos') renderEventos();
-  if (name==='nuevo') renderIngSelector();
-  if (name==='menu') renderMenu();
-  updateBadge();
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+  const map={dashboard:0,nuevo:1,eventos:2,menu:3};
+  const tabs=document.querySelectorAll('.nav-tab');
+  if(map[name]!==undefined) tabs[map[name]].classList.add('active');
+  if(name==='dashboard') renderDashboard();
+  if(name==='eventos') loadEventos();
+  if(name==='nuevo') renderIngSelector();
+  if(name==='menu') loadMenu();
 }
 
-// ============ DASHBOARD ============
-function renderDashboard() {
-  const today = new Date().toISOString().split('T')[0];
-  const ev = DB.eventos;
-  const completados = ev.filter(e=>e.estado==='completado');
-  const pendientes = ev.filter(e=>e.estado==='pendiente'||e.estado==='confirmado');
-  const ingresos = completados.reduce((s,e)=>s+(e.budget||0),0);
-  const costos = completados.reduce((s,e)=>s+(e.costoEst||0),0);
-  const margen = ingresos - costos;
-
+async function renderDashboard() {
   document.getElementById('dash-date').textContent = new Date().toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  document.getElementById('dash-stats').innerHTML = `
-    <div class="stat-card"><div class="stat-label">Total eventos</div><div class="stat-value white">${ev.length}</div><div class="stat-sub">registrados</div></div>
-    <div class="stat-card"><div class="stat-label">Pendientes</div><div class="stat-value" style="color:var(--gold)">${pendientes.length}</div><div class="stat-sub">por completar</div></div>
-    <div class="stat-card"><div class="stat-label">Ingresos (completados)</div><div class="stat-value green">$${ingresos.toFixed(2)}</div><div class="stat-sub">presupuestos cobrados</div></div>
-    <div class="stat-card"><div class="stat-label">Ganancia neta</div><div class="stat-value ${margen>=0?'green':'red'}">$${margen.toFixed(2)}</div><div class="stat-sub">sobre costos estimados</div></div>
-  `;
-
-  const upcoming = ev.filter(e=>e.fecha>=today && e.estado!=='cancelado').sort((a,b)=>a.fecha.localeCompare(b.fecha)).slice(0,5);
-  document.getElementById('dash-upcoming').innerHTML = upcoming.length ? upcoming.map(e=>`
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:0.5px solid var(--border);cursor:pointer;" onclick="verDetalle(${e.id})">
-      <div>
-        <div style="font-size:13px;font-weight:500;">${e.cliente}</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px;">${fecha(e.fecha)} · ${e.personas} personas</div>
-      </div>
-      <div style="text-align:right;">
-        <div style="font-size:12px;color:var(--gold);font-weight:600;">$${(e.budget||0).toFixed(2)}</div>
-        ${estadoBadge(e.estado)}
-      </div>
-    </div>
-  `).join('') : '<div class="empty" style="padding:1.5rem;"><div class="empty-text">Sin eventos próximos</div></div>';
-
-  const cats = {social:0,corporativo:0,graduacion:0,otro:0};
-  ev.forEach(e=>{ if(cats[e.tipo]!==undefined) cats[e.tipo]++; });
-  document.getElementById('dash-finance').innerHTML = `
-    <div class="report-row"><span>Eventos sociales</span><span style="color:var(--gold)">${cats.social}</span></div>
-    <div class="report-row"><span>Eventos corporativos</span><span style="color:var(--gold)">${cats.corporativo}</span></div>
-    <div class="report-row"><span>Graduaciones</span><span style="color:var(--gold)">${cats.graduacion}</span></div>
-    <div class="report-row"><span>Costos estimados totales</span><span style="color:var(--red)">$${ev.reduce((s,e)=>s+(e.costoEst||0),0).toFixed(2)}</span></div>
-    <div class="report-total"><span>Presupuestos totales</span><span>$${ev.reduce((s,e)=>s+(e.budget||0),0).toFixed(2)}</span></div>
-  `;
+  try {
+    eventos = await sbGet('eventos','order=created_at.desc');
+    updateBadge();
+    const today = new Date().toISOString().split('T')[0];
+    const comp = eventos.filter(e=>e.estado==='completado');
+    const pend = eventos.filter(e=>e.estado==='pendiente'||e.estado==='confirmado');
+    const ingresos = comp.reduce((s,e)=>s+(parseFloat(e.budget)||0),0);
+    const costos = comp.reduce((s,e)=>s+(parseFloat(e.costo_est)||0),0);
+    const margen = ingresos - costos;
+    document.getElementById('dash-stats').innerHTML = `
+      <div class="stat-card"><div class="stat-label">Total eventos</div><div class="stat-value white">${eventos.length}</div><div class="stat-sub">registrados</div></div>
+      <div class="stat-card"><div class="stat-label">Pendientes</div><div class="stat-value">${pend.length}</div><div class="stat-sub">por completar</div></div>
+      <div class="stat-card"><div class="stat-label">Ingresos completados</div><div class="stat-value green">$${ingresos.toFixed(2)}</div><div class="stat-sub">presupuestos cobrados</div></div>
+      <div class="stat-card"><div class="stat-label">Ganancia neta</div><div class="stat-value ${margen>=0?'green':'red'}">$${margen.toFixed(2)}</div><div class="stat-sub">sobre costos</div></div>
+    `;
+    const upcoming = eventos.filter(e=>e.fecha>=today&&e.estado!=='cancelado').sort((a,b)=>a.fecha.localeCompare(b.fecha)).slice(0,5);
+    document.getElementById('dash-upcoming').innerHTML = upcoming.length
+      ? upcoming.map(e=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:0.5px solid var(--border);cursor:pointer;" onclick="verDetalle(${e.id})">
+          <div><div style="font-size:13px;font-weight:500;">${e.cliente}</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">${fechaFmt(e.fecha)} · ${e.personas} personas</div></div>
+          <div style="text-align:right;"><div style="font-size:12px;color:var(--gold);font-weight:600;">$${parseFloat(e.budget||0).toFixed(2)}</div>${estadoBadge(e.estado)}</div>
+        </div>`).join('')
+      : '<div class="empty" style="padding:1.5rem;"><div class="empty-text">Sin eventos próximos</div></div>';
+    const cats={social:0,corporativo:0,graduacion:0,otro:0};
+    eventos.forEach(e=>{if(cats[e.tipo]!==undefined)cats[e.tipo]++;});
+    document.getElementById('dash-finance').innerHTML = `
+      <div class="report-row"><span>Eventos sociales</span><span style="color:var(--gold)">${cats.social}</span></div>
+      <div class="report-row"><span>Eventos corporativos</span><span style="color:var(--gold)">${cats.corporativo}</span></div>
+      <div class="report-row"><span>Graduaciones</span><span style="color:var(--gold)">${cats.graduacion}</span></div>
+      <div class="report-row"><span>Costos estimados totales</span><span style="color:var(--red)">$${eventos.reduce((s,e)=>s+(parseFloat(e.costo_est)||0),0).toFixed(2)}</span></div>
+      <div class="report-total"><span>Presupuestos totales</span><span>$${eventos.reduce((s,e)=>s+(parseFloat(e.budget)||0),0).toFixed(2)}</span></div>
+    `;
+  } catch(err) {
+    document.getElementById('dash-stats').innerHTML = `<div style="color:var(--red);padding:1rem;font-size:13px;">⚠ Error conectando a Supabase. Ejecuta el SQL de configuración primero.</div>`;
+  }
 }
 
-// ============ NUEVO EVENTO ============
+async function loadIngredientes() {
+  ingredientes = await sbGet('ingredientes','order=cat.asc,nombre.asc');
+  return ingredientes;
+}
+
 function renderIngSelector() {
-  const cats = ['topping','base','entrada','postre','bebida'];
-  const labels = {topping:'Toppings de pizza',base:'Bases y salsas',entrada:'Entradas',postre:'Postres',bebida:'Bebidas'};
-  let html = '';
-  cats.forEach(cat => {
-    const items = DB.ingredientes.filter(i=>i.cat===cat);
-    if (!items.length) return;
-    html += `<div class="ing-section-title">${labels[cat]}</div><div class="ing-grid">`;
-    items.forEach(i => {
-      html += `<div class="ing-item" id="iitem-${i.id}" onclick="toggleIng(${i.id})">
+  if(!ingredientes.length){ loadIngredientes().then(()=>renderIngSelector()); return; }
+  const cats=['topping','base','entrada','postre','bebida'];
+  const lbl={topping:'Toppings de pizza',base:'Bases y salsas',entrada:'Entradas',postre:'Postres',bebida:'Bebidas'};
+  let html='';
+  cats.forEach(cat=>{
+    const items=ingredientes.filter(i=>i.cat===cat);
+    if(!items.length) return;
+    html+=`<div class="ing-section-title">${lbl[cat]}</div><div class="ing-grid">`;
+    items.forEach(i=>{
+      html+=`<div class="ing-item" id="iitem-${i.id}" onclick="toggleIng(${i.id})">
         <input type="checkbox" class="ing-chk" id="ichk-${i.id}" value="${i.id}" onchange="updatePreview()">
         <label for="ichk-${i.id}">${i.nombre}</label>
-        <span class="ing-cost-pill">$${i.costo.toFixed(2)}</span>
+        <span class="ing-cost-pill">$${parseFloat(i.costo).toFixed(2)}</span>
       </div>`;
     });
-    html += '</div>';
+    html+='</div>';
   });
-  document.getElementById('ing-selector').innerHTML = html;
+  document.getElementById('ing-selector').innerHTML=html;
   updatePreview();
 }
 
 function toggleIng(id) {
-  const chk = document.getElementById('ichk-'+id);
-  const item = document.getElementById('iitem-'+id);
-  if (!chk) return;
-  chk.checked = !chk.checked;
-  item.classList.toggle('selected', chk.checked);
+  const chk=document.getElementById('ichk-'+id);
+  const item=document.getElementById('iitem-'+id);
+  if(!chk) return;
+  chk.checked=!chk.checked;
+  item.classList.toggle('selected',chk.checked);
   updatePreview();
 }
 
 function toggleSvc(key) {
-  const chk = document.getElementById('chk-'+key);
-  const item = document.getElementById('svc-'+key);
-  if (!chk) return;
-  chk.checked = !chk.checked;
-  item.classList.toggle('active', chk.checked);
+  const chk=document.getElementById('chk-'+key);
+  const item=document.getElementById('svc-'+key);
+  if(!chk) return;
+  chk.checked=!chk.checked;
+  item.classList.toggle('active',chk.checked);
   updatePreview();
 }
 
-function getSelectedIngs() {
-  return [...document.querySelectorAll('.ing-chk:checked')].map(c=>{
-    return DB.ingredientes.find(i=>i.id==c.value);
-  }).filter(Boolean);
-}
-
-function getSelectedSvcs() {
-  const svcs = [];
-  if (document.getElementById('chk-pizza')?.checked) svcs.push('pizza');
-  if (document.getElementById('chk-entrada')?.checked) svcs.push('entrada');
-  if (document.getElementById('chk-postre')?.checked) svcs.push('postre');
-  if (document.getElementById('chk-bebida')?.checked) svcs.push('bebida');
-  return svcs;
-}
+function getSelectedIngs() { return [...document.querySelectorAll('.ing-chk:checked')].map(c=>ingredientes.find(i=>i.id==c.value)).filter(Boolean); }
+function getSelectedSvcs() { return ['pizza','entrada','postre','bebida'].filter(k=>document.getElementById('chk-'+k)?.checked); }
 
 function updatePreview() {
-  const personas = parseInt(document.getElementById('f-personas')?.value)||0;
-  const porciones = parseInt(document.getElementById('f-porciones')?.value)||2;
-  const budget = parseFloat(document.getElementById('f-budget')?.value)||0;
-  const ings = getSelectedIngs();
-  const svcs = getSelectedSvcs();
-
-  const costoBase = 3.50;
-  const costoToppings = ings.filter(i=>i.cat==='topping'||i.cat==='base').reduce((s,i)=>s+i.costo,0);
-  const costoEntradas = svcs.includes('entrada') ? 2.50 : 0;
-  const costoPostres = svcs.includes('postre') ? 2.00 : 0;
-  const costoBebidas = svcs.includes('bebida') ? 1.00 : 0;
-  const cpp = (costoBase + costoToppings) * porciones + costoEntradas + costoPostres + costoBebidas;
-  const total = cpp * personas;
-  const margen = budget - total;
-  const pct = budget > 0 ? Math.min(105, (total / budget) * 100) : 0;
-  const barColor = pct > 95 ? 'var(--red)' : pct > 75 ? 'var(--gold)' : 'var(--green)';
-
-  window._preview = { cpp, total, margen, ings, svcs, personas, porciones, budget };
-
-  const ingTags = ings.length
-    ? ings.map(i=>`<span style="background:var(--surface3);color:var(--text);padding:3px 8px;border-radius:5px;font-size:11px;margin:2px;display:inline-block;">${i.nombre}</span>`).join('')
-    : '<span style="color:var(--muted);font-size:12px;">Sin toppings seleccionados</span>';
-
-  document.getElementById('preview-body').innerHTML = `
+  const personas=parseInt(document.getElementById('f-personas')?.value)||0;
+  const porciones=parseInt(document.getElementById('f-porciones')?.value)||2;
+  const budget=parseFloat(document.getElementById('f-budget')?.value)||0;
+  const ings=getSelectedIngs(); const svcs=getSelectedSvcs();
+  const costoToppings=ings.filter(i=>i.cat==='topping'||i.cat==='base').reduce((s,i)=>s+parseFloat(i.costo),0);
+  const cpp=(3.50+costoToppings)*porciones+(svcs.includes('entrada')?2.50:0)+(svcs.includes('postre')?2.00:0)+(svcs.includes('bebida')?1.00:0);
+  const total=cpp*personas; const margen=budget-total;
+  const pct=budget>0?Math.min(105,(total/budget)*100):0;
+  const barColor=pct>95?'var(--red)':pct>75?'var(--gold)':'var(--green)';
+  window._preview={cpp,total,margen,ings,svcs,personas,porciones,budget};
+  const ingTags=ings.length?ings.map(i=>`<span style="background:var(--surface3);color:var(--text);padding:3px 8px;border-radius:5px;font-size:11px;margin:2px;display:inline-block;">${i.nombre}</span>`).join(''):'<span style="color:var(--muted);font-size:12px;">Sin toppings seleccionados</span>';
+  document.getElementById('preview-body').innerHTML=`
     <div class="preview-grid">
       <div class="stat-card"><div class="stat-label">Costo/persona</div><div class="stat-value">$${cpp.toFixed(2)}</div></div>
       <div class="stat-card"><div class="stat-label">Costo total</div><div class="stat-value">$${total.toFixed(2)}</div></div>
       <div class="stat-card"><div class="stat-label">Presupuesto cliente</div><div class="stat-value green">$${budget.toFixed(2)}</div></div>
-      <div class="stat-card"><div class="stat-label">Margen / ganancia</div><div class="stat-value ${margen>=0?'green':'red'}">$${margen.toFixed(2)}</div></div>
+      <div class="stat-card"><div class="stat-label">Margen ganancia</div><div class="stat-value ${margen>=0?'green':'red'}">$${margen.toFixed(2)}</div></div>
     </div>
     <div class="budget-bar-wrap">
       <div class="budget-bar-bg"><div class="budget-bar-fill" style="width:${Math.min(100,pct).toFixed(1)}%;background:${barColor};"></div></div>
-      <div class="budget-labels">
-        <span>Costos: ${pct.toFixed(0)}% del presupuesto</span>
-        <span>${pct > 100 ? '⚠ Excede el presupuesto' : pct > 75 ? 'Margen ajustado' : 'Margen saludable'}</span>
-      </div>
+      <div class="budget-labels"><span>Costos: ${pct.toFixed(0)}% del presupuesto</span><span>${pct>100?'⚠ Excede presupuesto':pct>75?'Margen ajustado':'Margen saludable'}</span></div>
     </div>
-    <div style="margin-top:10px;">
-      <div style="font-size:11px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.4px;">Ingredientes seleccionados</div>
-      <div>${ingTags}</div>
-    </div>
+    <div style="margin-top:10px;"><div style="font-size:11px;color:var(--muted);margin-bottom:6px;">Ingredientes seleccionados:</div><div>${ingTags}</div></div>
   `;
 }
 
-function guardarEvento() {
-  const cliente = document.getElementById('f-cliente').value.trim();
-  const tipo = document.getElementById('f-tipo').value;
-  const fecha = document.getElementById('f-fecha').value;
-  const personas = parseInt(document.getElementById('f-personas').value);
-  const budget = parseFloat(document.getElementById('f-budget').value);
-  const porciones = parseInt(document.getElementById('f-porciones').value)||2;
-  const telefono = document.getElementById('f-telefono').value.trim();
-  const lugar = document.getElementById('f-lugar').value.trim();
-  const notas = document.getElementById('f-notas').value.trim();
-
-  if (!cliente || !fecha || !personas || !budget) { toast('Completa los campos obligatorios *','error'); return; }
-
-  const p = window._preview || {};
-  const svcs = getSelectedSvcs();
-  const ings = getSelectedIngs().map(i=>i.id);
-
-  const ev = {
-    id: Date.now(),
-    cliente, tipo, fecha, personas, budget, porciones, telefono, lugar, notas,
-    servicios: svcs, ingredientes: ings,
-    costoEst: p.total || 0,
-    cpp: p.cpp || 0,
-    estado: 'pendiente',
-    creadoEn: new Date().toISOString()
-  };
-
-  DB.eventos.push(ev);
-  saveDB();
-  toast('Evento guardado correctamente');
-  limpiarForm();
-  showScreen('eventos');
+async function guardarEvento() {
+  const cliente=document.getElementById('f-cliente').value.trim();
+  const tipo=document.getElementById('f-tipo').value;
+  const fecha=document.getElementById('f-fecha').value;
+  const personas=parseInt(document.getElementById('f-personas').value);
+  const budget=parseFloat(document.getElementById('f-budget').value);
+  const porciones=parseInt(document.getElementById('f-porciones').value)||2;
+  if(!cliente||!fecha||!personas||!budget){toast('Completa los campos obligatorios *','error');return;}
+  const btn=document.getElementById('btn-guardar');
+  btn.disabled=true; btn.textContent='Guardando...';
+  try {
+    const p=window._preview||{};
+    await sbPost('eventos',{
+      cliente,tipo,fecha,personas,budget,porciones,
+      telefono:document.getElementById('f-tel').value.trim(),
+      lugar:document.getElementById('f-lugar').value.trim(),
+      notas:document.getElementById('f-notas').value.trim(),
+      servicios:getSelectedSvcs(),
+      ingredientes:getSelectedIngs().map(i=>i.id),
+      costo_est:p.total||0, cpp:p.cpp||0, estado:'pendiente'
+    });
+    toast('Evento guardado en Supabase ✓');
+    limpiarForm(); showScreen('eventos');
+  } catch(err) { toast('Error: '+err.message,'error'); }
+  finally { btn.disabled=false; btn.textContent='Guardar evento'; }
 }
 
 function limpiarForm() {
-  ['f-cliente','f-personas','f-budget','f-notas','f-fecha','f-telefono','f-lugar'].forEach(id=>{
-    const el = document.getElementById(id); if(el) el.value='';
-  });
-  document.getElementById('f-porciones').value = 2;
-  document.querySelectorAll('.ing-chk').forEach(c=>{ c.checked=false; });
+  ['f-cliente','f-personas','f-budget','f-notas','f-fecha','f-tel','f-lugar'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('f-porciones').value=2;
+  document.querySelectorAll('.ing-chk').forEach(c=>{c.checked=false;});
   document.querySelectorAll('.ing-item').forEach(el=>el.classList.remove('selected'));
-  // reset services
   ['pizza','entrada','postre','bebida'].forEach(k=>{
-    const chk = document.getElementById('chk-'+k);
-    const item = document.getElementById('svc-'+k);
-    if(chk && item) {
-      chk.checked = k==='pizza';
-      item.classList.toggle('active', k==='pizza');
-    }
+    const chk=document.getElementById('chk-'+k);
+    const item=document.getElementById('svc-'+k);
+    if(chk&&item){chk.checked=k==='pizza';item.classList.toggle('active',k==='pizza');}
   });
   updatePreview();
 }
 
-// ============ EVENTOS LIST ============
+async function loadEventos() {
+  document.getElementById('ev-loading').style.display='flex';
+  document.getElementById('ev-empty').style.display='none';
+  document.getElementById('ev-tbody').innerHTML='';
+  try { eventos=await sbGet('eventos','order=created_at.desc'); updateBadge(); renderEventos(); }
+  catch(err){toast('Error cargando eventos','error');}
+  finally{document.getElementById('ev-loading').style.display='none';}
+}
+
 function renderEventos() {
-  const filtroE = document.getElementById('fil-estado')?.value||'';
-  const filtroT = document.getElementById('fil-tipo')?.value||'';
-  const filtroB = (document.getElementById('fil-buscar')?.value||'').toLowerCase();
-
-  let lista = DB.eventos.filter(e=>{
-    if (filtroE && e.estado!==filtroE) return false;
-    if (filtroT && e.tipo!==filtroT) return false;
-    if (filtroB && !e.cliente.toLowerCase().includes(filtroB)) return false;
+  const fE=document.getElementById('fil-estado')?.value||'';
+  const fT=document.getElementById('fil-tipo')?.value||'';
+  const fB=(document.getElementById('fil-buscar')?.value||'').toLowerCase();
+  let lista=eventos.filter(e=>{
+    if(fE&&e.estado!==fE)return false;
+    if(fT&&e.tipo!==fT)return false;
+    if(fB&&!e.cliente.toLowerCase().includes(fB))return false;
     return true;
-  }).sort((a,b)=>(b.creadoEn||'').localeCompare(a.creadoEn||''));
-
-  const tbody = document.getElementById('ev-tbody');
-  const empty = document.getElementById('ev-empty');
-
-  if (!lista.length) { tbody.innerHTML=''; empty.style.display='block'; return; }
+  });
+  const tbody=document.getElementById('ev-tbody');
+  const empty=document.getElementById('ev-empty');
+  if(!lista.length){tbody.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
-
-  tbody.innerHTML = lista.map(e=>{
-    const m = (e.budget||0)-(e.costoEst||0);
+  tbody.innerHTML=lista.map(e=>{
+    const m=(parseFloat(e.budget)||0)-(parseFloat(e.costo_est)||0);
     return `<tr>
       <td style="font-weight:500;cursor:pointer;color:var(--gold);" onclick="verDetalle(${e.id})">${e.cliente}</td>
-      <td>${tipoLabel(e.tipo)}</td>
-      <td style="white-space:nowrap">${fecha(e.fecha)}</td>
-      <td>${e.personas}</td>
-      <td>$${(e.costoEst||0).toFixed(2)}</td>
-      <td style="color:var(--green)">$${(e.budget||0).toFixed(2)}</td>
+      <td>${tipoLabel(e.tipo)}</td><td style="white-space:nowrap">${fechaFmt(e.fecha)}</td><td>${e.personas}</td>
+      <td>$${parseFloat(e.costo_est||0).toFixed(2)}</td>
+      <td style="color:var(--green)">$${parseFloat(e.budget||0).toFixed(2)}</td>
       <td style="color:${m>=0?'var(--green)':'var(--red)'}">$${m.toFixed(2)}</td>
       <td>${estadoBadge(e.estado)}</td>
-      <td>
-        <div style="display:flex;gap:4px;">
-          <button class="btn btn-outline btn-sm" onclick="verDetalle(${e.id})">Ver</button>
-          <select class="status-select" onchange="cambiarEstado(${e.id},this.value)">
-            <option value="">Estado</option>
-            <option value="pendiente">Pendiente</option>
-            <option value="confirmado">Confirmado</option>
-            <option value="completado">Completado</option>
-            <option value="cancelado">Cancelado</option>
-          </select>
-          <button class="btn btn-danger btn-sm" onclick="confirmarEliminar(${e.id})">✕</button>
-        </div>
-      </td>
+      <td><div style="display:flex;gap:4px;">
+        <button class="btn btn-outline btn-sm" onclick="verDetalle(${e.id})">Ver</button>
+        <select class="status-select" onchange="cambiarEstado(${e.id},this.value)">
+          <option value="">Estado</option><option value="pendiente">Pendiente</option><option value="confirmado">Confirmado</option><option value="completado">Completado</option><option value="cancelado">Cancelado</option>
+        </select>
+        <button class="btn btn-danger btn-sm" onclick="eliminarEvento(${e.id})">✕</button>
+      </div></td>
     </tr>`;
   }).join('');
 }
 
-function cambiarEstado(id, estado) {
-  if (!estado) return;
-  const e = DB.eventos.find(ev=>ev.id===id);
-  if (e) { e.estado=estado; saveDB(); toast('Estado actualizado'); renderEventos(); updateBadge(); }
+async function cambiarEstado(id,estado) {
+  if(!estado) return;
+  try { await sbPatch('eventos',id,{estado}); const e=eventos.find(ev=>ev.id===id); if(e)e.estado=estado; toast('Estado actualizado'); renderEventos(); updateBadge(); }
+  catch(err){toast('Error al actualizar','error');}
 }
 
-function confirmarEliminar(id) {
-  const e = DB.eventos.find(ev=>ev.id===id);
-  if (!e) return;
-  if (confirm(`¿Eliminar el evento de ${e.cliente}?`)) {
-    DB.eventos = DB.eventos.filter(ev=>ev.id!==id);
-    saveDB(); toast('Evento eliminado'); renderEventos(); updateBadge();
-  }
+async function eliminarEvento(id) {
+  const e=eventos.find(ev=>ev.id===id);
+  if(!e||!confirm(`¿Eliminar el evento de ${e.cliente}?`)) return;
+  try { await sbDelete('eventos',id); eventos=eventos.filter(ev=>ev.id!==id); toast('Evento eliminado'); renderEventos(); updateBadge(); }
+  catch(err){toast('Error al eliminar','error');}
 }
 
-// ============ DETALLE ============
-function verDetalle(id) {
-  const e = DB.eventos.find(ev=>ev.id===id);
-  if (!e) return;
-  const ings = (e.ingredientes||[]).map(iid=>DB.ingredientes.find(i=>i.id===iid)).filter(Boolean);
-  const margen = (e.budget||0)-(e.costoEst||0);
-  const pct = e.budget>0 ? Math.min(105,(e.costoEst/e.budget)*100) : 0;
-  const barColor = pct>95?'var(--red)':pct>75?'var(--gold)':'var(--green)';
-  const svcLabels = {pizza:'🍕 Porciones de pizza',entrada:'🥗 Entradas',postre:'🍰 Postres',bebida:'🥤 Bebidas'};
-
-  document.getElementById('detalle-body').innerHTML = `
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-      <button class="back-btn" onclick="showScreen('eventos')">← Volver a eventos</button>
-      <div style="display:flex;gap:8px;">
-        ${['pendiente','confirmado','completado','cancelado'].map(s=>`
-          <button class="btn btn-sm ${e.estado===s?'btn-gold':'btn-ghost'}" onclick="cambiarEstadoDetalle(${e.id},'${s}')">${s.charAt(0).toUpperCase()+s.slice(1)}</button>
-        `).join('')}
+async function verDetalle(id) {
+  let e=eventos.find(ev=>ev.id===id);
+  if(!e){try{const res=await sbGet('eventos',`id=eq.${id}`);e=res[0];}catch(err){return;}}
+  if(!e) return;
+  if(!ingredientes.length) await loadIngredientes();
+  const ings=(e.ingredientes||[]).map(iid=>ingredientes.find(i=>i.id===iid)).filter(Boolean);
+  const margen=(parseFloat(e.budget)||0)-(parseFloat(e.costo_est)||0);
+  const pct=e.budget>0?Math.min(105,(parseFloat(e.costo_est)/parseFloat(e.budget))*100):0;
+  const barColor=pct>95?'var(--red)':pct>75?'var(--gold)':'var(--green)';
+  const svcLbl={pizza:'🍕 Porciones de pizza',entrada:'🥗 Entradas',postre:'🍰 Postres',bebida:'🥤 Bebidas'};
+  document.getElementById('detalle-body').innerHTML=`
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px;">
+      <button class="back-btn" onclick="showScreen('eventos')">← Volver</button>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        ${['pendiente','confirmado','completado','cancelado'].map(s=>`<button class="btn btn-sm ${e.estado===s?'btn-gold':'btn-ghost'}" onclick="cambiarEstadoDetalle(${e.id},'${s}')">${s.charAt(0).toUpperCase()+s.slice(1)}</button>`).join('')}
       </div>
     </div>
     <div class="detail-hero">
       <div>
         <div class="detail-client-name">${e.cliente}</div>
         <div class="detail-meta">
-          <span class="meta-pill">📅 ${fecha(e.fecha)}</span>
+          <span class="meta-pill">📅 ${fechaFmt(e.fecha)}</span>
           <span class="meta-pill">👥 ${e.personas} personas</span>
           <span class="meta-pill">🍕 ${e.porciones} porciones/persona</span>
           <span class="meta-pill">${tipoLabel(e.tipo)}</span>
-          ${e.lugar ? `<span class="meta-pill">📍 ${e.lugar}</span>` : ''}
-          ${e.telefono ? `<span class="meta-pill">📞 ${e.telefono}</span>` : ''}
+          ${e.lugar?`<span class="meta-pill">📍 ${e.lugar}</span>`:''}
+          ${e.telefono?`<span class="meta-pill">📞 ${e.telefono}</span>`:''}
         </div>
       </div>
       ${estadoBadge(e.estado)}
     </div>
-
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
       <div class="card">
         <div class="card-title">Desglose financiero</div>
         <div class="preview-grid" style="grid-template-columns:1fr 1fr;">
-          <div class="stat-card"><div class="stat-label">Costo/persona</div><div class="stat-value">$${(e.cpp||0).toFixed(2)}</div></div>
-          <div class="stat-card"><div class="stat-label">Costo total</div><div class="stat-value">$${(e.costoEst||0).toFixed(2)}</div></div>
-          <div class="stat-card"><div class="stat-label">Presupuesto</div><div class="stat-value green">$${(e.budget||0).toFixed(2)}</div></div>
+          <div class="stat-card"><div class="stat-label">Costo/persona</div><div class="stat-value">$${parseFloat(e.cpp||0).toFixed(2)}</div></div>
+          <div class="stat-card"><div class="stat-label">Costo total</div><div class="stat-value">$${parseFloat(e.costo_est||0).toFixed(2)}</div></div>
+          <div class="stat-card"><div class="stat-label">Presupuesto</div><div class="stat-value green">$${parseFloat(e.budget||0).toFixed(2)}</div></div>
           <div class="stat-card"><div class="stat-label">Ganancia</div><div class="stat-value ${margen>=0?'green':'red'}">$${margen.toFixed(2)}</div></div>
         </div>
         <div class="budget-bar-wrap">
@@ -1035,77 +532,61 @@ function verDetalle(id) {
       </div>
       <div class="card">
         <div class="card-title">Servicios contratados</div>
-        ${(e.servicios||[]).map(s=>`<div style="padding:8px 0;border-bottom:0.5px solid var(--border);font-size:13px;">${svcLabels[s]||s}</div>`).join('') || '<div style="color:var(--muted);font-size:13px;">Sin servicios adicionales</div>'}
-        ${e.notas ? `<div style="margin-top:1rem;padding:10px;background:var(--surface3);border-radius:8px;font-size:13px;color:var(--muted2);">${e.notas}</div>` : ''}
+        ${(e.servicios||[]).map(s=>`<div style="padding:8px 0;border-bottom:0.5px solid var(--border);font-size:13px;">${svcLbl[s]||s}</div>`).join('')||'<div style="color:var(--muted);font-size:13px;">Sin servicios adicionales</div>'}
+        ${e.notas?`<div style="margin-top:1rem;padding:10px;background:var(--surface3);border-radius:8px;font-size:13px;color:var(--muted2);">${e.notas}</div>`:''}
       </div>
     </div>
-
-    ${ings.length ? `<div class="card">
-      <div class="card-title">Ingredientes y toppings personalizados</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;">
-        ${ings.map(i=>`<span style="background:var(--surface3);border:0.5px solid var(--border);color:var(--text);padding:5px 12px;border-radius:7px;font-size:12px;">${i.nombre} <span style="color:var(--gold)">$${i.costo.toFixed(2)}/p</span></span>`).join('')}
-      </div>
-    </div>` : ''}
+    ${ings.length?`<div class="card"><div class="card-title">Ingredientes y toppings</div><div style="display:flex;flex-wrap:wrap;gap:6px;">${ings.map(i=>`<span style="background:var(--surface3);border:0.5px solid var(--border);color:var(--text);padding:5px 12px;border-radius:7px;font-size:12px;">${i.nombre} <span style="color:var(--gold)">$${parseFloat(i.costo).toFixed(2)}/p</span></span>`).join('')}</div></div>`:''}
   `;
-
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-detalle').classList.add('active');
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
 }
 
-function cambiarEstadoDetalle(id, estado) {
-  const e = DB.eventos.find(ev=>ev.id===id);
-  if (e) { e.estado=estado; saveDB(); toast('Estado actualizado'); verDetalle(id); updateBadge(); }
+async function cambiarEstadoDetalle(id,estado) { await cambiarEstado(id,estado); verDetalle(id); }
+
+async function loadMenu() {
+  document.getElementById('menu-body').innerHTML='<div class="loading"><div class="spinner"></div> Cargando...</div>';
+  try { await loadIngredientes(); renderMenu(); }
+  catch(err){toast('Error cargando menú','error');}
 }
 
-// ============ MENU ============
 function renderMenu() {
-  const cats = ['topping','base','entrada','postre','bebida'];
-  const labels = {topping:'Toppings de pizza',base:'Bases y salsas',entrada:'Entradas',postre:'Postres',bebida:'Bebidas'};
-  let html = '';
+  const cats=['topping','base','entrada','postre','bebida'];
+  const lbl={topping:'Toppings de pizza',base:'Bases y salsas',entrada:'Entradas',postre:'Postres',bebida:'Bebidas'};
+  let html='';
   cats.forEach(cat=>{
-    const items = DB.ingredientes.filter(i=>i.cat===cat);
-    if (!items.length) return;
-    html += `<div class="ing-section-title">${labels[cat]}</div>`;
-    items.forEach(i=>{
-      html += `<div class="menu-item">
-        <div>
-          <div class="menu-item-name">${i.nombre}</div>
-          <div class="menu-item-cat">${labels[cat]}</div>
-        </div>
-        <div class="menu-item-cost">$${i.costo.toFixed(2)} / porción</div>
-        <button class="btn btn-danger btn-sm" onclick="removeIngrediente(${i.id})">Quitar</button>
-      </div>`;
-    });
+    const items=ingredientes.filter(i=>i.cat===cat);
+    if(!items.length) return;
+    html+=`<div class="ing-section-title">${lbl[cat]}</div>`;
+    items.forEach(i=>{html+=`<div class="menu-item"><div><div class="menu-item-name">${i.nombre}</div><div class="menu-item-cat">${lbl[cat]}</div></div><div class="menu-item-cost">$${parseFloat(i.costo).toFixed(2)} / porción</div><button class="btn btn-danger btn-sm" onclick="removeIngrediente(${i.id})">Quitar</button></div>`;});
   });
-  document.getElementById('menu-body').innerHTML = html || '<div class="empty"><div class="empty-text">Sin ingredientes en el menú</div></div>';
+  document.getElementById('menu-body').innerHTML=html||'<div class="empty"><div class="empty-text">Sin ingredientes</div></div>';
 }
 
-function addIngrediente() {
-  const nombre = document.getElementById('mi-nombre').value.trim();
-  const cat = document.getElementById('mi-cat').value;
-  const costo = parseFloat(document.getElementById('mi-costo').value);
-  if (!nombre || !costo || costo <= 0) { toast('Completa nombre y costo válido','error'); return; }
-  const maxId = DB.ingredientes.reduce((m,i)=>Math.max(m,i.id),0);
-  DB.ingredientes.push({id:maxId+1,nombre,cat,costo});
-  saveDB();
-  document.getElementById('mi-nombre').value='';
-  document.getElementById('mi-costo').value='';
-  toast('Ingrediente agregado al menú');
-  renderMenu();
+async function addIngrediente() {
+  const nombre=document.getElementById('mi-nombre').value.trim();
+  const cat=document.getElementById('mi-cat').value;
+  const costo=parseFloat(document.getElementById('mi-costo').value);
+  if(!nombre||!costo||costo<=0){toast('Completa nombre y costo válido','error');return;}
+  try {
+    const res=await sbPost('ingredientes',{nombre,cat,costo});
+    ingredientes.push(res[0]);
+    document.getElementById('mi-nombre').value='';
+    document.getElementById('mi-costo').value='';
+    toast('Ingrediente guardado en Supabase ✓');
+    renderMenu();
+  } catch(err){toast('Error: '+err.message,'error');}
 }
 
-function removeIngrediente(id) {
-  DB.ingredientes = DB.ingredientes.filter(i=>i.id!==id);
-  saveDB();
-  toast('Ingrediente eliminado');
-  renderMenu();
+async function removeIngrediente(id) {
+  if(!confirm('¿Quitar este ingrediente?')) return;
+  try { await sbDelete('ingredientes',id); ingredientes=ingredientes.filter(i=>i.id!==id); toast('Ingrediente eliminado'); renderMenu(); }
+  catch(err){toast('Error al eliminar','error');}
 }
 
-// ============ INIT ============
-loadDB();
+loadIngredientes();
 renderDashboard();
-updateBadge();
 </script>
 </body>
 </html>
