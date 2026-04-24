@@ -316,6 +316,69 @@ tr:last-child td{border-bottom:none;}tr:hover td{background:var(--s2);}
   <div class="card" id="costos-body"></div>
 </div>
 
+<!-- MODAL EDITAR -->
+<div id="modal-edit" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;overflow-y:auto;padding:1rem;">
+  <div style="background:var(--s1);border:1px solid var(--bg);border-radius:14px;max-width:800px;margin:0 auto;padding:1.5rem;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:1px;">✏ Editar Evento</div>
+      <button class="btn bdel bsm" onclick="cerrarModal()">✕ Cerrar</button>
+    </div>
+    <div class="fg">
+      <div class="fg2 full"><label>Nombre del evento *</label><input type="text" id="e-nombre" placeholder="Nombre del evento"></div>
+      <div class="fg2"><label>Tipo</label><select id="e-tipo"><option value="social">Social</option><option value="corporativo">Corporativo</option><option value="casamiento">Casamiento</option><option value="cumpleanos">Cumpleaños</option><option value="graduacion">Graduación</option><option value="otro">Otro</option></select></div>
+      <div class="fg2"><label>Fecha</label><input type="date" id="e-fecha"></div>
+      <div class="fg2"><label>Cant. invitados</label><input type="number" id="e-inv" placeholder="0" min="0"></div>
+      <div class="fg2"><label>Nombre cliente</label><input type="text" id="e-cliente"></div>
+      <div class="fg2"><label>Teléfono</label><input type="tel" id="e-tel"></div>
+      <div class="fg2 full"><label>Extras / Alérgicos</label><input type="text" id="e-extras"></div>
+    </div>
+    <div class="sdiv"><div class="sdline"></div><div class="sdl">Horarios</div><div class="sdline"></div></div>
+    <div class="fg">
+      <div class="fg2"><label>Inicio del evento</label><input type="time" id="e-h-ini"></div>
+      <div class="fg2"><label>Llegada al evento</label><input type="time" id="e-h-lleg"></div>
+      <div class="fg2"><label>Horario de partida</label><input type="time" id="e-h-part"></div>
+      <div class="fg2"><label>Llegada en Maikels</label><input type="time" id="e-h-mk"></div>
+    </div>
+    <div class="sdiv"><div class="sdline"></div><div class="sdl">Lugar</div><div class="sdline"></div></div>
+    <div class="fg">
+      <div class="fg2"><label>Nombre del lugar</label><input type="text" id="e-lugar"></div>
+      <div class="fg2"><label>Dirección</label><input type="text" id="e-dir"></div>
+    </div>
+    <div class="sdiv"><div class="sdline"></div><div class="sdl">Producción</div><div class="sdline"></div></div>
+    <div class="fg c3">
+      <div class="fg2"><label>Cant. pizzas</label><input type="number" id="e-piz" min="0"></div>
+      <div class="fg2"><label>Cant. personal</label><input type="number" id="e-pers" min="0"></div>
+      <div class="fg2"><label>Notas</label><input type="text" id="e-notas"></div>
+      <div class="fg2 full"><label>Nombres del personal</label><input type="text" id="e-pnombres"></div>
+    </div>
+    <div class="sdiv"><div class="sdline"></div><div class="sdl">Servicio</div><div class="sdline"></div></div>
+    <div class="svcg" id="e-svc-grid"></div>
+    <div class="sdiv"><div class="sdline"></div><div class="sdl">Costos y cobros</div><div class="sdline"></div></div>
+    <div class="cblock">
+      <div>
+        <div class="crow"><span class="clabel">Total que se cobra</span><input class="cinput" type="number" id="e-cob" step="0.01"></div>
+        <div class="crow"><span class="clabel">Costo materia prima</span><input class="cinput" type="number" id="e-mp" step="0.01"></div>
+        <div class="crow"><span class="clabel">Celíacos / Sin TACC</span><input class="cinput" type="number" id="e-cel" step="0.01"></div>
+        <div class="crow"><span class="clabel">Entradas</span><input class="cinput" type="number" id="e-ent" step="0.01"></div>
+        <div class="crow"><span class="clabel">Tortas</span><input class="cinput" type="number" id="e-tor" step="0.01"></div>
+        <div class="crow"><span class="clabel">Personal</span><input class="cinput" type="number" id="e-per" step="0.01"></div>
+        <div class="crow"><span class="clabel">Nafta / Traslado</span><input class="cinput" type="number" id="e-naf" step="0.01"></div>
+        <div class="crow"><span class="clabel">Bebida</span><input class="cinput" type="number" id="e-beb" step="0.01"></div>
+        <div class="crow"><span class="clabel">Otros</span><input class="cinput" type="number" id="e-otr" step="0.01"></div>
+      </div>
+      <div>
+        <div class="crow"><span class="clabel">Seña recibida</span><input class="cinput" type="number" id="e-sena" step="0.01"></div>
+        <div class="crow"><span class="clabel">Fecha seña</span><input class="cinput" type="date" id="e-fecha-sena"></div>
+        <div class="crow"><span class="clabel">Fecha pago restante</span><input class="cinput" type="date" id="e-fecha-resto"></div>
+        <div class="crow"><span class="clabel">Estado</label><select id="e-estado" style="width:140px;"><option value="pendiente">Pendiente</option><option value="confirmado">Confirmado</option><option value="completado">Completado</option><option value="cancelado">Cancelado</option></select></div>
+      </div>
+    </div>
+    <div class="brow">
+      <button class="btn bgold" id="btn-edit-save" onclick="guardarEdicion()">💾 Guardar cambios</button>
+      <button class="btn bghost" onclick="cerrarModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
 </div>
 <script>
 // ===== SUPABASE =====
@@ -627,6 +690,7 @@ function renderEvs(){
       <td>${ebadge(e.estado)}</td>
       <td><div style="display:flex;gap:3px;">
         <button class="btn bout bsm" onclick="verDet(${e.id})">Ver</button>
+        <button class="btn bghost bsm" onclick="editarEv(${e.id})">✏</button>
         <select class="ssel" onchange="cambEst(${e.id},this.value)">
           <option value="">Estado</option>
           <option value="pendiente">Pendiente</option><option value="confirmado">Confirmado</option>
@@ -660,6 +724,8 @@ function verDet(id){
       <button class="backbtn" onclick="go('eventos')">← Volver</button>
       <div style="display:flex;gap:5px;flex-wrap:wrap;">
         ${['pendiente','confirmado','completado','cancelado'].map(s=>`<button class="btn bsm ${e.estado===s?'bgold':'bghost'}" onclick="cEstDet(${e.id},'${s}')">${s.charAt(0).toUpperCase()+s.slice(1)}</button>`).join('')}
+        <button class="btn bsm" style="background:var(--s3);color:var(--txt);border:.5px solid var(--b);" onclick="editarEv(${e.id})">✏ Editar</button>
+        <button class="btn bsm bgold" onclick="imprimirReporte(${e.id})">🖨 Reporte</button>
       </div>
     </div>
     <div class="dhero">
@@ -760,6 +826,327 @@ function renderCostos(){
       <button class="btn bgold bsm" onclick="lsSet('mk_csts',csts);toast('Costos guardados ✓')">💾 Guardar costos</button>
       <button class="btn bghost bsm" onclick="if(confirm('¿Restaurar a $0?')){csts=JSON.parse(JSON.stringify(CST_DEF));lsSet('mk_csts',csts);renderCostos();toast('Restaurado');}">Restaurar</button>
     </div>`;
+}
+
+
+// ===== EDITAR EVENTO =====
+let editingId = null;
+let editSelSvc = null;
+
+function editarEv(id){
+  const e = evs.find(x=>x.id===id);
+  if(!e) return;
+  editingId = id;
+  editSelSvc = e.servicio_tipo || null;
+
+  // Fill all fields
+  const set = (fid, val) => { const el=document.getElementById(fid); if(el) el.value=val||''; };
+  set('e-nombre', e.nombre_evento);
+  set('e-tipo', e.tipo);
+  set('e-fecha', (e.fecha+'').substring(0,10));
+  set('e-inv', e.cant_invitados||0);
+  set('e-cliente', e.nombre_cliente);
+  set('e-tel', e.telefono);
+  set('e-extras', e.extras_info);
+  set('e-h-ini', e.horario_inicio);
+  set('e-h-lleg', e.horario_llegada_evento);
+  set('e-h-part', e.horario_partida);
+  set('e-h-mk', e.horario_llegada_maikels);
+  set('e-lugar', e.lugar);
+  set('e-dir', e.direccion);
+  set('e-piz', e.cant_pizzas||0);
+  set('e-pers', e.cant_personal||0);
+  set('e-notas', e.notas);
+  set('e-pnombres', e.nombres_personal);
+  set('e-cob', e.total_cobrado||0);
+  set('e-mp', e.costo_materia_prima||0);
+  set('e-cel', e.celiacos||0);
+  set('e-ent', e.entradas||0);
+  set('e-tor', e.tortas||0);
+  set('e-per', e.personal||0);
+  set('e-naf', e.nafta||0);
+  set('e-beb', e.bebida||0);
+  set('e-otr', e.otros||0);
+  set('e-sena', e.sena||0);
+  set('e-fecha-sena', (e.fecha_sena||'').substring(0,10));
+  set('e-fecha-resto', (e.fecha_resto||'').substring(0,10));
+  set('e-estado', e.estado||'pendiente');
+
+  // Render service selector
+  document.getElementById('e-svc-grid').innerHTML = svcs.map(s=>`
+    <div class="svcc${editSelSvc===s.key?' sel':''}" onclick="editSelSvcFn('${s.key}')">
+      <div class="svcn">${s.nombre}</div><div class="svcd">${s.desc}</div>
+      <div class="svcp">${fmtM(s.precio)}<span style="font-size:10px;color:var(--mut);font-weight:400">/persona</span></div>
+    </div>`).join('');
+
+  document.getElementById('modal-edit').style.display='block';
+  document.body.style.overflow='hidden';
+}
+
+function editSelSvcFn(key){
+  editSelSvc=key;
+  document.querySelectorAll('#e-svc-grid .svcc').forEach(c=>c.classList.remove('sel'));
+  document.querySelectorAll('#e-svc-grid .svcc')[svcs.findIndex(s=>s.key===key)]?.classList.add('sel');
+}
+
+function cerrarModal(){
+  document.getElementById('modal-edit').style.display='none';
+  document.body.style.overflow='';
+  editingId=null;
+}
+
+async function guardarEdicion(){
+  const Ne = (id) => parseFloat(document.getElementById(id)?.value)||0;
+  const Ve = (id) => (document.getElementById(id)?.value||'').trim();
+  const nombre = Ve('e-nombre'), fecha = Ve('e-fecha');
+  if(!nombre||!fecha){toast('⚠ Nombre y fecha son obligatorios','err');return;}
+  const ext = ['e-cel','e-ent','e-tor','e-per','e-naf','e-beb','e-otr'];
+  const extSum = ext.reduce((s,id)=>s+Ne(id),0);
+  const cob = Ne('e-cob'), sena = Ne('e-sena');
+  const btn = document.getElementById('btn-edit-save');
+  btn.disabled=true; btn.textContent='Guardando...';
+  try{
+    const data = {
+      nombre_evento:nombre, tipo:Ve('e-tipo'), fecha, estado:Ve('e-estado'),
+      horario_inicio:Ve('e-h-ini')||null, horario_llegada_evento:Ve('e-h-lleg')||null,
+      horario_partida:Ve('e-h-part')||null, horario_llegada_maikels:Ve('e-h-mk')||null,
+      lugar:Ve('e-lugar')||null, direccion:Ve('e-dir')||null,
+      nombre_cliente:Ve('e-cliente')||null, telefono:Ve('e-tel')||null,
+      cant_invitados:Ne('e-inv')||0, extras_info:Ve('e-extras')||null,
+      cant_pizzas:Ne('e-piz')||0, cant_personal:Ne('e-pers')||0,
+      nombres_personal:Ve('e-pnombres')||null, notas:Ve('e-notas')||null,
+      servicio_tipo:editSelSvc||null,
+      total_cobrado:cob, costo_materia_prima:Ne('e-mp'),
+      celiacos:Ne('e-cel'), entradas:Ne('e-ent'), tortas:Ne('e-tor'),
+      personal:Ne('e-per'), nafta:Ne('e-naf'), bebida:Ne('e-beb'), otros:Ne('e-otr'),
+      extras_total:extSum, sena,
+      fecha_sena:Ve('e-fecha-sena')||null,
+      resta_abonar:Math.max(0,cob-sena),
+      fecha_resto:Ve('e-fecha-resto')||null,
+    };
+    await dbUpdate(editingId, data);
+    const idx = evs.findIndex(x=>x.id===editingId);
+    if(idx>=0) evs[idx]={...evs[idx],...data};
+    toast('✓ Evento actualizado');
+    cerrarModal();
+    verDet(editingId);
+  }catch(err){
+    toast('Error: '+err.message,'err');
+  }finally{
+    btn.disabled=false; btn.textContent='💾 Guardar cambios';
+  }
+}
+
+// ===== REPORTE / IMPRIMIR =====
+function imprimirReporte(id){
+  const e = evs.find(x=>x.id===id);
+  if(!e) return;
+  const svc = svcs.find(s=>s.key===e.servicio_tipo);
+  const cost = (parseFloat(e.costo_materia_prima)||0)+(parseFloat(e.extras_total)||0);
+  const gan  = (parseFloat(e.total_cobrado)||0)-cost;
+  const estadoColor = {pendiente:'#F5B800',confirmado:'#60A5FA',completado:'#22C55E',cancelado:'#EF4444'}[e.estado]||'#999';
+
+  const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Reporte — ${e.nombre_evento||'Evento'}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#0D0D0D;color:#F0F0F0;font-family:'DM Sans',sans-serif;font-size:13px;padding:0;}
+  .page{max-width:760px;margin:0 auto;padding:2rem;}
+
+  /* HEADER */
+  .header{display:flex;align-items:center;justify-content:space-between;padding-bottom:1.5rem;border-bottom:2px solid #F5B800;margin-bottom:1.75rem;}
+  .logo-area{display:flex;align-items:center;gap:12px;}
+  .logo-box{width:48px;height:48px;background:#F5B800;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:26px;color:#0D0D0D;}
+  .logo-name{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#F5B800;letter-spacing:1.5px;line-height:1;}
+  .logo-sub{font-size:10px;color:#666;margin-top:2px;}
+  .header-right{text-align:right;}
+  .report-label{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:.8px;}
+  .report-date{font-size:13px;color:#999;margin-top:2px;}
+
+  /* HERO */
+  .event-name{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#F0F0F0;letter-spacing:1px;line-height:1;margin-bottom:.5rem;}
+  .estado-pill{display:inline-block;padding:4px 14px;border-radius:20px;font-size:11px;font-weight:700;border:1.5px solid ${estadoColor};color:${estadoColor};background:${estadoColor}22;margin-bottom:1.5rem;}
+
+  /* GRID INFO */
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+  .info-block{background:#161616;border:.5px solid rgba(255,255,255,0.07);border-radius:10px;padding:.85rem 1rem;}
+  .info-block-title{font-size:9px;color:#F5B800;text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:.65rem;}
+  .info-row{display:flex;justify-content:space-between;align-items:flex-start;padding:5px 0;border-bottom:.5px solid rgba(255,255,255,0.06);font-size:12px;}
+  .info-row:last-child{border-bottom:none;}
+  .info-label{color:#888;}
+  .info-val{color:#F0F0F0;font-weight:500;text-align:right;max-width:55%;}
+
+  /* SERVICIOS */
+  .svc-box{background:rgba(245,184,0,0.07);border:1.5px solid rgba(245,184,0,0.3);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;}
+  .svc-name{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#F5B800;letter-spacing:1px;}
+  .svc-desc{font-size:11px;color:#888;margin-top:2px;}
+  .svc-price{font-size:20px;font-weight:700;color:#F5B800;text-align:right;}
+  .svc-price-label{font-size:10px;color:#666;text-align:right;}
+
+  /* TOPPINGS */
+  .toppings-section{margin-bottom:1.5rem;}
+  .section-title{font-size:10px;color:#F5B800;text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:.6rem;}
+  .tags{display:flex;flex-wrap:wrap;gap:5px;}
+  .tag{font-size:11px;background:#1E1E1E;color:#999;padding:3px 9px;border-radius:5px;border:.5px solid rgba(255,255,255,0.07);}
+
+  /* FINANCIERO */
+  .fin-table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;}
+  .fin-table td{padding:8px 12px;border-bottom:.5px solid rgba(255,255,255,0.07);font-size:12px;}
+  .fin-table tr:last-child td{border-bottom:none;}
+  .fin-label{color:#888;}
+  .fin-val{text-align:right;font-weight:500;}
+  .fin-total td{background:#1E1E1E;font-size:14px;font-weight:700;padding:10px 12px;}
+  .fin-total .fin-label{color:#F0F0F0;}
+  .fin-total .fin-val{color:#F5B800;font-size:16px;}
+  .fin-green{color:#22C55E!important;}
+  .fin-red{color:#EF4444!important;}
+
+  /* COBROS */
+  .cobros-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+  .cobro-box{background:#161616;border:.5px solid rgba(255,255,255,0.07);border-radius:10px;padding:.85rem 1rem;}
+
+  /* FOOTER */
+  .footer{border-top:1px solid rgba(245,184,0,0.2);padding-top:1rem;margin-top:.5rem;display:flex;justify-content:space-between;align-items:center;}
+  .footer-brand{font-family:'Bebas Neue',sans-serif;font-size:14px;color:#F5B800;letter-spacing:1px;}
+  .footer-date{font-size:11px;color:#555;}
+
+  @media print{
+    body{background:#fff;color:#000;}
+    .page{padding:1.5rem;}
+    .info-block,.cobro-box{background:#f8f8f8;border-color:#ddd;}
+    .svc-box{background:#fffbe6;border-color:#F5B800;}
+    .tag{background:#f0f0f0;color:#444;}
+    .fin-total td{background:#f0f0f0;}
+    .logo-name,.svc-name,.svc-price,.fin-total .fin-val{color:#C49400;}
+    .estado-pill{color:inherit;border-color:#ccc;background:#f5f5f5;}
+    .info-row .info-label,.fin-label,.report-label,.logo-sub,.footer-date{color:#666;}
+    .event-name,.info-val,.fin-val,.svc-desc,.tag{color:#222;}
+    .header{border-color:#C49400;}
+    .footer{border-color:#ddd;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="logo-area">
+      <div class="logo-box">M</div>
+      <div><div class="logo-name">Maikels Pizzería</div><div class="logo-sub">Sistema de Catering</div></div>
+    </div>
+    <div class="header-right">
+      <div class="report-label">Reporte de evento</div>
+      <div class="report-date">Generado: ${new Date().toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'})}</div>
+    </div>
+  </div>
+
+  <div class="event-name">${e.nombre_evento||'—'}</div>
+  <div class="estado-pill">${{pendiente:'Pendiente',confirmado:'Confirmado',completado:'Completado',cancelado:'Cancelado'}[e.estado]||e.estado}</div>
+
+  <div class="info-grid">
+    <div class="info-block">
+      <div class="info-block-title">Datos del evento</div>
+      <div class="info-row"><span class="info-label">Fecha</span><span class="info-val">${fmtD(e.fecha)}</span></div>
+      <div class="info-row"><span class="info-label">Tipo</span><span class="info-val">${tlbl(e.tipo)}</span></div>
+      <div class="info-row"><span class="info-label">Invitados</span><span class="info-val">${e.cant_invitados||0} personas</span></div>
+      ${e.extras_info?`<div class="info-row"><span class="info-label">Extras/alérgicos</span><span class="info-val">${e.extras_info}</span></div>`:''}
+    </div>
+    <div class="info-block">
+      <div class="info-block-title">Cliente</div>
+      ${e.nombre_cliente?`<div class="info-row"><span class="info-label">Nombre</span><span class="info-val">${e.nombre_cliente}</span></div>`:''}
+      ${e.telefono?`<div class="info-row"><span class="info-label">Teléfono</span><span class="info-val">${e.telefono}</span></div>`:''}
+      ${e.lugar?`<div class="info-row"><span class="info-label">Lugar</span><span class="info-val">${e.lugar}</span></div>`:''}
+      ${e.direccion?`<div class="info-row"><span class="info-label">Dirección</span><span class="info-val">${e.direccion}</span></div>`:''}
+    </div>
+    <div class="info-block">
+      <div class="info-block-title">Horarios</div>
+      ${e.horario_inicio?`<div class="info-row"><span class="info-label">Inicio del evento</span><span class="info-val">${e.horario_inicio}</span></div>`:''}
+      ${e.horario_llegada_evento?`<div class="info-row"><span class="info-label">Llegada al evento</span><span class="info-val">${e.horario_llegada_evento}</span></div>`:''}
+      ${e.horario_partida?`<div class="info-row"><span class="info-label">Partida</span><span class="info-val">${e.horario_partida}</span></div>`:''}
+      ${e.horario_llegada_maikels?`<div class="info-row"><span class="info-label">Llegada en Maikels</span><span class="info-val">${e.horario_llegada_maikels}</span></div>`:''}
+    </div>
+    <div class="info-block">
+      <div class="info-block-title">Producción</div>
+      <div class="info-row"><span class="info-label">Pizzas</span><span class="info-val">${e.cant_pizzas||0}</span></div>
+      <div class="info-row"><span class="info-label">Personal</span><span class="info-val">${e.cant_personal||0} personas</span></div>
+      ${e.nombres_personal?`<div class="info-row"><span class="info-label">Equipo</span><span class="info-val">${e.nombres_personal}</span></div>`:''}
+      ${e.notas?`<div class="info-row"><span class="info-label">Notas</span><span class="info-val">${e.notas}</span></div>`:''}
+    </div>
+  </div>
+
+  ${svc?`<div class="svc-box">
+    <div>
+      <div class="svc-name">${svc.nombre}</div>
+      <div class="svc-desc">${svc.desc}</div>
+    </div>
+    <div>
+      <div class="svc-price">${fmtM(svc.precio)}</div>
+      <div class="svc-price-label">por persona</div>
+    </div>
+  </div>`:''}
+
+  <div class="toppings-section">
+    <div class="section-title">Toppings básicos incluidos</div>
+    <div class="tags">${['Jamón cocido','Cherrys','Rúcula','Salchicha','Cebolla salteada','Morrón asado','Parmesano','Orégano','Aceitunas','Salsa de ajo'].map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+  </div>
+
+  ${(svc&&(svc.key==='clasico1'||svc.key==='clasico2'||svc.key==='premium'))?`<div class="toppings-section">
+    <div class="section-title">Toppings agregados</div>
+    <div class="tags">${['Roquefort','Pesto de albahaca','Jamón crudo','Cebolla al limón con tomillo','Champiñones','Tomate asado c/orégano y sriracha','Panceta','Pepperoni','Cebolla caramelizada al Malbec'].map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+  </div>`:''}
+
+  <div class="section-title" style="margin-bottom:.75rem;">Desglose financiero</div>
+  <table class="fin-table">
+    <tr><td class="fin-label">Total cobrado</td><td class="fin-val">${fmtM(e.total_cobrado)}</td></tr>
+    <tr><td class="fin-label">Costo materia prima</td><td class="fin-val fin-red">${fmtM(e.costo_materia_prima)}</td></tr>
+    ${parseFloat(e.celiacos)>0?`<tr><td class="fin-label">Celíacos</td><td class="fin-val fin-red">${fmtM(e.celiacos)}</td></tr>`:''}
+    ${parseFloat(e.entradas)>0?`<tr><td class="fin-label">Entradas</td><td class="fin-val fin-red">${fmtM(e.entradas)}</td></tr>`:''}
+    ${parseFloat(e.tortas)>0?`<tr><td class="fin-label">Tortas</td><td class="fin-val fin-red">${fmtM(e.tortas)}</td></tr>`:''}
+    ${parseFloat(e.personal)>0?`<tr><td class="fin-label">Personal</td><td class="fin-val fin-red">${fmtM(e.personal)}</td></tr>`:''}
+    ${parseFloat(e.nafta)>0?`<tr><td class="fin-label">Nafta / Traslado</td><td class="fin-val fin-red">${fmtM(e.nafta)}</td></tr>`:''}
+    ${parseFloat(e.bebida)>0?`<tr><td class="fin-label">Bebida</td><td class="fin-val fin-red">${fmtM(e.bebida)}</td></tr>`:''}
+    ${parseFloat(e.otros)>0?`<tr><td class="fin-label">Otros</td><td class="fin-val fin-red">${fmtM(e.otros)}</td></tr>`:''}
+    <tr class="fin-total">
+      <td class="fin-label">Ganancia estimada</td>
+      <td class="fin-val ${gan>=0?'fin-green':'fin-red'}">${fmtM(gan)}</td>
+    </tr>
+  </table>
+
+  <div class="cobros-grid">
+    <div class="cobro-box">
+      <div class="info-block-title">Cobros</div>
+      <div class="info-row"><span class="info-label">Seña recibida</span><span class="info-val fin-green">${fmtM(e.sena)}</span></div>
+      ${e.fecha_sena?`<div class="info-row"><span class="info-label">Fecha seña</span><span class="info-val">${fmtD(e.fecha_sena)}</span></div>`:''}
+      <div class="info-row" style="padding-top:8px;border-top:1px solid rgba(255,255,255,0.1);margin-top:4px;"><span class="info-label" style="color:#F0F0F0;font-weight:700;">Resta abonar</span><span class="info-val fin-green" style="font-size:16px;font-weight:700;">${fmtM(e.resta_abonar)}</span></div>
+      ${e.fecha_resto?`<div class="info-row"><span class="info-label">Fecha pago resto</span><span class="info-val">${fmtD(e.fecha_resto)}</span></div>`:''}
+    </div>
+    <div class="cobro-box" style="background:rgba(245,184,0,0.05);border-color:rgba(245,184,0,0.2);">
+      <div class="info-block-title">Resumen</div>
+      <div class="info-row"><span class="info-label">Servicio</span><span class="info-val">${svc?svc.nombre:'—'}</span></div>
+      <div class="info-row"><span class="info-label">Personas</span><span class="info-val">${e.cant_invitados||0}</span></div>
+      <div class="info-row"><span class="info-label">Total cobrado</span><span class="info-val">${fmtM(e.total_cobrado)}</span></div>
+      <div class="info-row"><span class="info-label">Costos totales</span><span class="info-val fin-red">${fmtM(cost)}</span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">Maikels Pizzería — Catering</div>
+    <div class="footer-date">Reporte generado el ${new Date().toLocaleDateString('es-AR')}</div>
+  </div>
+
+</div>
+<script>window.onload=()=>window.print();<\/script>
+</body>
+</html>`;
+
+  const win = window.open('','_blank');
+  if(!win){ toast('⚠ Permitir popups para imprimir','err'); return; }
+  win.document.write(html);
+  win.document.close();
 }
 
 // ===== INIT =====
