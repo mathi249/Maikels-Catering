@@ -152,6 +152,7 @@ input:disabled,select:disabled{opacity:.5;cursor:not-allowed;}
 .sumrow:last-child{border-bottom:none;}
 .sumrow.tot{padding-top:9px;font-size:15px;font-weight:700;color:var(--gold);border-top:1px solid var(--border-gold);}
 .sumrow.resta{font-size:14px;font-weight:700;color:var(--green);}
+.costos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
 
 /* ===== BTNS ===== */
 .btn{border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;padding:10px 18px;transition:all .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;}
@@ -232,6 +233,7 @@ tr:last-child td{border-bottom:none;} tr:hover td{background:var(--surface2);}
   .fg.c3{grid-template-columns:1fr 1fr;}
   .sgrid{grid-template-columns:1fr 1fr;}
   .svc-grid{grid-template-columns:1fr;}
+  .costos-grid{grid-template-columns:1fr;}
   .toast{bottom:calc(var(--bottom-h) + 8px);}
 }
 @media(min-width:769px){
@@ -374,7 +376,7 @@ tr:last-child td{border-bottom:none;} tr:hover td{background:var(--surface2);}
     <!-- COSTOS -->
     <div class="card">
       <div class="ct">Costos y cobros</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="costos-grid">
         <div>
           <div class="sdiv" style="margin-top:0;"><div class="sdiv-line"></div><div class="sdiv-label">Desglose costos</div><div class="sdiv-line"></div></div>
           <table class="cost-t">
