@@ -475,7 +475,7 @@ const SK='sb_publishable_uP2fZf9XP6a9AQAb1UZdYg_rwCO2jPT';
 const H={'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK};
 
 async function GET(t,q=''){const r=await fetch(`${SB}/rest/v1/${t}?${q}`,{headers:H});if(!r.ok)throw new Error(await r.text());return r.json();}
-async function POST(t,d){const r=await fetch(`${SB}/rest/v1/${t}`,{method:'POST',headers:{...H,'Prefer':'return=representation'},body:JSON.stringify(d)});if(!r.ok)throw new Error(await r.text());return r.json();}
+async function POST(t,d){const r=await fetch(`${SB}/rest/v1/${t}`,{method:'POST',headers:{...H,'Prefer':'return=representation','Accept-Profile':'public'},body:JSON.stringify(d)});if(!r.ok){const err=await r.text();console.error('POST error:',err);throw new Error(err);}return r.json();}
 async function PATCH(t,id,d){const r=await fetch(`${SB}/rest/v1/${t}?id=eq.${id}`,{method:'PATCH',headers:{...H,'Prefer':'return=representation'},body:JSON.stringify(d)});if(!r.ok)throw new Error(await r.text());return r.json();}
 async function DEL(t,id){const r=await fetch(`${SB}/rest/v1/${t}?id=eq.${id}`,{method:'DELETE',headers:H});if(!r.ok)throw new Error(await r.text());}
 
@@ -766,26 +766,33 @@ async function guardarEvento(){
   const btn=document.getElementById('btn-save');
   btn.disabled=true;btn.textContent='Guardando...';
   try{
-    await POST('eventos',{
+    // Build payload - only include fields that exist in DB
+    const payload = {
       nombre_evento:nombre,
       tipo:$v('f-tipo'),
       fecha,
+      estado:'pendiente',
+      lugar:$v('f-lugar')||null,
+      nombre_cliente:$v('f-cliente')||null,
+      telefono:$v('f-tel')||null,
+      cant_invitados:$n('f-invitados')||0,
+      notas:$v('f-notas')||null,
+      total_cobrado:cobrado,
+      sena:seña,
+      resta_abonar:Math.max(0,cobrado-seña),
+    };
+    // Add optional columns safely
+    const optionals = {
       horario_inicio:$v('f-h-inicio')||null,
       horario_llegada_evento:$v('f-h-llegada-ev')||null,
       horario_partida:$v('f-h-partida')||null,
       horario_llegada_maikels:$v('f-h-llegada-mk')||null,
-      lugar:$v('f-lugar'),
-      direccion:$v('f-direccion'),
-      nombre_cliente:$v('f-cliente'),
-      telefono:$v('f-tel'),
-      cant_invitados:$n('f-invitados')||0,
-      extras_info:$v('f-extras-info'),
+      direccion:$v('f-direccion')||null,
       cant_pizzas:$n('f-pizzas')||0,
       cant_personal:$n('f-personal-cant')||0,
-      nombres_personal:$v('f-personal-nombres'),
-      notas:$v('f-notas'),
+      nombres_personal:$v('f-personal-nombres')||null,
+      extras_info:$v('f-extras-info')||null,
       servicio_tipo:selectedSvc||null,
-      total_cobrado:cobrado,
       costo_materia_prima:$n('c-mp'),
       celiacos:$n('c-cel'),
       entradas:$n('c-ent'),
@@ -795,12 +802,23 @@ async function guardarEvento(){
       bebida:$n('c-beb'),
       otros:$n('c-otr'),
       extras_total:extSum,
-      sena:seña,
       fecha_sena:$v('c-fecha-seña')||null,
-      resta_abonar:Math.max(0,cobrado-seña),
       fecha_resto:$v('c-fecha-resto')||null,
-      estado:'pendiente'
-    });
+    };
+    // Try to save with all fields, fallback to basic if schema error
+    let saved = false;
+    try {
+      await POST('eventos', {...payload, ...optionals});
+      saved = true;
+    } catch(e) {
+      if(e.message.includes('schema cache') || e.message.includes('column')) {
+        console.warn('Schema cache issue, saving with basic fields only');
+        await POST('eventos', payload);
+        saved = true;
+        toast('⚠ Guardado con campos básicos. Ejecuta el SQL en Supabase para habilitar todos los campos.');
+      } else { throw e; }
+    }
+    if(!saved) throw new Error('No se pudo guardar');
     toast('Evento guardado ✓');
     limpiarForm();
     go('eventos');
