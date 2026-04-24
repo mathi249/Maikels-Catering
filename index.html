@@ -675,7 +675,7 @@ function renderEvs(){
       <td>${ebadge(e.estado)}</td>
       <td><div style="display:flex;gap:3px;">
         <button class="btn bout bsm" onclick="verDet(${e.id})">Ver</button>
-        <button class="btn bghost bsm" onclick="editarEv(${e.id})">✏</button>
+        <button class="btn bsm" style="background:#1a1a00;border:.5px solid #c49400;color:#F5B800;padding:5px 8px;" onclick="editarEv(${e.id})"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
         <button class="btn bgold bsm" onclick="imprimirReporte(${e.id})">🖨</button>
         <select class="ssel" onchange="cambEst(${e.id},this.value)">
           <option value="">Estado</option>
@@ -710,7 +710,7 @@ function verDet(id){
       <button class="backbtn" onclick="go('eventos')">← Volver</button>
       <div style="display:flex;gap:5px;flex-wrap:wrap;">
         ${['pendiente','confirmado','completado','cancelado'].map(s=>`<button class="btn bsm ${e.estado===s?'bgold':'bghost'}" onclick="cEstDet(${e.id},'${s}')">${s.charAt(0).toUpperCase()+s.slice(1)}</button>`).join('')}
-        <button class="btn bsm" style="background:var(--s3);color:var(--txt);border:.5px solid var(--b);" onclick="editarEv(${e.id})">✏ Editar</button>
+        <button class="btn bsm" style="background:#1a1a00;border:.5px solid #c49400;color:#F5B800;" onclick="editarEv(${e.id})"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Editar</button>
         <button class="btn bsm bgold" onclick="imprimirReporte(${e.id})">🖨 Reporte</button>
       </div>
     </div>
@@ -1055,13 +1055,7 @@ function imprimirReporte(id){
       ${e.horario_partida?`<div class="info-row"><span class="info-label">Partida</span><span class="info-val">${e.horario_partida}</span></div>`:''}
       ${e.horario_llegada_maikels?`<div class="info-row"><span class="info-label">Llegada en Maikels</span><span class="info-val">${e.horario_llegada_maikels}</span></div>`:''}
     </div>
-    <div class="info-block">
-      <div class="info-block-title">Producción</div>
-      <div class="info-row"><span class="info-label">Pizzas</span><span class="info-val">${e.cant_pizzas||0}</span></div>
-      <div class="info-row"><span class="info-label">Personal</span><span class="info-val">${e.cant_personal||0} personas</span></div>
-      ${e.nombres_personal?`<div class="info-row"><span class="info-label">Equipo</span><span class="info-val">${e.nombres_personal}</span></div>`:''}
-      ${e.notas?`<div class="info-row"><span class="info-label">Notas</span><span class="info-val">${e.notas}</span></div>`:''}
-    </div>
+
   </div>
 
   ${svc?`<div class="svc-box">
@@ -1069,10 +1063,7 @@ function imprimirReporte(id){
       <div class="svc-name">${svc.nombre}</div>
       <div class="svc-desc">${svc.desc}</div>
     </div>
-    <div>
-      <div class="svc-price">${fmtM(svc.precio)}</div>
-      <div class="svc-price-label">por persona</div>
-    </div>
+
   </div>`:''}
 
   <div class="toppings-section">
@@ -1085,39 +1076,9 @@ function imprimirReporte(id){
     <div class="tags">${['Roquefort','Pesto de albahaca','Jamón crudo','Cebolla al limón con tomillo','Champiñones','Tomate asado c/orégano y sriracha','Panceta','Pepperoni','Cebolla caramelizada al Malbec'].map(t=>`<span class="tag">${t}</span>`).join('')}</div>
   </div>`:''}
 
-  <div class="section-title" style="margin-bottom:.75rem;">Desglose financiero</div>
-  <table class="fin-table">
-    <tr><td class="fin-label">Total cobrado</td><td class="fin-val">${fmtM(e.total_cobrado)}</td></tr>
-    <tr><td class="fin-label">Costo materia prima</td><td class="fin-val fin-red">${fmtM(e.costo_materia_prima)}</td></tr>
-    ${parseFloat(e.celiacos)>0?`<tr><td class="fin-label">Celíacos</td><td class="fin-val fin-red">${fmtM(e.celiacos)}</td></tr>`:''}
-    ${parseFloat(e.entradas)>0?`<tr><td class="fin-label">Entradas</td><td class="fin-val fin-red">${fmtM(e.entradas)}</td></tr>`:''}
-    ${parseFloat(e.tortas)>0?`<tr><td class="fin-label">Tortas</td><td class="fin-val fin-red">${fmtM(e.tortas)}</td></tr>`:''}
-    ${parseFloat(e.personal)>0?`<tr><td class="fin-label">Personal</td><td class="fin-val fin-red">${fmtM(e.personal)}</td></tr>`:''}
-    ${parseFloat(e.nafta)>0?`<tr><td class="fin-label">Nafta / Traslado</td><td class="fin-val fin-red">${fmtM(e.nafta)}</td></tr>`:''}
-    ${parseFloat(e.bebida)>0?`<tr><td class="fin-label">Bebida</td><td class="fin-val fin-red">${fmtM(e.bebida)}</td></tr>`:''}
-    ${parseFloat(e.otros)>0?`<tr><td class="fin-label">Otros</td><td class="fin-val fin-red">${fmtM(e.otros)}</td></tr>`:''}
-    <tr class="fin-total">
-      <td class="fin-label">Ganancia estimada</td>
-      <td class="fin-val ${gan>=0?'fin-green':'fin-red'}">${fmtM(gan)}</td>
-    </tr>
-  </table>
 
-  <div class="cobros-grid">
-    <div class="cobro-box">
-      <div class="info-block-title">Cobros</div>
-      <div class="info-row"><span class="info-label">Seña recibida</span><span class="info-val fin-green">${fmtM(e.sena)}</span></div>
-      ${e.fecha_sena?`<div class="info-row"><span class="info-label">Fecha seña</span><span class="info-val">${fmtD(e.fecha_sena)}</span></div>`:''}
-      <div class="info-row" style="padding-top:8px;border-top:1px solid rgba(255,255,255,0.1);margin-top:4px;"><span class="info-label" style="color:#F0F0F0;font-weight:700;">Resta abonar</span><span class="info-val fin-green" style="font-size:16px;font-weight:700;">${fmtM(e.resta_abonar)}</span></div>
-      ${e.fecha_resto?`<div class="info-row"><span class="info-label">Fecha pago resto</span><span class="info-val">${fmtD(e.fecha_resto)}</span></div>`:''}
-    </div>
-    <div class="cobro-box" style="background:rgba(245,184,0,0.05);border-color:rgba(245,184,0,0.2);">
-      <div class="info-block-title">Resumen</div>
-      <div class="info-row"><span class="info-label">Servicio</span><span class="info-val">${svc?svc.nombre:'—'}</span></div>
-      <div class="info-row"><span class="info-label">Personas</span><span class="info-val">${e.cant_invitados||0}</span></div>
-      <div class="info-row"><span class="info-label">Total cobrado</span><span class="info-val">${fmtM(e.total_cobrado)}</span></div>
-      <div class="info-row"><span class="info-label">Costos totales</span><span class="info-val fin-red">${fmtM(cost)}</span></div>
-    </div>
-  </div>
+
+
 
   <div class="footer">
     <div class="footer-brand">Maikels Pizzería — Catering</div>
