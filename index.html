@@ -159,7 +159,8 @@ input:disabled,select:disabled{opacity:.5;cursor:not-allowed;}
 .cost-row:last-child{border-bottom:none;}
 .cost-row-total{background:var(--surface2);padding:8px 10px;border-radius:7px;margin-top:4px;border:none !important;}
 .cr-label{font-size:12px;color:var(--muted2);flex:1;}
-.cr-input{width:110px !important;flex-shrink:0;text-align:right;font-size:13px;padding:6px 9px;}
+.cr-input{width:130px !important;flex-shrink:0;text-align:right;font-size:13px;padding:6px 9px;}
+.cr-input[type="date"]{width:150px !important;text-align:left;}
 
 /* ===== BTNS ===== */
 .btn{border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;padding:10px 18px;transition:all .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;}
@@ -268,6 +269,7 @@ tr:last-child td{border-bottom:none;} tr:hover td{background:var(--surface2);}
     <button class="dtab" onclick="go('nuevo')"><span class="dtab-icon">➕</span>Evento</button>
     <button class="dtab" onclick="go('eventos')"><span class="dtab-icon">📋</span>Eventos <span class="nbadge" id="nbadge-d" style="display:none">0</span></button>
     <button class="dtab" onclick="go('menu')"><span class="dtab-icon">🍕</span>Menú</button>
+    <button class="dtab" onclick="go('costos')"><span class="dtab-icon">💰</span>Costos</button>
   </div>
 </nav>
 
@@ -292,6 +294,10 @@ tr:last-child td{border-bottom:none;} tr:hover td{background:var(--surface2);}
   <button class="bnav-item" onclick="go('menu')">
     <div class="bnav-bg"><span class="bnav-icon">🍕</span></div>
     <span class="bnav-label">Menú</span>
+  </button>
+  <button class="bnav-item" onclick="go('costos')">
+    <div class="bnav-bg"><span class="bnav-icon">💰</span></div>
+    <span class="bnav-label">Costos</span>
   </button>
 </nav>
 
@@ -455,6 +461,12 @@ tr:last-child td{border-bottom:none;} tr:hover td{background:var(--surface2);}
     <div class="card" id="menu-body"><div class="loading"><div class="spin"></div></div></div>
   </div>
 
+  <!-- ===== COSTOS ===== -->
+  <div class="screen" id="screen-costos">
+    <div class="ph"><div class="pt">Gestión de <span>Costos</span></div><div class="ps">Editá los costos fijos de cada rubro</div></div>
+    <div class="card" id="costos-body"><div class="loading"><div class="spin"></div></div></div>
+  </div>
+
 </div>
 
 <script>
@@ -510,7 +522,7 @@ function go(name){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.dtab,.bnav-item').forEach(t=>t.classList.remove('active'));
   document.getElementById('screen-'+name).classList.add('active');
-  const map={dashboard:0,calendario:1,nuevo:2,eventos:3,menu:4};
+  const map={dashboard:0,calendario:1,nuevo:2,eventos:3,menu:4,costos:5};
   if(map[name]!==undefined){
     document.querySelectorAll('.dtab')[map[name]]?.classList.add('active');
     document.querySelectorAll('.bnav-item')[map[name]]?.classList.add('active');
@@ -520,6 +532,7 @@ function go(name){
   if(name==='eventos')loadEventos();
   if(name==='nuevo')renderSvcSelector();
   if(name==='menu')renderMenu();
+  if(name==='costos')renderCostos();
 }
 
 // ===== DONUT CHART =====
@@ -1021,6 +1034,56 @@ function resetPrecios(){
   saveServicios();
   renderMenu();
   toast('Precios restaurados');
+}
+
+
+// ===== COSTOS FIJOS =====
+const COSTOS_DEFAULT = [
+  {key:'materia_prima_pp', nombre:'Materia prima por pizza', precio:0, desc:'Costo de harina, levadura, tomate, queso por pizza'},
+  {key:'personal_pp', nombre:'Personal por evento', precio:0, desc:'Costo total del personal por evento'},
+  {key:'nafta_pp', nombre:'Nafta / Traslado', precio:0, desc:'Combustible y traslado estimado por evento'},
+  {key:'celiaco_pp', nombre:'Porción celíaco / Sin TACC', precio:0, desc:'Costo extra por porción especial'},
+  {key:'entrada_pp', nombre:'Entrada por persona', precio:0, desc:'Costo de entradas por persona'},
+  {key:'torta_pp', nombre:'Torta por evento', precio:0, desc:'Costo estimado de tortas por evento'},
+  {key:'bebida_pp', nombre:'Bebida por persona', precio:0, desc:'Costo de bebida por persona'},
+  {key:'otros_pp', nombre:'Otros gastos', precio:0, desc:'Gastos varios no contemplados'},
+];
+
+let costosConfig = JSON.parse(localStorage.getItem('mk_costos') || 'null') || JSON.parse(JSON.stringify(COSTOS_DEFAULT));
+function saveCostos(){ localStorage.setItem('mk_costos', JSON.stringify(costosConfig)); }
+
+function renderCostos(){
+  const html = `
+    <div class="ct">Costos de referencia por rubro</div>
+    <div style="margin-bottom:.5rem;font-size:12px;color:var(--muted);">Estos valores son de referencia para tu control interno. Se pueden editar en cualquier momento.</div>
+    ${costosConfig.map((c,i) => `
+      <div class="menu-row">
+        <div style="flex:1;min-width:0;">
+          <div class="mn">${c.nombre}</div>
+          <div class="md">${c.desc}</div>
+        </div>
+        <div class="mp" style="display:flex;align-items:center;gap:6px;">
+          <span style="font-size:11px;color:var(--muted);">$</span>
+          <input type="number" value="${c.precio}" step="100" min="0"
+            style="width:120px;text-align:right;color:var(--gold);font-weight:700;font-size:14px;background:var(--surface3);border:1px solid var(--border-gold);border-radius:7px;padding:6px 9px;"
+            onchange="updateCosto(${i},this.value)">
+        </div>
+      </div>
+    `).join('')}
+    <div class="brow">
+      <button class="btn btn-gold btn-sm" onclick="guardarCostos()">💾 Guardar costos</button>
+      <button class="btn btn-ghost btn-sm" onclick="resetCostos()">Restaurar predeterminados</button>
+    </div>
+  `;
+  document.getElementById('costos-body').innerHTML = html;
+}
+
+function updateCosto(idx, val){ costosConfig[idx].precio = parseFloat(val)||0; }
+function guardarCostos(){ saveCostos(); toast('Costos guardados ✓'); }
+function resetCostos(){
+  if(!confirm('¿Restaurar todos los costos a $0?')) return;
+  costosConfig = JSON.parse(JSON.stringify(COSTOS_DEFAULT));
+  saveCostos(); renderCostos(); toast('Costos restaurados');
 }
 
 // ===== INIT =====
