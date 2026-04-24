@@ -676,6 +676,7 @@ function renderEvs(){
       <td><div style="display:flex;gap:3px;">
         <button class="btn bout bsm" onclick="verDet(${e.id})">Ver</button>
         <button class="btn bghost bsm" onclick="editarEv(${e.id})">✏</button>
+        <button class="btn bgold bsm" onclick="imprimirReporte(${e.id})">🖨</button>
         <select class="ssel" onchange="cambEst(${e.id},this.value)">
           <option value="">Estado</option>
           <option value="pendiente">Pendiente</option><option value="confirmado">Confirmado</option>
