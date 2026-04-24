@@ -153,6 +153,13 @@ input:disabled,select:disabled{opacity:.5;cursor:not-allowed;}
 .sumrow.tot{padding-top:9px;font-size:15px;font-weight:700;color:var(--gold);border-top:1px solid var(--border-gold);}
 .sumrow.resta{font-size:14px;font-weight:700;color:var(--green);}
 .costos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.costos-inline{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.costos-col{display:flex;flex-direction:column;min-width:0;}
+.cost-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--border);}
+.cost-row:last-child{border-bottom:none;}
+.cost-row-total{background:var(--surface2);padding:8px 10px;border-radius:7px;margin-top:4px;border:none !important;}
+.cr-label{font-size:12px;color:var(--muted2);flex:1;}
+.cr-input{width:110px !important;flex-shrink:0;text-align:right;font-size:13px;padding:6px 9px;}
 
 /* ===== BTNS ===== */
 .btn{border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;padding:10px 18px;transition:all .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;}
@@ -235,6 +242,7 @@ tr:last-child td{border-bottom:none;} tr:hover td{background:var(--surface2);}
   .svc-grid{grid-template-columns:1fr;}
   .costos-grid{grid-template-columns:1fr;}
   .costos-inline{grid-template-columns:1fr !important;}
+  .cr-input{width:100px !important;}
   .toast{bottom:calc(var(--bottom-h) + 8px);}
 }
 @media(min-width:769px){
@@ -378,32 +386,28 @@ tr:last-child td{border-bottom:none;} tr:hover td{background:var(--surface2);}
     <div class="card">
       <div class="ct">Costos y cobros</div>
 
-      <div class="costos-inline" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+      <div class="costos-inline">
         <!-- COLUMNA IZQUIERDA: costos -->
-        <div style="min-width:0;overflow:hidden;">
+        <div class="costos-col">
           <div class="sdiv" style="margin-top:0;"><div class="sdiv-line"></div><div class="sdiv-label">Desglose costos</div><div class="sdiv-line"></div></div>
-          <table class="cost-t">
-            <tr><td class="lc">Total que se cobra</td><td class="ic"><input type="number" id="c-cobrado" placeholder="0.00" step="0.01" oninput="calcTotal()"></td></tr>
-            <tr><td class="lc">Costo materia prima</td><td class="ic"><input type="number" id="c-mp" placeholder="0.00" step="0.01" oninput="calcTotal()"></td></tr>
-            <tr><td class="lc">Celíacos / Sin TACC</td><td class="ic"><input type="number" id="c-cel" placeholder="0.00" step="0.01" oninput="calcTotal()"></td></tr>
-            <tr><td class="lc">Entradas</td><td class="ic"><input type="number" id="c-ent" placeholder="0.00" step="0.01" oninput="calcTotal()"></td></tr>
-            <tr><td class="lc">Tortas</td><td class="ic"><input type="number" id="c-tor" placeholder="0.00" step="0.01" oninput="calcTotal()"></td></tr>
-            <tr><td class="lc">Personal</td><td class="ic"><input type="number" id="c-per" placeholder="0.00" step="0.01" oninput="calcTotal()"></td></tr>
-            <tr><td class="lc">Nafta / Traslado</td><td class="ic"><input type="number" id="c-naf" placeholder="0.00" step="0.01" oninput="calcTotal()"></td></tr>
-            <tr><td class="lc">Bebida</td><td class="ic"><input type="number" id="c-beb" placeholder="0.00" step="0.01" oninput="calcTotal()"></td></tr>
-            <tr><td class="lc">Otros</td><td class="ic"><input type="number" id="c-otr" placeholder="0.00" step="0.01" oninput="calcTotal()"></td></tr>
-            <tr class="tot"><td class="lc">Extras (total)</td><td class="ic"><span class="val" id="extras-disp">$0.00</span></td></tr>
-          </table>
+          <div class="cost-row"><span class="cr-label">Total que se cobra</span><input class="cr-input" type="number" id="c-cobrado" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
+          <div class="cost-row"><span class="cr-label">Costo materia prima</span><input class="cr-input" type="number" id="c-mp" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
+          <div class="cost-row"><span class="cr-label">Celíacos / Sin TACC</span><input class="cr-input" type="number" id="c-cel" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
+          <div class="cost-row"><span class="cr-label">Entradas</span><input class="cr-input" type="number" id="c-ent" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
+          <div class="cost-row"><span class="cr-label">Tortas</span><input class="cr-input" type="number" id="c-tor" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
+          <div class="cost-row"><span class="cr-label">Personal</span><input class="cr-input" type="number" id="c-per" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
+          <div class="cost-row"><span class="cr-label">Nafta / Traslado</span><input class="cr-input" type="number" id="c-naf" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
+          <div class="cost-row"><span class="cr-label">Bebida</span><input class="cr-input" type="number" id="c-beb" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
+          <div class="cost-row"><span class="cr-label">Otros</span><input class="cr-input" type="number" id="c-otr" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
+          <div class="cost-row cost-row-total"><span class="cr-label" style="color:var(--text);font-weight:600;">Extras (total)</span><span id="extras-disp" style="color:var(--gold);font-weight:700;font-size:15px;">$0.00</span></div>
         </div>
         <!-- COLUMNA DERECHA: cobros + resumen -->
-        <div style="min-width:0;overflow:hidden;">
+        <div class="costos-col">
           <div class="sdiv" style="margin-top:0;"><div class="sdiv-line"></div><div class="sdiv-label">Cobros / Señas</div><div class="sdiv-line"></div></div>
-          <table class="cost-t">
-            <tr><td class="lc">Seña recibida</td><td class="ic"><input type="number" id="c-seña" placeholder="0.00" step="0.01" oninput="calcTotal()"></td></tr>
-            <tr><td class="lc">Fecha seña</td><td class="ic"><input type="date" id="c-fecha-seña"></td></tr>
-            <tr class="tot"><td class="lc">Resta abonar</td><td class="ic"><span class="val" style="color:var(--green)" id="resta-disp">$0.00</span></td></tr>
-            <tr><td class="lc">Fecha pago restante</td><td class="ic"><input type="date" id="c-fecha-resto"></td></tr>
-          </table>
+          <div class="cost-row"><span class="cr-label">Seña recibida</span><input class="cr-input" type="number" id="c-seña" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
+          <div class="cost-row"><span class="cr-label">Fecha seña</span><input class="cr-input" type="date" id="c-fecha-seña"></div>
+          <div class="cost-row cost-row-total"><span class="cr-label" style="color:var(--text);font-weight:600;">Resta abonar</span><span id="resta-disp" style="color:var(--green);font-weight:700;font-size:15px;">$0.00</span></div>
+          <div class="cost-row"><span class="cr-label">Fecha pago restante</span><input class="cr-input" type="date" id="c-fecha-resto"></div>
           <div style="height:.6rem;"></div>
           <div class="sumbox" id="sumbox">
             <div class="sumrow"><span>Servicio</span><span id="s-svc" style="color:var(--gold)">—</span></div>
