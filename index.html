@@ -381,29 +381,29 @@ tr:last-child td{border-bottom:none;}tr:hover td{background:var(--s2);}
 </div>
 </div>
 <script>
-// ===== SUPABASE =====
-const SB  = 'https://oajmytptnivekxjawjow.supabase.co';
-const SK  = 'sb_publishable_uP2fZf9XP6a9AQAb1UZdYg_rwCO2jPT';
-const SH  = {'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK,'Prefer':'return=representation'};
+// ===== BASE DE DATOS LOCAL =====
+const DB_KEY = 'mk_eventos';
 
-async function dbGet(q=''){
-  const r = await fetch(`${SB}/rest/v1/eventos?${q}`, {headers:SH});
-  if(!r.ok) throw new Error(await r.text());
-  return r.json();
-}
+function dbLoad(){ try{ return JSON.parse(localStorage.getItem(DB_KEY)||'[]'); }catch(e){ return []; } }
+function dbSave(data){ localStorage.setItem(DB_KEY, JSON.stringify(data)); }
+
+async function dbGet(q=''){ return dbLoad(); }
 async function dbInsert(data){
-  const r = await fetch(`${SB}/rest/v1/eventos`, {method:'POST', headers:SH, body:JSON.stringify(data)});
-  if(!r.ok) throw new Error(await r.text());
-  return r.json();
+  const all = dbLoad();
+  const nuevo = {...data, id: Date.now(), created_at: new Date().toISOString()};
+  all.push(nuevo);
+  dbSave(all);
+  return [nuevo];
 }
 async function dbUpdate(id, data){
-  const r = await fetch(`${SB}/rest/v1/eventos?id=eq.${id}`, {method:'PATCH', headers:SH, body:JSON.stringify(data)});
-  if(!r.ok) throw new Error(await r.text());
-  return r.json();
+  const all = dbLoad();
+  const idx = all.findIndex(e=>e.id===id);
+  if(idx>=0){ all[idx]={...all[idx],...data}; dbSave(all); return [all[idx]]; }
+  return [];
 }
 async function dbDelete(id){
-  const r = await fetch(`${SB}/rest/v1/eventos?id=eq.${id}`, {method:'DELETE', headers:SH});
-  if(!r.ok) throw new Error(await r.text());
+  const all = dbLoad().filter(e=>e.id!==id);
+  dbSave(all);
 }
 
 // ===== LOCAL CONFIG (menu/costos stay in localStorage) =====
@@ -451,22 +451,7 @@ function tlbl(t){ return {social:'Social',corporativo:'Corporativo',casamiento:'
 function ebadge(e){ const c={pendiente:'bpend',confirmado:'bconf',completado:'bcomp',cancelado:'bcanc'}; const l={pendiente:'Pendiente',confirmado:'Confirmado',completado:'Completado',cancelado:'Cancelado'}; return `<span class="badge ${c[e]||'bgray'}">${l[e]||e}</span>`; }
 function updBadge(){ const n=evs.filter(e=>e.estado==='pendiente').length; const d=document.getElementById('nb-d'); if(d){d.textContent=n;d.style.display=n?'inline-flex':'none';} }
 
-// ===== MIGRATE localStorage → Supabase =====
-async function migrarLocal(){
-  const local = lsGet('mk_evs', []);
-  if(!local.length) return;
-  toast('Migrando datos locales a Supabase...','info');
-  let ok=0;
-  for(const e of local){
-    try{
-      const {id, created_at, ...rest} = e;
-      await dbInsert(rest);
-      ok++;
-    }catch(err){ console.warn('No se pudo migrar evento',e.nombre_evento,err.message); }
-  }
-  localStorage.removeItem('mk_evs');
-  toast(`✓ ${ok} evento${ok!==1?'s':''} migrado${ok!==1?'s':''} a Supabase`);
-}
+
 
 // ===== NAV =====
 function go(name){
@@ -1150,12 +1135,7 @@ function imprimirReporte(id){
 }
 
 // ===== INIT =====
-(async()=>{
-  // Si hay datos en localStorage, migrarlos a Supabase primero
-  const local = lsGet('mk_evs', []);
-  if(local.length) await migrarLocal();
-  renderDash();
-})();
+renderDash();
 </script>
 </body>
 </html>
