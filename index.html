@@ -56,8 +56,7 @@ body{background:var(--black);color:var(--txt);font-family:'DM Sans',sans-serif;f
 .leg{width:100%;display:flex;flex-direction:column;gap:4px;}
 .li{display:flex;align-items:center;gap:7px;font-size:11px;}
 .ld{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
-.ll{flex:1;color:var(--mut2);}
-.lv{font-weight:600;}.lp{color:var(--mut);font-size:10px;}
+.ll{flex:1;color:var(--mut2);}.lv{font-weight:600;}.lp{color:var(--mut);font-size:10px;}
 .calh{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;}
 .calnav{display:flex;align-items:center;gap:8px;}
 .calm{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold);letter-spacing:1px;min-width:150px;text-align:center;}
@@ -66,9 +65,7 @@ body{background:var(--black);color:var(--txt);font-family:'DM Sans',sans-serif;f
 .calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
 .cdn{text-align:center;font-size:9px;font-weight:700;color:var(--mut);padding:4px 0;text-transform:uppercase;}
 .cd{min-height:36px;border-radius:6px;padding:3px;cursor:pointer;transition:all .15s;border:.5px solid transparent;display:flex;flex-direction:column;align-items:center;}
-.cd:hover{background:var(--s2);}
-.cd.today{border-color:var(--gold);}
-.cd.sel{background:var(--gold-dim);border-color:var(--gold);}
+.cd:hover{background:var(--s2);}.cd.today{border-color:var(--gold);}.cd.sel{background:var(--gold-dim);border-color:var(--gold);}
 .cd.om .cnum{color:var(--mut);}
 .cnum{font-size:11px;font-weight:500;}
 .cdot{width:5px;height:5px;border-radius:50%;background:var(--gold);margin-top:1px;}
@@ -84,15 +81,13 @@ body{background:var(--black);color:var(--txt);font-family:'DM Sans',sans-serif;f
 label{font-size:10px;color:var(--mut2);text-transform:uppercase;letter-spacing:.4px;}
 input,select,textarea{background:var(--s3);border:.5px solid var(--b);border-radius:7px;color:var(--txt);font-size:13px;font-family:'DM Sans',sans-serif;padding:8px 10px;outline:none;transition:border-color .15s;width:100%;}
 input:focus,select:focus,textarea:focus{border-color:var(--gold);}
-select option{background:var(--s3);}
-textarea{resize:vertical;min-height:60px;}
+select option{background:var(--s3);}textarea{resize:vertical;min-height:60px;}
 .sdiv{display:flex;align-items:center;gap:8px;margin:.9rem 0 .6rem;}
 .sdl{font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;font-weight:700;white-space:nowrap;}
 .sdline{flex:1;height:1px;background:var(--bg);}
 .svcg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:.75rem;}
 .svcc{border:1px solid var(--b);border-radius:10px;padding:10px;cursor:pointer;transition:all .15s;}
-.svcc:hover{border-color:var(--bg);}
-.svcc.sel{border-color:var(--gold);background:var(--gold-dim);}
+.svcc:hover{border-color:var(--bg);}.svcc.sel{border-color:var(--gold);background:var(--gold-dim);}
 .svcn{font-size:12px;font-weight:700;margin-bottom:2px;}
 .svcd{font-size:10px;color:var(--mut);line-height:1.3;}
 .svcp{font-size:15px;font-weight:700;color:var(--gold);margin-top:6px;}
@@ -153,6 +148,7 @@ tr:last-child td{border-bottom:none;}tr:hover td{background:var(--s2);}
 .toast{position:fixed;bottom:calc(var(--bot) + 10px);left:50%;transform:translateX(-50%) translateY(8px);background:var(--gold);color:var(--black);padding:9px 18px;border-radius:20px;font-size:12px;font-weight:700;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:9999;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .toast.err{background:var(--red);color:#fff;}
+.toast.info{background:var(--blu);color:#fff;}
 .backbtn{display:inline-flex;align-items:center;gap:5px;background:none;border:.5px solid var(--b);border-radius:6px;color:var(--mut2);font-size:11px;font-family:'DM Sans',sans-serif;padding:5px 10px;cursor:pointer;}
 .backbtn:hover{border-color:var(--gold);color:var(--gold);}
 .ssel{background:var(--s3);border:.5px solid var(--b);border-radius:5px;color:var(--txt);font-size:11px;padding:4px 7px;cursor:pointer;font-family:'DM Sans',sans-serif;}
@@ -195,10 +191,9 @@ tr:last-child td{border-bottom:none;}tr:hover td{background:var(--s2);}
 <div class="toast" id="toast"></div>
 <div class="main">
 
-<!-- DASHBOARD -->
 <div class="screen active" id="screen-dashboard">
   <div class="ph"><div class="pt">Panel de <span>Control</span></div><div class="ps" id="d-date"></div></div>
-  <div class="sg" id="d-stats"></div>
+  <div class="sg" id="d-stats"><div class="loading" style="grid-column:1/-1"><div class="spin"></div></div></div>
   <div class="cg">
     <div class="cc"><div class="cht">Eventos por tipo</div><div id="ch-tipo"></div></div>
     <div class="cc"><div class="cht">Estado de cobros</div><div id="ch-cobros"></div></div>
@@ -207,7 +202,6 @@ tr:last-child td{border-bottom:none;}tr:hover td{background:var(--s2);}
   <div class="card"><div class="ct">Próximos eventos</div><div id="d-up"></div></div>
 </div>
 
-<!-- CALENDARIO -->
 <div class="screen" id="screen-calendario">
   <div class="ph"><div class="pt"><span>Calendario</span></div></div>
   <div class="card">
@@ -220,7 +214,6 @@ tr:last-child td{border-bottom:none;}tr:hover td{background:var(--s2);}
   <div class="card"><div class="ct" id="cal-day-title">Seleccioná un día</div><div id="cal-list"><div class="empty"><div class="eico">📅</div><div>Tocá un día para ver eventos</div></div></div></div>
 </div>
 
-<!-- NUEVO -->
 <div class="screen" id="screen-nuevo">
   <div class="ph"><div class="pt">Nuevo <span>Evento</span></div></div>
   <div class="card">
@@ -254,13 +247,11 @@ tr:last-child td{border-bottom:none;}tr:hover td{background:var(--s2);}
       <div class="fg2 full"><label>Nombres del personal</label><input type="text" id="f-pnombres" placeholder="Juan, María, Carlos..."></div>
     </div>
   </div>
-
   <div class="card">
     <div class="ct">Tipo de servicio</div>
     <div class="svcg" id="svc-grid"></div>
     <div id="topping-ref"></div>
   </div>
-
   <div class="card">
     <div class="ct">Costos y cobros</div>
     <div class="cblock">
@@ -299,7 +290,6 @@ tr:last-child td{border-bottom:none;}tr:hover td{background:var(--s2);}
   </div>
 </div>
 
-<!-- EVENTOS -->
 <div class="screen" id="screen-eventos">
   <div class="ph"><div class="pt">Todos los <span>Eventos</span></div></div>
   <div class="filt">
@@ -309,20 +299,18 @@ tr:last-child td{border-bottom:none;}tr:hover td{background:var(--s2);}
   </div>
   <div class="card" style="padding:0;overflow:hidden;">
     <div class="tw"><table><thead><tr><th>Evento</th><th>Fecha</th><th>Invitados</th><th>Servicio</th><th>Cobrado</th><th>Ganancia</th><th>Resta</th><th>Estado</th><th></th></tr></thead><tbody id="ev-tb"></tbody></table></div>
+    <div id="ev-load" class="loading" style="display:none"><div class="spin"></div> Cargando...</div>
     <div id="ev-empty" class="empty" style="display:none"><div class="eico">📋</div><div>Sin eventos registrados</div></div>
   </div>
 </div>
 
-<!-- DETALLE -->
 <div class="screen" id="screen-detalle"><div id="det"></div></div>
 
-<!-- MENÚ -->
 <div class="screen" id="screen-menu">
   <div class="ph"><div class="pt">Gestión de <span>Menú</span></div><div class="ps">Precios por persona — editables</div></div>
   <div class="card" id="menu-body"></div>
 </div>
 
-<!-- COSTOS -->
 <div class="screen" id="screen-costos">
   <div class="ph"><div class="pt">Gestión de <span>Costos</span></div><div class="ps">Costos de referencia por rubro</div></div>
   <div class="card" id="costos-body"></div>
@@ -330,9 +318,34 @@ tr:last-child td{border-bottom:none;}tr:hover td{background:var(--s2);}
 
 </div>
 <script>
-// ===== BASE DE DATOS LOCAL =====
-function loadDB(key, def){ try{ const v=localStorage.getItem(key); return v?JSON.parse(v):def; }catch(e){ return def; } }
-function saveDB(key, data){ try{ localStorage.setItem(key, JSON.stringify(data)); }catch(e){ console.error(e); } }
+// ===== SUPABASE =====
+const SB  = 'https://oajmytptnivekxjawjow.supabase.co';
+const SK  = 'sb_publishable_uP2fZf9XP6a9AQAb1UZdYg_rwCO2jPT';
+const SH  = {'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK,'Prefer':'return=representation'};
+
+async function dbGet(q=''){
+  const r = await fetch(`${SB}/rest/v1/eventos?${q}`, {headers:SH});
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+async function dbInsert(data){
+  const r = await fetch(`${SB}/rest/v1/eventos`, {method:'POST', headers:SH, body:JSON.stringify(data)});
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+async function dbUpdate(id, data){
+  const r = await fetch(`${SB}/rest/v1/eventos?id=eq.${id}`, {method:'PATCH', headers:SH, body:JSON.stringify(data)});
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+async function dbDelete(id){
+  const r = await fetch(`${SB}/rest/v1/eventos?id=eq.${id}`, {method:'DELETE', headers:SH});
+  if(!r.ok) throw new Error(await r.text());
+}
+
+// ===== LOCAL CONFIG (menu/costos stay in localStorage) =====
+function lsGet(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
 
 const SVC_DEF = [
   {key:'basico',   nombre:'Básico',    precio:15500, desc:'Pizza libre + 10 toppings'},
@@ -353,9 +366,9 @@ const CST_DEF = [
   {key:'otro', nombre:'Otros gastos',               precio:0, desc:'Gastos varios'},
 ];
 
-let svcs   = loadDB('mk_svcs', JSON.parse(JSON.stringify(SVC_DEF)));
-let csts   = loadDB('mk_csts', JSON.parse(JSON.stringify(CST_DEF)));
-let evs    = loadDB('mk_evs',  []);
+let svcs   = lsGet('mk_svcs', JSON.parse(JSON.stringify(SVC_DEF)));
+let csts   = lsGet('mk_csts', JSON.parse(JSON.stringify(CST_DEF)));
+let evs    = [];
 let selSvc = null;
 let calY   = new Date().getFullYear();
 let calM   = new Date().getMonth();
@@ -375,6 +388,23 @@ function tlbl(t){ return {social:'Social',corporativo:'Corporativo',casamiento:'
 function ebadge(e){ const c={pendiente:'bpend',confirmado:'bconf',completado:'bcomp',cancelado:'bcanc'}; const l={pendiente:'Pendiente',confirmado:'Confirmado',completado:'Completado',cancelado:'Cancelado'}; return `<span class="badge ${c[e]||'bgray'}">${l[e]||e}</span>`; }
 function updBadge(){ const n=evs.filter(e=>e.estado==='pendiente').length; const d=document.getElementById('nb-d'); if(d){d.textContent=n;d.style.display=n?'inline-flex':'none';} }
 
+// ===== MIGRATE localStorage → Supabase =====
+async function migrarLocal(){
+  const local = lsGet('mk_evs', []);
+  if(!local.length) return;
+  toast('Migrando datos locales a Supabase...','info');
+  let ok=0;
+  for(const e of local){
+    try{
+      const {id, created_at, ...rest} = e;
+      await dbInsert(rest);
+      ok++;
+    }catch(err){ console.warn('No se pudo migrar evento',e.nombre_evento,err.message); }
+  }
+  localStorage.removeItem('mk_evs');
+  toast(`✓ ${ok} evento${ok!==1?'s':''} migrado${ok!==1?'s':''} a Supabase`);
+}
+
 // ===== NAV =====
 function go(name){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -386,8 +416,8 @@ function go(name){
     document.querySelectorAll('.bitem')[map[name]]?.classList.add('active');
   }
   if(name==='dashboard')  renderDash();
-  if(name==='calendario') renderCal();
-  if(name==='eventos')    renderEvs();
+  if(name==='calendario') loadEvs().then(()=>renderCal());
+  if(name==='eventos')    loadEvs();
   if(name==='nuevo')      initNuevo();
   if(name==='menu')       renderMenu();
   if(name==='costos')     renderCostos();
@@ -411,41 +441,43 @@ function donut(data,id){
 }
 
 // ===== DASHBOARD =====
-function renderDash(){
+async function renderDash(){
   document.getElementById('d-date').textContent=new Date().toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  updBadge();
-  const today=new Date().toISOString().split('T')[0];
-  const comp=evs.filter(e=>e.estado==='completado');
-  const pend=evs.filter(e=>e.estado==='pendiente'||e.estado==='confirmado');
-  const ingr=comp.reduce((s,e)=>s+(e.total_cobrado||0),0);
-  const cost=comp.reduce((s,e)=>s+(e.costo_materia_prima||0)+(e.extras_total||0),0);
-  const pcob=evs.filter(e=>e.estado!=='cancelado'&&e.estado!=='completado').reduce((s,e)=>s+(e.resta_abonar||0),0);
-
-  document.getElementById('d-stats').innerHTML=`
-    <div class="sc"><div class="sl">Total eventos</div><div class="sv w">${evs.length}</div></div>
-    <div class="sc"><div class="sl">Pendientes</div><div class="sv">${pend.length}</div></div>
-    <div class="sc"><div class="sl">Por cobrar</div><div class="sv b">${fmtM(pcob)}</div></div>
-    <div class="sc"><div class="sl">Ganancia neta</div><div class="sv ${ingr-cost>=0?'g':'r'}">${fmtM(ingr-cost)}</div></div>`;
-
-  const tipos={};evs.forEach(e=>{const k=tlbl(e.tipo);tipos[k]=(tipos[k]||0)+1;});
-  donut(Object.entries(tipos).map(([l,v])=>({l,v})),'ch-tipo');
-  const sv2={};evs.forEach(e=>{if(e.servicio_tipo){const s=svcs.find(x=>x.key===e.servicio_tipo);sv2[s?s.nombre:e.servicio_tipo]=(sv2[s?s.nombre:e.servicio_tipo]||0)+1;}});
-  donut(Object.entries(sv2).map(([l,v])=>({l,v})),'ch-svcs');
-  donut([{l:'Completados',v:comp.length},{l:'Confirmados',v:evs.filter(e=>e.estado==='confirmado').length},{l:'Pendientes',v:evs.filter(e=>e.estado==='pendiente').length},{l:'Cancelados',v:evs.filter(e=>e.estado==='cancelado').length}].filter(d=>d.v>0),'ch-cobros');
-
-  const up=evs.filter(e=>e.fecha>=today&&e.estado!=='cancelado').sort((a,b)=>a.fecha.localeCompare(b.fecha)).slice(0,5);
-  document.getElementById('d-up').innerHTML=up.length
-    ?up.map(e=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:.5px solid var(--b);cursor:pointer;" onclick="verDet(${e.id})">
-        <div><div style="font-size:13px;font-weight:600;">${e.nombre_evento||'—'}</div><div style="font-size:10px;color:var(--mut);margin-top:1px;">${fmtD(e.fecha)}${e.horario_inicio?' · '+e.horario_inicio:''} · ${e.cant_invitados||0} inv.</div></div>
-        <div style="text-align:right;"><div style="font-size:12px;color:var(--gold);font-weight:700;">${fmtM(e.total_cobrado)}</div>${ebadge(e.estado)}</div>
-      </div>`).join('')
-    :'<div class="empty" style="padding:1rem;font-size:12px;">Sin eventos próximos</div>';
+  document.getElementById('d-stats').innerHTML='<div class="loading" style="grid-column:1/-1"><div class="spin"></div></div>';
+  try{
+    evs = await dbGet('order=fecha.asc');
+    updBadge();
+    const today=new Date().toISOString().split('T')[0];
+    const comp=evs.filter(e=>e.estado==='completado');
+    const pend=evs.filter(e=>e.estado==='pendiente'||e.estado==='confirmado');
+    const ingr=comp.reduce((s,e)=>s+(parseFloat(e.total_cobrado)||0),0);
+    const cost=comp.reduce((s,e)=>s+(parseFloat(e.costo_materia_prima)||0)+(parseFloat(e.extras_total)||0),0);
+    const pcob=evs.filter(e=>e.estado!=='cancelado'&&e.estado!=='completado').reduce((s,e)=>s+(parseFloat(e.resta_abonar)||0),0);
+    document.getElementById('d-stats').innerHTML=`
+      <div class="sc"><div class="sl">Total eventos</div><div class="sv w">${evs.length}</div></div>
+      <div class="sc"><div class="sl">Pendientes</div><div class="sv">${pend.length}</div></div>
+      <div class="sc"><div class="sl">Por cobrar</div><div class="sv b">${fmtM(pcob)}</div></div>
+      <div class="sc"><div class="sl">Ganancia neta</div><div class="sv ${ingr-cost>=0?'g':'r'}">${fmtM(ingr-cost)}</div></div>`;
+    const tipos={};evs.forEach(e=>{const k=tlbl(e.tipo);tipos[k]=(tipos[k]||0)+1;});
+    donut(Object.entries(tipos).map(([l,v])=>({l,v})),'ch-tipo');
+    const sv2={};evs.forEach(e=>{if(e.servicio_tipo){const s=svcs.find(x=>x.key===e.servicio_tipo);sv2[s?s.nombre:e.servicio_tipo]=(sv2[s?s.nombre:e.servicio_tipo]||0)+1;}});
+    donut(Object.entries(sv2).map(([l,v])=>({l,v})),'ch-svcs');
+    donut([{l:'Completados',v:comp.length},{l:'Confirmados',v:evs.filter(e=>e.estado==='confirmado').length},{l:'Pendientes',v:evs.filter(e=>e.estado==='pendiente').length},{l:'Cancelados',v:evs.filter(e=>e.estado==='cancelado').length}].filter(d=>d.v>0),'ch-cobros');
+    const up=evs.filter(e=>e.fecha>=today&&e.estado!=='cancelado').slice(0,5);
+    document.getElementById('d-up').innerHTML=up.length
+      ?up.map(e=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:.5px solid var(--b);cursor:pointer;" onclick="verDet(${e.id})">
+          <div><div style="font-size:13px;font-weight:600;">${e.nombre_evento||'—'}</div><div style="font-size:10px;color:var(--mut);margin-top:1px;">${fmtD(e.fecha)}${e.horario_inicio?' · '+e.horario_inicio:''} · ${e.cant_invitados||0} inv.</div></div>
+          <div style="text-align:right;"><div style="font-size:12px;color:var(--gold);font-weight:700;">${fmtM(e.total_cobrado)}</div>${ebadge(e.estado)}</div>
+        </div>`).join('')
+      :'<div class="empty" style="padding:1rem;font-size:12px;">Sin eventos próximos</div>';
+  }catch(err){
+    document.getElementById('d-stats').innerHTML=`<div style="color:var(--red);padding:1rem;font-size:12px;grid-column:1/-1;">⚠ ${err.message}</div>`;
+  }
 }
 
 // ===== CALENDARIO =====
 function calNav(d){ calM+=d; if(calM>11){calM=0;calY++;} if(calM<0){calM=11;calY--;} renderCal(); }
 function calToday(){ calY=new Date().getFullYear();calM=new Date().getMonth();calSel=new Date().toISOString().split('T')[0];renderCal();showDay(calSel); }
-
 function renderCal(){
   const MN=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
   document.getElementById('cal-label').textContent=`${MN[calM]} ${calY}`;
@@ -453,7 +485,7 @@ function renderCal(){
   const first=new Date(calY,calM,1).getDay();
   const days=new Date(calY,calM+1,0).getDate();
   const prev=new Date(calY,calM,0).getDate();
-  const evMap={};evs.forEach(e=>{if(!evMap[e.fecha])evMap[e.fecha]=[];evMap[e.fecha].push(e);});
+  const evMap={};evs.forEach(e=>{const d=(e.fecha+'').substring(0,10);if(!evMap[d])evMap[d]=[];evMap[d].push(e);});
   const DN=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
   let h=DN.map(d=>`<div class="cdn">${d}</div>`).join('');
   const pad=first===0?6:first-1;
@@ -466,10 +498,9 @@ function renderCal(){
   document.getElementById('cal-grid').innerHTML=h;
   if(calSel) showDay(calSel);
 }
-
 function selectDay(ds){ calSel=ds; renderCal(); showDay(ds); }
 function showDay(ds){
-  const de=evs.filter(e=>e.fecha===ds);
+  const de=evs.filter(e=>(e.fecha+'').substring(0,10)===ds);
   const p=ds.split('-');
   const MN=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
   document.getElementById('cal-day-title').textContent=`${parseInt(p[2])} de ${MN[parseInt(p[1])-1]} — ${de.length} evento${de.length!==1?'s':''}`;
@@ -478,9 +509,8 @@ function showDay(ds){
     :'<div class="empty" style="padding:1rem;font-size:12px;">Sin eventos este día</div>';
 }
 
-// ===== NUEVO EVENTO =====
+// ===== NUEVO =====
 function initNuevo(){ renderSvcGrid(); calcRes(); }
-
 function renderSvcGrid(){
   document.getElementById('svc-grid').innerHTML=svcs.map(s=>`
     <div class="svcc${selSvc===s.key?' sel':''}" onclick="selSvcFn('${s.key}')">
@@ -491,7 +521,6 @@ function renderSvcGrid(){
     <div class="tbox"><div class="tcat">Toppings básicos</div><div class="tags">${TOP_BAS.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>
     <div class="tbox"><div class="tcat">Toppings agregados (Clásico y Premium)</div><div class="tags">${TOP_AGR.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;
 }
-
 function selSvcFn(key){
   selSvc=key;
   document.querySelectorAll('.svcc').forEach(c=>c.classList.remove('sel'));
@@ -501,12 +530,11 @@ function selSvcFn(key){
   if(svc&&inv>0) document.getElementById('c-cob').value=(svc.precio*inv).toFixed(2);
   calcRes();
 }
-
 function calcRes(){
   const ext=['c-cel','c-ent','c-tor','c-per','c-naf','c-beb','c-otr'];
   const extSum=ext.reduce((s,id)=>s+N(id),0);
   const cob=N('c-cob'),mp=N('c-mp'),sena=N('c-sena');
-  const resta=Math.max(0,cob-sena), gan=cob-mp-extSum;
+  const resta=Math.max(0,cob-sena),gan=cob-mp-extSum;
   const svc=svcs.find(s=>s.key===selSvc);
   document.getElementById('r-ext').textContent=fmtM(extSum);
   document.getElementById('r-resta').textContent=fmtM(resta);
@@ -517,54 +545,39 @@ function calcRes(){
   document.getElementById('r-resta2').textContent=fmtM(resta);
 }
 
-function guardar(){
+async function guardar(){
   const nombre=V('f-nombre'), fecha=V('f-fecha');
   if(!nombre||!fecha){toast('⚠ Nombre y fecha son obligatorios','err');return;}
   const ext=['c-cel','c-ent','c-tor','c-per','c-naf','c-beb','c-otr'];
   const extSum=ext.reduce((s,id)=>s+N(id),0);
   const cob=N('c-cob'), sena=N('c-sena');
-  const ev={
-    id: Date.now(),
-    nombre_evento:    nombre,
-    tipo:             V('f-tipo'),
-    fecha:            fecha,
-    estado:           'pendiente',
-    horario_inicio:   V('f-h-ini'),
-    horario_llegada_evento: V('f-h-lleg'),
-    horario_partida:  V('f-h-part'),
-    horario_llegada_maikels: V('f-h-mk'),
-    lugar:            V('f-lugar'),
-    direccion:        V('f-dir'),
-    nombre_cliente:   V('f-cliente'),
-    telefono:         V('f-tel'),
-    cant_invitados:   N('f-inv')||0,
-    extras_info:      V('f-extras'),
-    cant_pizzas:      N('f-piz')||0,
-    cant_personal:    N('f-pers')||0,
-    nombres_personal: V('f-pnombres'),
-    notas:            V('f-notas'),
-    servicio_tipo:    selSvc||null,
-    total_cobrado:    cob,
-    costo_materia_prima: N('c-mp'),
-    celiacos:         N('c-cel'),
-    entradas:         N('c-ent'),
-    tortas:           N('c-tor'),
-    personal:         N('c-per'),
-    nafta:            N('c-naf'),
-    bebida:           N('c-beb'),
-    otros:            N('c-otr'),
-    extras_total:     extSum,
-    sena:             sena,
-    fecha_sena:       V('c-fecha-sena'),
-    resta_abonar:     Math.max(0,cob-sena),
-    fecha_resto:      V('c-fecha-resto'),
-    created_at:       new Date().toISOString(),
-  };
-  evs.push(ev);
-  saveDB('mk_evs', evs);
-  toast('✓ Evento guardado correctamente');
-  limpiar();
-  go('eventos');
+  const btn=document.getElementById('btn-save');
+  btn.disabled=true; btn.textContent='Guardando...';
+  try{
+    await dbInsert({
+      nombre_evento:nombre, tipo:V('f-tipo'), fecha, estado:'pendiente',
+      horario_inicio:V('f-h-ini')||null, horario_llegada_evento:V('f-h-lleg')||null,
+      horario_partida:V('f-h-part')||null, horario_llegada_maikels:V('f-h-mk')||null,
+      lugar:V('f-lugar')||null, direccion:V('f-dir')||null,
+      nombre_cliente:V('f-cliente')||null, telefono:V('f-tel')||null,
+      cant_invitados:N('f-inv')||0, extras_info:V('f-extras')||null,
+      cant_pizzas:N('f-piz')||0, cant_personal:N('f-pers')||0,
+      nombres_personal:V('f-pnombres')||null, notas:V('f-notas')||null,
+      servicio_tipo:selSvc||null,
+      total_cobrado:cob, costo_materia_prima:N('c-mp'),
+      celiacos:N('c-cel'), entradas:N('c-ent'), tortas:N('c-tor'),
+      personal:N('c-per'), nafta:N('c-naf'), bebida:N('c-beb'), otros:N('c-otr'),
+      extras_total:extSum, sena, fecha_sena:V('c-fecha-sena')||null,
+      resta_abonar:Math.max(0,cob-sena), fecha_resto:V('c-fecha-resto')||null,
+    });
+    toast('✓ Evento guardado en Supabase');
+    limpiar(); go('eventos');
+  }catch(err){
+    toast('Error: '+err.message,'err');
+    console.error(err);
+  }finally{
+    btn.disabled=false; btn.textContent='💾 Guardar evento';
+  }
 }
 
 function limpiar(){
@@ -578,22 +591,30 @@ function limpiar(){
 }
 
 // ===== EVENTOS =====
+async function loadEvs(){
+  document.getElementById('ev-load').style.display='flex';
+  document.getElementById('ev-empty').style.display='none';
+  document.getElementById('ev-tb').innerHTML='';
+  try{ evs=await dbGet('order=fecha.desc'); updBadge(); renderEvs(); }
+  catch(err){ toast('Error cargando: '+err.message,'err'); }
+  finally{ document.getElementById('ev-load').style.display='none'; }
+}
 function renderEvs(){
-  const fe=V('fil-e')||document.getElementById('fil-e')?.value||'';
-  const ft=V('fil-t')||document.getElementById('fil-t')?.value||'';
+  const fe=document.getElementById('fil-e')?.value||'';
+  const ft=document.getElementById('fil-t')?.value||'';
   const fb=(document.getElementById('fil-b')?.value||'').toLowerCase();
   const lista=evs.filter(e=>{
     if(fe&&e.estado!==fe)return false;
     if(ft&&e.tipo!==ft)return false;
     if(fb&&!(e.nombre_evento||'').toLowerCase().includes(fb)&&!(e.nombre_cliente||'').toLowerCase().includes(fb))return false;
     return true;
-  }).sort((a,b)=>b.created_at?.localeCompare(a.created_at||'')||0);
+  });
   const tb=document.getElementById('ev-tb'),em=document.getElementById('ev-empty');
   if(!lista.length){tb.innerHTML='';em.style.display='block';return;}
   em.style.display='none';
   tb.innerHTML=lista.map(e=>{
-    const cost=(e.costo_materia_prima||0)+(e.extras_total||0);
-    const gan=(e.total_cobrado||0)-cost;
+    const cost=(parseFloat(e.costo_materia_prima)||0)+(parseFloat(e.extras_total)||0);
+    const gan=(parseFloat(e.total_cobrado)||0)-cost;
     const svc=svcs.find(s=>s.key===e.servicio_tipo);
     return `<tr>
       <td style="font-weight:600;cursor:pointer;color:var(--gold);" onclick="verDet(${e.id})">${e.nombre_evento||'—'}</td>
@@ -616,24 +637,23 @@ function renderEvs(){
   }).join('');
   updBadge();
 }
-
-function cambEst(id,est){
+async function cambEst(id,est){
   if(!est)return;
-  const e=evs.find(x=>x.id===id);
-  if(e){e.estado=est;saveDB('mk_evs',evs);toast('Estado actualizado');renderEvs();}
+  try{ await dbUpdate(id,{estado:est}); const e=evs.find(x=>x.id===id); if(e)e.estado=est; toast('Estado actualizado'); renderEvs(); }
+  catch(err){ toast('Error','err'); }
 }
-
-function delEv(id){
+async function delEv(id){
   const e=evs.find(x=>x.id===id);
   if(!e||!confirm(`¿Eliminar "${e.nombre_evento}"?`))return;
-  evs=evs.filter(x=>x.id!==id);saveDB('mk_evs',evs);toast('Eliminado');renderEvs();
+  try{ await dbDelete(id); evs=evs.filter(x=>x.id!==id); toast('Eliminado'); renderEvs(); }
+  catch(err){ toast('Error','err'); }
 }
 
 // ===== DETALLE =====
 function verDet(id){
   const e=evs.find(x=>x.id===id);if(!e)return;
-  const cost=(e.costo_materia_prima||0)+(e.extras_total||0);
-  const gan=(e.total_cobrado||0)-cost;
+  const cost=(parseFloat(e.costo_materia_prima)||0)+(parseFloat(e.extras_total)||0);
+  const gan=(parseFloat(e.total_cobrado)||0)-cost;
   const svc=svcs.find(s=>s.key===e.servicio_tipo);
   document.getElementById('det').innerHTML=`
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;flex-wrap:wrap;gap:8px;">
@@ -672,13 +692,13 @@ function verDet(id){
       </div>
       <div class="card"><div class="ct">Costos</div>
         <div class="crow"><span class="clabel">Materia prima</span><span>${fmtM(e.costo_materia_prima)}</span></div>
-        ${(e.celiacos||0)>0?`<div class="crow"><span class="clabel">Celíacos</span><span>${fmtM(e.celiacos)}</span></div>`:''}
-        ${(e.entradas||0)>0?`<div class="crow"><span class="clabel">Entradas</span><span>${fmtM(e.entradas)}</span></div>`:''}
-        ${(e.tortas||0)>0?`<div class="crow"><span class="clabel">Tortas</span><span>${fmtM(e.tortas)}</span></div>`:''}
-        ${(e.personal||0)>0?`<div class="crow"><span class="clabel">Personal</span><span>${fmtM(e.personal)}</span></div>`:''}
-        ${(e.nafta||0)>0?`<div class="crow"><span class="clabel">Nafta</span><span>${fmtM(e.nafta)}</span></div>`:''}
-        ${(e.bebida||0)>0?`<div class="crow"><span class="clabel">Bebida</span><span>${fmtM(e.bebida)}</span></div>`:''}
-        ${(e.otros||0)>0?`<div class="crow"><span class="clabel">Otros</span><span>${fmtM(e.otros)}</span></div>`:''}
+        ${parseFloat(e.celiacos)>0?`<div class="crow"><span class="clabel">Celíacos</span><span>${fmtM(e.celiacos)}</span></div>`:''}
+        ${parseFloat(e.entradas)>0?`<div class="crow"><span class="clabel">Entradas</span><span>${fmtM(e.entradas)}</span></div>`:''}
+        ${parseFloat(e.tortas)>0?`<div class="crow"><span class="clabel">Tortas</span><span>${fmtM(e.tortas)}</span></div>`:''}
+        ${parseFloat(e.personal)>0?`<div class="crow"><span class="clabel">Personal</span><span>${fmtM(e.personal)}</span></div>`:''}
+        ${parseFloat(e.nafta)>0?`<div class="crow"><span class="clabel">Nafta</span><span>${fmtM(e.nafta)}</span></div>`:''}
+        ${parseFloat(e.bebida)>0?`<div class="crow"><span class="clabel">Bebida</span><span>${fmtM(e.bebida)}</span></div>`:''}
+        ${parseFloat(e.otros)>0?`<div class="crow"><span class="clabel">Otros</span><span>${fmtM(e.otros)}</span></div>`:''}
         <div class="ctotal"><span class="clabel">Extras total</span><span class="cval" style="color:var(--gold)">${fmtM(e.extras_total)}</span></div>
       </div>
       <div class="card"><div class="ct">Cobros</div>
@@ -699,21 +719,19 @@ function verDet(id){
   document.getElementById('screen-detalle').classList.add('active');
   document.querySelectorAll('.dtab,.bitem').forEach(t=>t.classList.remove('active'));
 }
-
-function cEstDet(id,est){ cambEst(id,est); verDet(id); }
-
-function editCobro(id){
+async function cEstDet(id,est){ await cambEst(id,est); verDet(id); }
+async function editCobro(id){
   const e=evs.find(x=>x.id===id);if(!e)return;
   const nt=prompt(`Total cobrado (actual: ${fmtM(e.total_cobrado)}):`,parseFloat(e.total_cobrado||0).toFixed(2));
   if(nt===null)return;
   const ns=prompt(`Seña recibida (actual: ${fmtM(e.sena)}):`,parseFloat(e.sena||0).toFixed(2));
   if(ns===null)return;
-  e.total_cobrado=parseFloat(nt)||0;
-  e.sena=parseFloat(ns)||0;
-  e.resta_abonar=Math.max(0,e.total_cobrado-e.sena);
-  saveDB('mk_evs',evs);
-  toast('Cobros actualizados ✓');
-  verDet(id);
+  const t=parseFloat(nt)||0,s=parseFloat(ns)||0;
+  try{
+    await dbUpdate(id,{total_cobrado:t,sena:s,resta_abonar:Math.max(0,t-s)});
+    e.total_cobrado=t;e.sena=s;e.resta_abonar=Math.max(0,t-s);
+    toast('Cobros actualizados ✓'); verDet(id);
+  }catch(err){toast('Error','err');}
 }
 
 // ===== MENÚ =====
@@ -722,8 +740,8 @@ function renderMenu(){
     <div class="ct">Servicios Maikels — Precio por persona</div>
     ${svcs.map((s,i)=>`<div class="mrow"><div style="flex:1"><div class="mname">${s.nombre}</div><div class="mdesc">${s.desc}</div></div><input class="mpinput" type="number" value="${s.precio}" step="500" min="0" onchange="svcs[${i}].precio=parseFloat(this.value)||0"></div>`).join('')}
     <div class="brow">
-      <button class="btn bgold bsm" onclick="saveDB('mk_svcs',svcs);toast('Precios guardados ✓')">💾 Guardar precios</button>
-      <button class="btn bghost bsm" onclick="if(confirm('¿Restaurar precios originales?')){svcs=JSON.parse(JSON.stringify(SVC_DEF));saveDB('mk_svcs',svcs);renderMenu();toast('Restaurado');}">Restaurar</button>
+      <button class="btn bgold bsm" onclick="lsSet('mk_svcs',svcs);toast('Precios guardados ✓')">💾 Guardar precios</button>
+      <button class="btn bghost bsm" onclick="if(confirm('¿Restaurar precios originales?')){svcs=JSON.parse(JSON.stringify(SVC_DEF));lsSet('mk_svcs',svcs);renderMenu();toast('Restaurado');}">Restaurar</button>
     </div>
     <div style="height:1rem"></div>
     <div class="ct">Toppings básicos</div>
@@ -739,13 +757,18 @@ function renderCostos(){
     <div style="font-size:11px;color:var(--mut);margin-bottom:.85rem;">Valores de referencia para tu control interno.</div>
     ${csts.map((c,i)=>`<div class="mrow"><div style="flex:1"><div class="mname">${c.nombre}</div><div class="mdesc">${c.desc}</div></div><input class="mpinput" type="number" value="${c.precio}" step="100" min="0" onchange="csts[${i}].precio=parseFloat(this.value)||0"></div>`).join('')}
     <div class="brow">
-      <button class="btn bgold bsm" onclick="saveDB('mk_csts',csts);toast('Costos guardados ✓')">💾 Guardar costos</button>
-      <button class="btn bghost bsm" onclick="if(confirm('¿Restaurar a $0?')){csts=JSON.parse(JSON.stringify(CST_DEF));saveDB('mk_csts',csts);renderCostos();toast('Restaurado');}">Restaurar</button>
+      <button class="btn bgold bsm" onclick="lsSet('mk_csts',csts);toast('Costos guardados ✓')">💾 Guardar costos</button>
+      <button class="btn bghost bsm" onclick="if(confirm('¿Restaurar a $0?')){csts=JSON.parse(JSON.stringify(CST_DEF));lsSet('mk_csts',csts);renderCostos();toast('Restaurado');}">Restaurar</button>
     </div>`;
 }
 
 // ===== INIT =====
-renderDash();
+(async()=>{
+  // Si hay datos en localStorage, migrarlos a Supabase primero
+  const local = lsGet('mk_evs', []);
+  if(local.length) await migrarLocal();
+  renderDash();
+})();
 </script>
 </body>
 </html>
