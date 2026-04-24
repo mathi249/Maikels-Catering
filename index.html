@@ -2,1106 +2,912 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Maikels Pizzería — Catering</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maikels — Catering</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --gold:#F5B800; --gold-dark:#C49400; --gold-dim:rgba(245,184,0,0.12);
-  --black:#0D0D0D; --surface:#161616; --surface2:#1E1E1E; --surface3:#262626;
-  --border:rgba(255,255,255,0.07); --border-gold:rgba(245,184,0,0.28);
-  --text:#F0F0F0; --muted:#666; --muted2:#999;
-  --green:#22C55E; --red:#EF4444; --blue:#60A5FA; --purple:#A78BFA;
-  --r:10px; --rl:14px;
-  --nav-h:60px; --bottom-h:64px;
+:root{
+  --gold:#F5B800;--gold-dark:#C49400;--gold-dim:rgba(245,184,0,0.1);
+  --black:#0D0D0D;--s1:#161616;--s2:#1E1E1E;--s3:#262626;
+  --b:rgba(255,255,255,0.07);--bg:rgba(245,184,0,0.25);
+  --txt:#F0F0F0;--mut:#666;--mut2:#999;
+  --grn:#22C55E;--red:#EF4444;--blu:#60A5FA;
+  --r:10px;--nav:60px;--bot:64px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;font-size:14px;line-height:1.5;min-height:100vh;overflow-x:hidden;}
-::-webkit-scrollbar{width:4px;} ::-webkit-scrollbar-track{background:var(--surface);} ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:4px;}
+body{background:var(--black);color:var(--txt);font-family:'DM Sans',sans-serif;font-size:14px;min-height:100vh;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
 
-/* ===== TOP NAV (desktop) ===== */
-.top-nav{background:var(--surface);border-bottom:2px solid var(--gold);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 1.5rem;height:var(--nav-h);position:sticky;top:0;z-index:200;}
-.logo{display:flex;align-items:center;gap:12px;}
-.logo-mark{width:38px;height:38px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--black);flex-shrink:0;}
-.logo-name{font-family:'Bebas Neue',sans-serif;font-size:17px;color:var(--gold);letter-spacing:1.5px;line-height:1;}
-.logo-sub{font-size:10px;color:var(--muted);margin-top:1px;}
-.desktop-tabs{display:flex;gap:4px;align-items:center;justify-content:center;}
-.dtab{background:none;border:none;color:var(--muted2);font-family:'DM Sans',sans-serif;font-size:13px;padding:7px 14px;border-radius:7px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px;}
-.dtab.active{background:var(--gold);color:var(--black);font-weight:600;}
-.dtab:hover:not(.active){background:var(--surface3);color:var(--text);}
-.dtab-icon{font-size:15px;}
-.nbadge{display:inline-flex;align-items:center;justify-content:center;background:var(--red);color:#fff;font-size:10px;font-weight:700;width:16px;height:16px;border-radius:50%;margin-left:2px;}
+/* NAV */
+.nav{background:var(--s1);border-bottom:2px solid var(--gold);height:var(--nav);display:grid;grid-template-columns:auto 1fr auto;align-items:center;padding:0 1.25rem;position:sticky;top:0;z-index:100;gap:1rem;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-m{width:36px;height:36px;background:var(--gold);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:19px;color:var(--black);}
+.logo-n{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--gold);letter-spacing:1px;line-height:1;}
+.logo-s{font-size:9px;color:var(--mut);margin-top:1px;}
+.dtabs{display:flex;gap:3px;justify-content:center;}
+.dtab{background:none;border:none;color:var(--mut2);font-family:'DM Sans',sans-serif;font-size:12px;padding:6px 12px;border-radius:7px;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.dtab.active{background:var(--gold);color:var(--black);font-weight:700;}
+.dtab:hover:not(.active){background:var(--s3);color:var(--txt);}
+.nbadge{display:inline-flex;align-items:center;justify-content:center;background:var(--red);color:#fff;font-size:9px;font-weight:700;width:15px;height:15px;border-radius:50%;margin-left:2px;}
+.nav-right{display:flex;justify-content:flex-end;}
 
-/* ===== BOTTOM NAV (mobile) ===== */
-.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:var(--bottom-h);background:var(--surface);border-top:1.5px solid var(--gold);z-index:200;justify-content:space-around;align-items:center;padding:0 4px;}
-.bnav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 12px;border-radius:10px;cursor:pointer;border:none;background:none;color:var(--muted2);font-family:'DM Sans',sans-serif;transition:all .15s;min-width:56px;}
-.bnav-item.active{color:var(--gold);}
-.bnav-item.active .bnav-bg{background:var(--gold-dim);}
-.bnav-bg{width:40px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all .15s;}
-.bnav-icon{font-size:18px;line-height:1;}
-.bnav-label{font-size:10px;font-weight:500;letter-spacing:.2px;}
-.bnav-badge{position:relative;}
-.bnav-badge::after{content:attr(data-count);position:absolute;top:-2px;right:-6px;background:var(--red);color:#fff;font-size:9px;font-weight:700;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;display:none;}
-.bnav-badge[data-count]:not([data-count="0"])::after{display:flex;}
+/* BOTTOM NAV */
+.bnav{display:none;position:fixed;bottom:0;left:0;right:0;height:var(--bot);background:var(--s1);border-top:1.5px solid var(--gold);z-index:100;align-items:center;justify-content:space-around;padding:0 4px;}
+.bitem{display:flex;flex-direction:column;align-items:center;gap:2px;padding:5px 8px;border-radius:10px;cursor:pointer;border:none;background:none;color:var(--mut2);font-family:'DM Sans',sans-serif;min-width:48px;}
+.bitem.active{color:var(--gold);}
+.bicon{font-size:19px;line-height:1;}
+.blabel{font-size:9px;font-weight:600;}
+.bhi{width:38px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.bitem.active .bhi{background:var(--gold-dim);}
 
-/* ===== MAIN ===== */
-.main{padding:1rem;max-width:1200px;margin:0 auto;padding-bottom:calc(var(--bottom-h) + 1rem);}
-.screen{display:none;} .screen.active{display:block;animation:fi .2s ease;}
+/* MAIN */
+.main{padding:1rem;max-width:1200px;margin:0 auto;padding-bottom:calc(var(--bot) + 1rem);}
+.screen{display:none;}.screen.active{display:block;animation:fi .18s ease;}
 @keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 
-/* ===== PAGE HEADER ===== */
-.ph{margin-bottom:1.25rem;}
-.pt{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--text);letter-spacing:1px;line-height:1;}
+/* HEADINGS */
+.ph{margin-bottom:1rem;}
+.pt{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;line-height:1;}
 .pt span{color:var(--gold);}
-.ps{font-size:12px;color:var(--muted);margin-top:3px;}
+.ps{font-size:11px;color:var(--mut);margin-top:2px;}
 
-/* ===== CARDS ===== */
-.card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:1.1rem;margin-bottom:.85rem;}
-.ct{font-size:10px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.85rem;}
+/* CARD */
+.card{background:var(--s1);border:.5px solid var(--b);border-radius:var(--r);padding:1rem;margin-bottom:.85rem;}
+.ct{font-size:10px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.9px;margin-bottom:.85rem;}
 
-/* ===== STATS ===== */
-.sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:.85rem;}
-.sc{background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:.85rem;position:relative;overflow:hidden;}
+/* STATS */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:.85rem;}
+.sc{background:var(--s2);border:.5px solid var(--b);border-radius:var(--r);padding:.85rem;position:relative;overflow:hidden;}
 .sc::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);}
-.sl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;}
+.sl{font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;}
 .sv{font-size:20px;font-weight:700;color:var(--gold);line-height:1;}
-.sv.g{color:var(--green);} .sv.r{color:var(--red);} .sv.w{color:var(--text);} .sv.b{color:var(--blue);}
-.ss{font-size:11px;color:var(--muted);margin-top:3px;}
+.sv.g{color:var(--grn);}.sv.r{color:var(--red);}.sv.w{color:var(--txt);}.sv.b{color:var(--blu);}
 
-/* ===== CHARTS ===== */
-.charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.85rem;margin-bottom:.85rem;}
-.chart-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:1.1rem;}
-.chart-title{font-size:10px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.85rem;text-align:center;}
-.donut-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
-.donut-svg{width:140px;height:140px;flex-shrink:0;}
-.donut-legend{width:100%;display:flex;flex-direction:column;gap:5px;}
-.leg-item{display:flex;align-items:center;gap:8px;font-size:12px;}
-.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-.leg-label{flex:1;color:var(--muted2);}
-.leg-val{color:var(--text);font-weight:600;}
-.leg-pct{color:var(--muted);font-size:11px;}
+/* CHARTS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;margin-bottom:.85rem;}
+.cc{background:var(--s1);border:.5px solid var(--b);border-radius:var(--r);padding:1rem;}
+.cht{font-size:10px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.75rem;text-align:center;}
+.dw{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.leg{width:100%;display:flex;flex-direction:column;gap:4px;}
+.li{display:flex;align-items:center;gap:7px;font-size:11px;}
+.ld{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.ll{flex:1;color:var(--mut2);}
+.lv{font-weight:600;}
+.lp{color:var(--mut);font-size:10px;}
 
-/* ===== CALENDAR ===== */
-.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;}
-.cal-nav{display:flex;align-items:center;gap:10px;}
-.cal-month{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold);letter-spacing:1px;min-width:160px;text-align:center;}
-.cal-btn{background:var(--surface3);border:0.5px solid var(--border);border-radius:7px;color:var(--text);font-size:16px;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
-.cal-btn:hover{border-color:var(--gold);color:var(--gold);}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
-.cal-day-name{text-align:center;font-size:10px;font-weight:600;color:var(--muted);padding:4px 0;text-transform:uppercase;}
-.cal-day{min-height:38px;border-radius:7px;padding:4px;cursor:pointer;transition:all .15s;border:0.5px solid transparent;display:flex;flex-direction:column;align-items:center;position:relative;}
-.cal-day:hover{background:var(--surface2);border-color:var(--border);}
-.cal-day.today{border-color:var(--gold);}
-.cal-day.selected{background:var(--gold-dim);border-color:var(--gold);}
-.cal-day.other-month .cal-num{color:var(--muted);}
-.cal-num{font-size:12px;font-weight:500;line-height:1.2;}
-.cal-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);margin-top:2px;}
-.cal-count{font-size:9px;color:var(--gold);font-weight:700;}
-.cal-events-list{margin-top:.85rem;}
-.cal-ev-item{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--surface2);border:0.5px solid var(--border);border-radius:8px;margin-bottom:6px;cursor:pointer;transition:all .15s;}
-.cal-ev-item:hover{border-color:var(--border-gold);}
-.cal-ev-time{font-size:12px;color:var(--gold);font-weight:600;min-width:45px;}
-.cal-ev-name{font-size:13px;font-weight:500;flex:1;}
-.cal-ev-detail{font-size:11px;color:var(--muted);}
+/* CALENDAR */
+.calh{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;}
+.calnav{display:flex;align-items:center;gap:8px;}
+.calm{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold);letter-spacing:1px;min-width:150px;text-align:center;}
+.calb{background:var(--s3);border:.5px solid var(--b);border-radius:6px;color:var(--txt);font-size:15px;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;border:none;}
+.calb:hover{color:var(--gold);}
+.calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.cdn{text-align:center;font-size:9px;font-weight:700;color:var(--mut);padding:4px 0;text-transform:uppercase;}
+.cd{min-height:36px;border-radius:6px;padding:3px;cursor:pointer;transition:all .15s;border:.5px solid transparent;display:flex;flex-direction:column;align-items:center;}
+.cd:hover{background:var(--s2);}
+.cd.today{border-color:var(--gold);}
+.cd.sel{background:var(--gold-dim);border-color:var(--gold);}
+.cd.om .cnum{color:var(--mut);}
+.cnum{font-size:11px;font-weight:500;}
+.cdot{width:5px;height:5px;border-radius:50%;background:var(--gold);margin-top:1px;}
+.ccount{font-size:8px;color:var(--gold);font-weight:700;}
+.cev{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--s2);border:.5px solid var(--b);border-radius:7px;margin-bottom:5px;cursor:pointer;}
+.cev:hover{border-color:var(--bg);}
+.cet{font-size:12px;color:var(--gold);font-weight:600;min-width:42px;}
+.cen{font-size:12px;font-weight:500;flex:1;}
+.ced{font-size:10px;color:var(--mut);}
 
-/* ===== FORM ===== */
+/* FORM */
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
-.fg.c1{grid-template-columns:1fr;}
 .fg.c3{grid-template-columns:1fr 1fr 1fr;}
-.fg > .full{grid-column:1/-1;}
-.fgroup{display:flex;flex-direction:column;gap:4px;}
-label{font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:.5px;}
-input,select,textarea{background:var(--surface3);border:0.5px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;padding:9px 11px;outline:none;transition:border-color .15s;width:100%;}
+.fg>.full{grid-column:1/-1;}
+.fg2{display:flex;flex-direction:column;gap:5px;}
+label{font-size:10px;color:var(--mut2);text-transform:uppercase;letter-spacing:.4px;}
+input,select,textarea{background:var(--s3);border:.5px solid var(--b);border-radius:7px;color:var(--txt);font-size:13px;font-family:'DM Sans',sans-serif;padding:8px 10px;outline:none;transition:border-color .15s;width:100%;}
 input:focus,select:focus,textarea:focus{border-color:var(--gold);}
-select option{background:var(--surface3);}
-textarea{resize:vertical;min-height:65px;}
-input[type="number"]{-moz-appearance:textfield;}
-input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none;}
-input:disabled,select:disabled{opacity:.5;cursor:not-allowed;}
+select option{background:var(--s3);}
+textarea{resize:vertical;min-height:60px;}
 
-/* ===== SERVICE SELECTOR ===== */
-.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.85rem;}
-.svc-card{border:1px solid var(--border);border-radius:10px;padding:10px 12px;cursor:pointer;transition:all .15s;position:relative;}
-.svc-card:hover{border-color:var(--border-gold);}
-.svc-card.selected{border-color:var(--gold);background:var(--gold-dim);}
-.svc-card input[type=radio]{position:absolute;opacity:0;width:0;height:0;}
-.svc-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;}
-.svc-desc{font-size:11px;color:var(--muted);line-height:1.3;}
-.svc-price{font-size:16px;font-weight:700;color:var(--gold);margin-top:6px;}
+/* SECTION DIV */
+.sdiv{display:flex;align-items:center;gap:8px;margin:.9rem 0 .6rem;}
+.sdl{font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;font-weight:700;white-space:nowrap;}
+.sdline{flex:1;height:1px;background:var(--bg);}
 
-/* ===== SECTION DIVIDER ===== */
-.sdiv{display:flex;align-items:center;gap:8px;margin:1rem 0 .7rem;}
-.sdiv-label{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;font-weight:700;white-space:nowrap;}
-.sdiv-line{flex:1;height:1px;background:var(--border-gold);}
+/* SERVICE CARDS */
+.svcg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:.75rem;}
+.svcc{border:1px solid var(--b);border-radius:10px;padding:10px;cursor:pointer;transition:all .15s;}
+.svcc:hover{border-color:var(--bg);}
+.svcc.sel{border-color:var(--gold);background:var(--gold-dim);}
+.svcc input{display:none;}
+.svcn{font-size:12px;font-weight:700;margin-bottom:2px;}
+.svcd{font-size:10px;color:var(--mut);line-height:1.3;}
+.svcp{font-size:15px;font-weight:700;color:var(--gold);margin-top:6px;}
 
-/* ===== COST TABLE ===== */
-.cost-t{width:100%;border-collapse:collapse;}
-.cost-t td{padding:6px 8px;border-bottom:0.5px solid var(--border);font-size:13px;vertical-align:middle;}
-.cost-t tr:last-child td{border-bottom:none;}
-.cost-t .lc{color:var(--muted2);font-size:12px;white-space:nowrap;padding-right:10px;}
-.cost-t .ic{width:1%;white-space:nowrap;}
-.cost-t input{text-align:right;font-size:13px;padding:6px 9px;width:120px;}
-.cost-t .tot td{background:var(--surface2);font-weight:600;}
-.cost-t .tot .lc{color:var(--text);}
-.cost-t .tot .val{color:var(--gold);font-size:14px;font-weight:700;display:block;text-align:right;min-width:100px;}
+/* TOPPING TAGS */
+.tbox{background:var(--s2);border:.5px solid var(--b);border-radius:7px;padding:9px 11px;margin-bottom:5px;}
+.tcat{font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
+.tags{display:flex;flex-wrap:wrap;gap:4px;}
+.tag{font-size:10px;background:var(--s3);color:var(--mut2);padding:2px 7px;border-radius:4px;}
 
-/* ===== SUMMARY BOX ===== */
-.sumbox{background:var(--surface2);border:1px solid var(--border-gold);border-radius:var(--r);padding:.9rem;}
-.sumrow{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:0.5px solid var(--border);font-size:13px;}
-.sumrow:last-child{border-bottom:none;}
-.sumrow.tot{padding-top:9px;font-size:15px;font-weight:700;color:var(--gold);border-top:1px solid var(--border-gold);}
-.sumrow.resta{font-size:14px;font-weight:700;color:var(--green);}
-.costos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.costos-inline{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
-.costos-col{display:flex;flex-direction:column;min-width:0;}
-.cost-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--border);}
-.cost-row:last-child{border-bottom:none;}
-.cost-row-total{background:var(--surface2);padding:8px 10px;border-radius:7px;margin-top:4px;border:none !important;}
-.cr-label{font-size:12px;color:var(--muted2);flex:1;}
-.cr-input{width:130px !important;flex-shrink:0;text-align:right;font-size:13px;padding:6px 9px;}
-.cr-input[type="date"]{width:150px !important;text-align:left;}
+/* COSTOS SECTION */
+.cblock{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
+.crow{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:.5px solid var(--b);}
+.crow:last-child{border-bottom:none;}
+.clabel{font-size:12px;color:var(--mut2);}
+.cinput{width:130px;flex-shrink:0;text-align:right;font-size:13px;font-weight:500;padding:6px 9px;}
+input[type="date"].cinput{width:155px;}
+.ctotal{background:var(--s2);border-radius:7px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;margin-top:4px;}
+.ctotal .clabel{color:var(--txt);font-weight:700;}
+.ctotal .cval{font-size:16px;font-weight:700;}
 
-/* ===== BTNS ===== */
-.btn{border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;padding:10px 18px;transition:all .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;}
-.btn-gold{background:var(--gold);color:var(--black);}
-.btn-gold:hover{background:var(--gold-dark);}
-.btn-out{background:transparent;border:0.5px solid var(--gold);color:var(--gold);}
-.btn-out:hover{background:var(--gold);color:var(--black);}
-.btn-ghost{background:transparent;border:0.5px solid var(--border);color:var(--muted2);}
-.btn-ghost:hover{border-color:var(--muted2);color:var(--text);}
-.btn-del{background:transparent;border:0.5px solid var(--red);color:var(--red);}
-.btn-del:hover{background:var(--red);color:#fff;}
-.btn-sm{padding:5px 10px;font-size:12px;}
+/* SUMMARY */
+.sumbox{background:var(--s2);border:1px solid var(--bg);border-radius:var(--r);padding:.85rem;margin-top:.6rem;}
+.srow{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:.5px solid var(--b);font-size:12px;}
+.srow:last-child{border-bottom:none;}
+.srow.tot{padding-top:8px;font-size:14px;font-weight:700;color:var(--gold);border-top:1px solid var(--bg);}
+.srow.resta{font-size:13px;font-weight:700;color:var(--grn);}
+
+/* BTNS */
+.btn{border:none;border-radius:7px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;padding:9px 16px;transition:all .15s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;}
+.bgold{background:var(--gold);color:var(--black);}
+.bgold:hover{background:var(--gold-dark);}
+.bout{background:transparent;border:.5px solid var(--gold);color:var(--gold);}
+.bout:hover{background:var(--gold);color:var(--black);}
+.bghost{background:transparent;border:.5px solid var(--b);color:var(--mut2);}
+.bghost:hover{color:var(--txt);border-color:var(--mut2);}
+.bdel{background:transparent;border:.5px solid var(--red);color:var(--red);}
+.bdel:hover{background:var(--red);color:#fff;}
+.bsm{padding:5px 9px;font-size:11px;}
 .btn:disabled{opacity:.5;cursor:not-allowed;}
 .brow{display:flex;gap:8px;margin-top:.85rem;flex-wrap:wrap;}
 
-/* ===== TABLE ===== */
+/* TABLE */
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-table{width:100%;border-collapse:collapse;font-size:13px;min-width:600px;}
-th{text-align:left;color:var(--gold);font-size:10px;text-transform:uppercase;letter-spacing:.6px;padding:9px 10px;border-bottom:1px solid var(--border-gold);font-weight:700;white-space:nowrap;}
-td{padding:10px 10px;border-bottom:0.5px solid var(--border);color:var(--text);vertical-align:middle;}
-tr:last-child td{border-bottom:none;} tr:hover td{background:var(--surface2);}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:580px;}
+th{text-align:left;color:var(--gold);font-size:9px;text-transform:uppercase;letter-spacing:.6px;padding:8px 10px;border-bottom:1px solid var(--bg);font-weight:700;white-space:nowrap;}
+td{padding:9px 10px;border-bottom:.5px solid var(--b);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}tr:hover td{background:var(--s2);}
 
-/* ===== BADGES ===== */
-.badge{display:inline-block;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:600;white-space:nowrap;}
-.bg{background:rgba(245,184,0,.12);color:var(--gold);border:0.5px solid var(--border-gold);}
-.bgr{background:rgba(34,197,94,.1);color:var(--green);border:0.5px solid rgba(34,197,94,.3);}
-.br{background:rgba(239,68,68,.1);color:var(--red);border:0.5px solid rgba(239,68,68,.3);}
-.bb{background:rgba(96,165,250,.1);color:var(--blue);border:0.5px solid rgba(96,165,250,.3);}
-.bgy{background:var(--surface3);color:var(--muted2);border:0.5px solid var(--border);}
+/* BADGES */
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;}
+.bpend{background:rgba(245,184,0,.12);color:var(--gold);border:.5px solid var(--bg);}
+.bconf{background:rgba(96,165,250,.1);color:var(--blu);border:.5px solid rgba(96,165,250,.3);}
+.bcomp{background:rgba(34,197,94,.1);color:var(--grn);border:.5px solid rgba(34,197,94,.3);}
+.bcanc{background:rgba(239,68,68,.1);color:var(--red);border:.5px solid rgba(239,68,68,.3);}
+.bgray{background:var(--s3);color:var(--mut2);}
 
-/* ===== MENU ===== */
-.cat-label{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.7px;font-weight:700;margin:12px 0 6px;}
-.menu-row{display:flex;align-items:center;gap:8px;padding:9px 11px;background:var(--surface2);border:0.5px solid var(--border);border-radius:8px;margin-bottom:5px;flex-wrap:wrap;}
-.menu-row .mn{flex:1;font-size:13px;font-weight:600;min-width:120px;}
-.menu-row .md{font-size:11px;color:var(--muted);flex-basis:100%;margin-top:2px;}
-.menu-row .mp{font-size:14px;color:var(--gold);font-weight:700;min-width:80px;text-align:right;}
-.menu-row .mp input{text-align:right;font-size:14px;font-weight:700;color:var(--gold);background:var(--surface3);border:1px solid var(--gold);width:100px;}
-.toppings-box{background:var(--surface2);border:0.5px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:5px;}
-.toppings-box .tcat{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
-.toppings-list{display:flex;flex-wrap:wrap;gap:5px;}
-.topping-tag{font-size:11px;background:var(--surface3);color:var(--muted2);padding:3px 8px;border-radius:5px;}
+/* MENU */
+.mrow{display:flex;align-items:center;gap:8px;padding:9px 11px;background:var(--s2);border:.5px solid var(--b);border-radius:7px;margin-bottom:5px;flex-wrap:wrap;}
+.mname{flex:1;font-size:13px;font-weight:600;min-width:100px;}
+.mdesc{font-size:10px;color:var(--mut);flex-basis:100%;margin-top:1px;}
+.mpinput{width:120px;text-align:right;font-size:14px;font-weight:700;color:var(--gold);background:var(--s3);border:1px solid var(--bg);border-radius:7px;padding:6px 9px;}
 
-/* ===== DETAIL ===== */
-.dhero{background:var(--surface);border:0.5px solid var(--border-gold);border-radius:var(--rl);padding:1.1rem;margin-bottom:.85rem;}
-.dclient{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--text);letter-spacing:1px;line-height:1;}
+/* DETAIL */
+.dhero{background:var(--s1);border:.5px solid var(--bg);border-radius:var(--r);padding:1.1rem;margin-bottom:.85rem;}
+.dname{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1px;line-height:1;}
 .dmeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
-.mpill{font-size:11px;color:var(--muted2);background:var(--surface3);padding:3px 9px;border-radius:20px;}
+.mpill{font-size:10px;color:var(--mut2);background:var(--s3);padding:3px 8px;border-radius:20px;}
+.dg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.85rem;}
 
-/* ===== FILTERS ===== */
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:.85rem;align-items:center;}
-.filters select,.filters input{font-size:12px;padding:6px 9px;}
-.filters select{width:auto;}
-.filters input{width:150px;}
+/* FILTERS */
+.filt{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:.85rem;}
+.filt select,.filt input{font-size:12px;padding:6px 9px;width:auto;}
+.filt input{width:160px;}
 
-/* ===== LOADING/EMPTY ===== */
-.loading{display:flex;align-items:center;justify-content:center;gap:10px;padding:2rem;color:var(--muted);font-size:13px;}
-.spin{width:18px;height:18px;border:2px solid var(--surface3);border-top-color:var(--gold);border-radius:50%;animation:sp .6s linear infinite;}
+/* EMPTY/LOADING */
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--mut);}
+.eico{font-size:36px;margin-bottom:.5rem;opacity:.4;}
+.loading{display:flex;align-items:center;justify-content:center;gap:9px;padding:1.5rem;color:var(--mut);font-size:13px;}
+.spin{width:17px;height:17px;border:2px solid var(--s3);border-top-color:var(--gold);border-radius:50%;animation:sp .6s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg)}}
-.empty{text-align:center;padding:2.5rem 1rem;color:var(--muted);}
-.empty-ico{font-size:40px;margin-bottom:.6rem;opacity:.4;}
-.empty-t{font-size:14px;} .empty-s{font-size:12px;margin-top:4px;}
 
-/* ===== TOAST ===== */
-.toast{position:fixed;bottom:calc(var(--bottom-h) + 10px);left:50%;transform:translateX(-50%) translateY(10px);background:var(--gold);color:var(--black);padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;z-index:9999;white-space:nowrap;}
+/* TOAST */
+.toast{position:fixed;bottom:calc(var(--bot) + 10px);left:50%;transform:translateX(-50%) translateY(8px);background:var(--gold);color:var(--black);padding:9px 18px;border-radius:20px;font-size:12px;font-weight:700;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:9999;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .toast.err{background:var(--red);color:#fff;}
 
-.back-btn{display:flex;align-items:center;gap:6px;background:none;border:0.5px solid var(--border);border-radius:7px;color:var(--muted2);font-size:12px;font-family:'DM Sans',sans-serif;padding:5px 12px;cursor:pointer;transition:all .15s;}
-.back-btn:hover{border-color:var(--gold);color:var(--gold);}
-.ssel{background:var(--surface3);border:0.5px solid var(--border);border-radius:6px;color:var(--text);font-size:12px;padding:4px 7px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.backbtn{display:inline-flex;align-items:center;gap:5px;background:none;border:.5px solid var(--b);border-radius:6px;color:var(--mut2);font-size:11px;font-family:'DM Sans',sans-serif;padding:5px 10px;cursor:pointer;}
+.backbtn:hover{border-color:var(--gold);color:var(--gold);}
+.ssel{background:var(--s3);border:.5px solid var(--b);border-radius:5px;color:var(--txt);font-size:11px;padding:4px 7px;cursor:pointer;font-family:'DM Sans',sans-serif;}
 
-/* ===== RESPONSIVE ===== */
+/* RESPONSIVE */
 @media(max-width:768px){
-  .desktop-tabs{display:none;}
-  .bottom-nav{display:flex;}
-  .main{padding:.85rem;padding-bottom:calc(var(--bottom-h) + .85rem);}
-  .charts-grid{grid-template-columns:1fr;}
+  .dtabs{display:none;}
+  .bnav{display:flex;}
+  .main{padding:.85rem;padding-bottom:calc(var(--bot) + .85rem);}
+  .sg{grid-template-columns:1fr 1fr;}
+  .cg{grid-template-columns:1fr;}
+  .svcg{grid-template-columns:1fr 1fr;}
+  .cblock{grid-template-columns:1fr;}
   .fg.c3{grid-template-columns:1fr 1fr;}
-  .sgrid{grid-template-columns:1fr 1fr;}
-  .svc-grid{grid-template-columns:1fr;}
-  .costos-grid{grid-template-columns:1fr;}
-  .costos-inline{grid-template-columns:1fr !important;}
-  .cr-input{width:100px !important;}
-  .toast{bottom:calc(var(--bottom-h) + 8px);}
+  .toast{bottom:calc(var(--bot) + 8px);}
 }
 @media(min-width:769px){
   .main{padding-bottom:1rem;}
-  .toast{bottom:22px;left:auto;right:22px;transform:translateY(10px);}
+  .toast{bottom:20px;left:auto;right:20px;transform:translateY(8px);}
   .toast.show{transform:translateY(0);}
-  .sgrid{grid-template-columns:repeat(4,1fr);}
-  .svc-grid{grid-template-columns:repeat(4,1fr);}
 }
 </style>
 </head>
 <body>
 
-<!-- TOP NAV -->
-<nav class="top-nav">
+<nav class="nav">
   <div class="logo">
-    <div class="logo-mark">M</div>
-    <div><div class="logo-name">Maikels Pizzería</div><div class="logo-sub">Sistema de Catering</div></div>
+    <div class="logo-m">M</div>
+    <div><div class="logo-n">Maikels Pizzería</div><div class="logo-s">Sistema de Catering</div></div>
   </div>
-  <div class="desktop-tabs">
-    <button class="dtab active" onclick="go('dashboard')"><span class="dtab-icon">📊</span>Resumen</button>
-    <button class="dtab" onclick="go('calendario')"><span class="dtab-icon">📅</span>Calendario</button>
-    <button class="dtab" onclick="go('nuevo')"><span class="dtab-icon">➕</span>Evento</button>
-    <button class="dtab" onclick="go('eventos')"><span class="dtab-icon">📋</span>Eventos <span class="nbadge" id="nbadge-d" style="display:none">0</span></button>
-    <button class="dtab" onclick="go('menu')"><span class="dtab-icon">🍕</span>Menú</button>
-    <button class="dtab" onclick="go('costos')"><span class="dtab-icon">💰</span>Costos</button>
+  <div class="dtabs">
+    <button class="dtab active" onclick="go('dashboard')">📊 Resumen</button>
+    <button class="dtab" onclick="go('calendario')">📅 Calendario</button>
+    <button class="dtab" onclick="go('nuevo')">➕ Evento</button>
+    <button class="dtab" onclick="go('eventos')">📋 Eventos <span class="nbadge" id="nb-d" style="display:none">0</span></button>
+    <button class="dtab" onclick="go('menu')">🍕 Menú</button>
+    <button class="dtab" onclick="go('costos')">💰 Costos</button>
   </div>
+  <div class="nav-right"></div>
 </nav>
 
-<!-- BOTTOM NAV (mobile) -->
-<nav class="bottom-nav">
-  <button class="bnav-item active" onclick="go('dashboard')">
-    <div class="bnav-bg"><span class="bnav-icon">📊</span></div>
-    <span class="bnav-label">Resumen</span>
-  </button>
-  <button class="bnav-item" onclick="go('calendario')">
-    <div class="bnav-bg"><span class="bnav-icon">📅</span></div>
-    <span class="bnav-label">Calendario</span>
-  </button>
-  <button class="bnav-item" onclick="go('nuevo')">
-    <div class="bnav-bg" style="background:var(--gold);border-radius:12px;width:48px;height:36px;"><span class="bnav-icon">➕</span></div>
-    <span class="bnav-label" style="color:var(--gold)">Nuevo</span>
-  </button>
-  <button class="bnav-item bnav-badge" id="nbadge-m" onclick="go('eventos')">
-    <div class="bnav-bg"><span class="bnav-icon">📋</span></div>
-    <span class="bnav-label">Eventos</span>
-  </button>
-  <button class="bnav-item" onclick="go('menu')">
-    <div class="bnav-bg"><span class="bnav-icon">🍕</span></div>
-    <span class="bnav-label">Menú</span>
-  </button>
-  <button class="bnav-item" onclick="go('costos')">
-    <div class="bnav-bg"><span class="bnav-icon">💰</span></div>
-    <span class="bnav-label">Costos</span>
-  </button>
+<nav class="bnav">
+  <button class="bitem active" onclick="go('dashboard')"><div class="bhi"><span class="bicon">📊</span></div><span class="blabel">Resumen</span></button>
+  <button class="bitem" onclick="go('calendario')"><div class="bhi"><span class="bicon">📅</span></div><span class="blabel">Calendario</span></button>
+  <button class="bitem" onclick="go('nuevo')"><div class="bhi" style="background:var(--gold);border-radius:10px;width:44px;height:32px;"><span class="bicon">➕</span></div><span class="blabel" style="color:var(--gold)">Nuevo</span></button>
+  <button class="bitem" id="nb-m" onclick="go('eventos')"><div class="bhi"><span class="bicon">📋</span></div><span class="blabel">Eventos</span></button>
+  <button class="bitem" onclick="go('menu')"><div class="bhi"><span class="bicon">🍕</span></div><span class="blabel">Menú</span></button>
+  <button class="bitem" onclick="go('costos')"><div class="bhi"><span class="bicon">💰</span></div><span class="blabel">Costos</span></button>
 </nav>
 
 <div class="toast" id="toast"></div>
 
 <div class="main">
 
-  <!-- ===== DASHBOARD ===== -->
-  <div class="screen active" id="screen-dashboard">
-    <div class="ph"><div class="pt">Panel de <span>Control</span></div><div class="ps" id="dash-date"></div></div>
-    <div class="sgrid" id="dash-stats"><div class="loading"><div class="spin"></div></div></div>
-    <div class="charts-grid" id="charts-area">
-      <div class="chart-card"><div class="chart-title">Eventos por tipo</div><div class="donut-wrap" id="chart-tipo"><div class="loading"><div class="spin"></div></div></div></div>
-      <div class="chart-card"><div class="chart-title">Estado de cobros</div><div class="donut-wrap" id="chart-cobros"><div class="loading"><div class="spin"></div></div></div></div>
-      <div class="chart-card"><div class="chart-title">Servicios más elegidos</div><div class="donut-wrap" id="chart-servicios"><div class="loading"><div class="spin"></div></div></div></div>
-    </div>
-    <div class="card"><div class="ct">Próximos eventos</div><div id="dash-up"><div class="loading"><div class="spin"></div></div></div></div>
+<!-- DASHBOARD -->
+<div class="screen active" id="screen-dashboard">
+  <div class="ph"><div class="pt">Panel de <span>Control</span></div><div class="ps" id="d-date"></div></div>
+  <div class="sg" id="d-stats"><div class="loading" style="grid-column:1/-1"><div class="spin"></div></div></div>
+  <div class="cg">
+    <div class="cc"><div class="cht">Eventos por tipo</div><div id="ch-tipo"><div class="loading"><div class="spin"></div></div></div></div>
+    <div class="cc"><div class="cht">Estado de cobros</div><div id="ch-cobros"><div class="loading"><div class="spin"></div></div></div></div>
+    <div class="cc"><div class="cht">Servicios elegidos</div><div id="ch-svcs"><div class="loading"><div class="spin"></div></div></div></div>
   </div>
-
-  <!-- ===== CALENDARIO ===== -->
-  <div class="screen" id="screen-calendario">
-    <div class="ph"><div class="pt"><span>Calendario</span> de Eventos</div></div>
-    <div class="card">
-      <div class="cal-header">
-        <div class="cal-nav">
-          <button class="cal-btn" onclick="calNav(-1)">‹</button>
-          <div class="cal-month" id="cal-month-label"></div>
-          <button class="cal-btn" onclick="calNav(1)">›</button>
-        </div>
-        <button class="btn btn-ghost btn-sm" onclick="calGoToday()">Hoy</button>
-      </div>
-      <div class="cal-grid" id="cal-grid"></div>
-    </div>
-    <div id="cal-events-day">
-      <div class="card"><div class="ct" id="cal-day-title">Seleccioná un día</div><div id="cal-events-list"><div class="empty"><div class="empty-ico">📅</div><div class="empty-t">Tocá un día para ver los eventos</div></div></div></div>
-    </div>
-  </div>
-
-  <!-- ===== NUEVO EVENTO ===== -->
-  <div class="screen" id="screen-nuevo">
-    <div class="ph"><div class="pt">Nuevo <span>Evento</span></div><div class="ps">Registra todos los detalles del catering</div></div>
-
-    <div class="card">
-      <div class="ct">Datos del evento</div>
-      <div class="fg">
-        <div class="fgroup full"><label>Nombre del evento *</label><input type="text" id="f-nombre" placeholder="Ej. Casamiento García"></div>
-        <div class="fgroup"><label>Tipo de evento</label>
-          <select id="f-tipo">
-            <option value="social">Social</option><option value="corporativo">Corporativo</option>
-            <option value="casamiento">Casamiento</option><option value="cumpleanos">Cumpleaños</option>
-            <option value="graduacion">Graduación</option><option value="otro">Otro</option>
-          </select>
-        </div>
-        <div class="fgroup"><label>Fecha *</label><input type="date" id="f-fecha"></div>
-        <div class="fgroup"><label>Cant. invitados</label><input type="number" id="f-invitados" placeholder="0" min="0" oninput="calcTotal()"></div>
-        <div class="fgroup"><label>Teléfono cliente</label><input type="tel" id="f-tel" placeholder="+54 000 000 0000"></div>
-        <div class="fgroup full"><label>Nombre del cliente</label><input type="text" id="f-cliente" placeholder="Nombre completo"></div>
-        <div class="fgroup full"><label>Extras (alérgicos / veganos / observaciones)</label><input type="text" id="f-extras-info" placeholder="Ej. 3 celíacos, 2 veganos..."></div>
-      </div>
-
-      <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-label">Horarios</div><div class="sdiv-line"></div></div>
-      <div class="fg">
-        <div class="fgroup"><label>Inicio del evento</label><input type="time" id="f-h-inicio"></div>
-        <div class="fgroup"><label>Llegada al evento</label><input type="time" id="f-h-llegada-ev"></div>
-        <div class="fgroup"><label>Horario de partida</label><input type="time" id="f-h-partida"></div>
-        <div class="fgroup"><label>Llegada en Maikels</label><input type="time" id="f-h-llegada-mk"></div>
-      </div>
-
-      <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-label">Lugar</div><div class="sdiv-line"></div></div>
-      <div class="fg">
-        <div class="fgroup"><label>Nombre del lugar</label><input type="text" id="f-lugar" placeholder="Ej. Salón Los Pinos"></div>
-        <div class="fgroup"><label>Dirección</label><input type="text" id="f-direccion" placeholder="Calle, número, ciudad"></div>
-      </div>
-
-      <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-label">Producción</div><div class="sdiv-line"></div></div>
-      <div class="fg">
-        <div class="fgroup"><label>Cant. pizzas</label><input type="number" id="f-pizzas" placeholder="0" min="0"></div>
-        <div class="fgroup"><label>Cant. personal</label><input type="number" id="f-personal-cant" placeholder="0" min="0"></div>
-        <div class="fgroup full"><label>Nombres del personal</label><input type="text" id="f-personal-nombres" placeholder="Juan, María, Carlos..."></div>
-        <div class="fgroup full"><label>Notas internas</label><input type="text" id="f-notas" placeholder="Observaciones..."></div>
-      </div>
-    </div>
-
-    <!-- SERVICIO -->
-    <div class="card">
-      <div class="ct">Tipo de servicio</div>
-      <div class="svc-grid" id="svc-selector"></div>
-      <div id="toppings-ref" style="margin-top:.5rem;"></div>
-    </div>
-
-    <!-- COSTOS -->
-    <div class="card">
-      <div class="ct">Costos y cobros</div>
-
-      <div class="costos-inline">
-        <!-- COLUMNA IZQUIERDA: costos -->
-        <div class="costos-col">
-          <div class="sdiv" style="margin-top:0;"><div class="sdiv-line"></div><div class="sdiv-label">Desglose costos</div><div class="sdiv-line"></div></div>
-          <div class="cost-row"><span class="cr-label">Total que se cobra</span><input class="cr-input" type="number" id="c-cobrado" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
-          <div class="cost-row"><span class="cr-label">Costo materia prima</span><input class="cr-input" type="number" id="c-mp" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
-          <div class="cost-row"><span class="cr-label">Celíacos / Sin TACC</span><input class="cr-input" type="number" id="c-cel" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
-          <div class="cost-row"><span class="cr-label">Entradas</span><input class="cr-input" type="number" id="c-ent" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
-          <div class="cost-row"><span class="cr-label">Tortas</span><input class="cr-input" type="number" id="c-tor" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
-          <div class="cost-row"><span class="cr-label">Personal</span><input class="cr-input" type="number" id="c-per" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
-          <div class="cost-row"><span class="cr-label">Nafta / Traslado</span><input class="cr-input" type="number" id="c-naf" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
-          <div class="cost-row"><span class="cr-label">Bebida</span><input class="cr-input" type="number" id="c-beb" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
-          <div class="cost-row"><span class="cr-label">Otros</span><input class="cr-input" type="number" id="c-otr" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
-          <div class="cost-row cost-row-total"><span class="cr-label" style="color:var(--text);font-weight:600;">Extras (total)</span><span id="extras-disp" style="color:var(--gold);font-weight:700;font-size:15px;">$0.00</span></div>
-        </div>
-        <!-- COLUMNA DERECHA: cobros + resumen -->
-        <div class="costos-col">
-          <div class="sdiv" style="margin-top:0;"><div class="sdiv-line"></div><div class="sdiv-label">Cobros / Señas</div><div class="sdiv-line"></div></div>
-          <div class="cost-row"><span class="cr-label">Seña recibida</span><input class="cr-input" type="number" id="c-seña" placeholder="0.00" step="0.01" oninput="calcTotal()"></div>
-          <div class="cost-row"><span class="cr-label">Fecha seña</span><input class="cr-input" type="date" id="c-fecha-seña"></div>
-          <div class="cost-row cost-row-total"><span class="cr-label" style="color:var(--text);font-weight:600;">Resta abonar</span><span id="resta-disp" style="color:var(--green);font-weight:700;font-size:15px;">$0.00</span></div>
-          <div class="cost-row"><span class="cr-label">Fecha pago restante</span><input class="cr-input" type="date" id="c-fecha-resto"></div>
-          <div style="height:.6rem;"></div>
-          <div class="sumbox" id="sumbox">
-            <div class="sumrow"><span>Servicio</span><span id="s-svc" style="color:var(--gold)">—</span></div>
-            <div class="sumrow"><span>Total cobrado</span><span id="s-cob" style="color:var(--gold)">$0.00</span></div>
-            <div class="sumrow"><span>Costos</span><span id="s-cost" style="color:var(--red)">$0.00</span></div>
-            <div class="sumrow tot"><span>Ganancia est.</span><span id="s-gan">$0.00</span></div>
-            <div class="sumrow resta"><span>Resta abonar</span><span id="s-resta">$0.00</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="brow">
-        <button class="btn btn-gold" id="btn-save" onclick="guardarEvento()">💾 Guardar evento</button>
-        <button class="btn btn-ghost" onclick="limpiarForm()">Limpiar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== EVENTOS ===== -->
-  <div class="screen" id="screen-eventos">
-    <div class="ph"><div class="pt">Todos los <span>Eventos</span></div></div>
-    <div class="filters">
-      <select id="fil-e" onchange="renderEventos()" style="width:auto;"><option value="">Todos los estados</option><option value="pendiente">Pendiente</option><option value="confirmado">Confirmado</option><option value="completado">Completado</option><option value="cancelado">Cancelado</option></select>
-      <select id="fil-t" onchange="renderEventos()" style="width:auto;"><option value="">Todos los tipos</option><option value="social">Social</option><option value="corporativo">Corporativo</option><option value="casamiento">Casamiento</option><option value="cumpleanos">Cumpleaños</option><option value="graduacion">Graduación</option></select>
-      <input type="text" id="fil-b" placeholder="Buscar..." oninput="renderEventos()">
-    </div>
-    <div class="card" style="padding:0;overflow:hidden;">
-      <div class="tw">
-        <table>
-          <thead><tr><th>Evento</th><th>Fecha</th><th>Invitados</th><th>Servicio</th><th>Cobrado</th><th>Ganancia</th><th>Resta</th><th>Estado</th><th></th></tr></thead>
-          <tbody id="ev-tbody"></tbody>
-        </table>
-      </div>
-      <div id="ev-loading" class="loading"><div class="spin"></div> Cargando...</div>
-      <div id="ev-empty" class="empty" style="display:none;"><div class="empty-ico">📋</div><div class="empty-t">Sin eventos</div></div>
-    </div>
-  </div>
-
-  <!-- ===== DETALLE ===== -->
-  <div class="screen" id="screen-detalle"><div id="det-body"></div></div>
-
-  <!-- ===== MENÚ ===== -->
-  <div class="screen" id="screen-menu">
-    <div class="ph"><div class="pt">Gestión de <span>Menú</span></div><div class="ps">Editá los precios por persona de cada servicio</div></div>
-    <div class="card" id="menu-body"><div class="loading"><div class="spin"></div></div></div>
-  </div>
-
-  <!-- ===== COSTOS ===== -->
-  <div class="screen" id="screen-costos">
-    <div class="ph"><div class="pt">Gestión de <span>Costos</span></div><div class="ps">Editá los costos fijos de cada rubro</div></div>
-    <div class="card" id="costos-body"><div class="loading"><div class="spin"></div></div></div>
-  </div>
-
+  <div class="card"><div class="ct">Próximos eventos</div><div id="d-up"><div class="loading"><div class="spin"></div></div></div></div>
 </div>
 
+<!-- CALENDARIO -->
+<div class="screen" id="screen-calendario">
+  <div class="ph"><div class="pt"><span>Calendario</span></div></div>
+  <div class="card">
+    <div class="calh">
+      <div class="calnav">
+        <button class="calb" onclick="calNav(-1)">‹</button>
+        <div class="calm" id="cal-label"></div>
+        <button class="calb" onclick="calNav(1)">›</button>
+      </div>
+      <button class="btn bghost bsm" onclick="calToday()">Hoy</button>
+    </div>
+    <div class="calgrid" id="cal-grid"></div>
+  </div>
+  <div class="card"><div class="ct" id="cal-day-title">Seleccioná un día</div><div id="cal-list"><div class="empty"><div class="eico">📅</div><div>Tocá un día para ver eventos</div></div></div></div>
+</div>
+
+<!-- NUEVO EVENTO -->
+<div class="screen" id="screen-nuevo">
+  <div class="ph"><div class="pt">Nuevo <span>Evento</span></div></div>
+  <div class="card">
+    <div class="ct">Datos del evento</div>
+    <div class="fg">
+      <div class="fg2 full"><label>Nombre del evento *</label><input type="text" id="f-nombre" placeholder="Ej. Casamiento García"></div>
+      <div class="fg2"><label>Tipo</label><select id="f-tipo"><option value="social">Social</option><option value="corporativo">Corporativo</option><option value="casamiento">Casamiento</option><option value="cumpleanos">Cumpleaños</option><option value="graduacion">Graduación</option><option value="otro">Otro</option></select></div>
+      <div class="fg2"><label>Fecha *</label><input type="date" id="f-fecha"></div>
+      <div class="fg2"><label>Cant. invitados</label><input type="number" id="f-inv" placeholder="0" min="0" oninput="calcResumen()"></div>
+      <div class="fg2"><label>Nombre cliente</label><input type="text" id="f-cliente" placeholder="Nombre completo"></div>
+      <div class="fg2"><label>Teléfono</label><input type="tel" id="f-tel" placeholder="+54 000 000 0000"></div>
+      <div class="fg2 full"><label>Extras / Alérgicos / Veganos</label><input type="text" id="f-extras" placeholder="Ej. 3 celíacos, 2 veganos..."></div>
+    </div>
+    <div class="sdiv"><div class="sdline"></div><div class="sdl">Horarios</div><div class="sdline"></div></div>
+    <div class="fg">
+      <div class="fg2"><label>Inicio del evento</label><input type="time" id="f-h-ini"></div>
+      <div class="fg2"><label>Llegada al evento</label><input type="time" id="f-h-lleg"></div>
+      <div class="fg2"><label>Horario de partida</label><input type="time" id="f-h-part"></div>
+      <div class="fg2"><label>Llegada en Maikels</label><input type="time" id="f-h-mk"></div>
+    </div>
+    <div class="sdiv"><div class="sdline"></div><div class="sdl">Lugar</div><div class="sdline"></div></div>
+    <div class="fg">
+      <div class="fg2"><label>Nombre del lugar</label><input type="text" id="f-lugar" placeholder="Salón Los Pinos"></div>
+      <div class="fg2"><label>Dirección</label><input type="text" id="f-dir" placeholder="Calle, número, ciudad"></div>
+    </div>
+    <div class="sdiv"><div class="sdline"></div><div class="sdl">Producción</div><div class="sdline"></div></div>
+    <div class="fg c3">
+      <div class="fg2"><label>Cant. pizzas</label><input type="number" id="f-piz" placeholder="0" min="0"></div>
+      <div class="fg2"><label>Cant. personal</label><input type="number" id="f-pers" placeholder="0" min="0"></div>
+      <div class="fg2"><label>Notas</label><input type="text" id="f-notas" placeholder="Observaciones..."></div>
+      <div class="fg2 full"><label>Nombres del personal</label><input type="text" id="f-pnombres" placeholder="Juan, María, Carlos..."></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ct">Tipo de servicio</div>
+    <div class="svcg" id="svc-grid"></div>
+    <div id="topping-ref"></div>
+  </div>
+
+  <div class="card">
+    <div class="ct">Costos y cobros</div>
+    <div class="cblock">
+      <div>
+        <div class="sdiv" style="margin-top:0"><div class="sdline"></div><div class="sdl">Desglose costos</div><div class="sdline"></div></div>
+        <div class="crow"><span class="clabel">Total que se cobra</span><input class="cinput" type="number" id="c-cob" placeholder="0.00" step="0.01" oninput="calcResumen()"></div>
+        <div class="crow"><span class="clabel">Costo materia prima</span><input class="cinput" type="number" id="c-mp" placeholder="0.00" step="0.01" oninput="calcResumen()"></div>
+        <div class="crow"><span class="clabel">Celíacos / Sin TACC</span><input class="cinput" type="number" id="c-cel" placeholder="0.00" step="0.01" oninput="calcResumen()"></div>
+        <div class="crow"><span class="clabel">Entradas</span><input class="cinput" type="number" id="c-ent" placeholder="0.00" step="0.01" oninput="calcResumen()"></div>
+        <div class="crow"><span class="clabel">Tortas</span><input class="cinput" type="number" id="c-tor" placeholder="0.00" step="0.01" oninput="calcResumen()"></div>
+        <div class="crow"><span class="clabel">Personal</span><input class="cinput" type="number" id="c-per" placeholder="0.00" step="0.01" oninput="calcResumen()"></div>
+        <div class="crow"><span class="clabel">Nafta / Traslado</span><input class="cinput" type="number" id="c-naf" placeholder="0.00" step="0.01" oninput="calcResumen()"></div>
+        <div class="crow"><span class="clabel">Bebida</span><input class="cinput" type="number" id="c-beb" placeholder="0.00" step="0.01" oninput="calcResumen()"></div>
+        <div class="crow"><span class="clabel">Otros</span><input class="cinput" type="number" id="c-otr" placeholder="0.00" step="0.01" oninput="calcResumen()"></div>
+        <div class="ctotal"><span class="clabel">Extras (total)</span><span id="r-ext" class="cval" style="color:var(--gold)">$0,00</span></div>
+      </div>
+      <div>
+        <div class="sdiv" style="margin-top:0"><div class="sdline"></div><div class="sdl">Cobros / Señas</div><div class="sdline"></div></div>
+        <div class="crow"><span class="clabel">Seña recibida</span><input class="cinput" type="number" id="c-sena" placeholder="0.00" step="0.01" oninput="calcResumen()"></div>
+        <div class="crow"><span class="clabel">Fecha seña</span><input class="cinput" type="date" id="c-fecha-sena"></div>
+        <div class="ctotal"><span class="clabel">Resta abonar</span><span id="r-resta" class="cval" style="color:var(--grn)">$0,00</span></div>
+        <div class="crow"><span class="clabel">Fecha pago restante</span><input class="cinput" type="date" id="c-fecha-resto"></div>
+        <div class="sumbox" id="sumbox">
+          <div class="srow"><span>Servicio</span><span id="r-svc" style="color:var(--gold)">—</span></div>
+          <div class="srow"><span>Total cobrado</span><span id="r-cob" style="color:var(--gold)">$0,00</span></div>
+          <div class="srow"><span>Costos totales</span><span id="r-cost" style="color:var(--red)">$0,00</span></div>
+          <div class="srow tot"><span>Ganancia estimada</span><span id="r-gan">$0,00</span></div>
+          <div class="srow resta"><span>Resta abonar</span><span id="r-resta2">$0,00</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="brow">
+      <button class="btn bgold" id="btn-save" onclick="guardar()">💾 Guardar evento</button>
+      <button class="btn bghost" onclick="limpiar()">Limpiar</button>
+    </div>
+  </div>
+</div>
+
+<!-- EVENTOS -->
+<div class="screen" id="screen-eventos">
+  <div class="ph"><div class="pt">Todos los <span>Eventos</span></div></div>
+  <div class="filt">
+    <select id="fil-e" onchange="renderEvs()" style="width:auto"><option value="">Todos los estados</option><option value="pendiente">Pendiente</option><option value="confirmado">Confirmado</option><option value="completado">Completado</option><option value="cancelado">Cancelado</option></select>
+    <select id="fil-t" onchange="renderEvs()" style="width:auto"><option value="">Todos los tipos</option><option value="social">Social</option><option value="corporativo">Corporativo</option><option value="casamiento">Casamiento</option><option value="cumpleanos">Cumpleaños</option><option value="graduacion">Graduación</option></select>
+    <input id="fil-b" placeholder="Buscar..." oninput="renderEvs()">
+  </div>
+  <div class="card" style="padding:0;overflow:hidden;">
+    <div class="tw"><table><thead><tr><th>Evento</th><th>Fecha</th><th>Invitados</th><th>Servicio</th><th>Cobrado</th><th>Ganancia</th><th>Resta</th><th>Estado</th><th></th></tr></thead><tbody id="ev-tb"></tbody></table></div>
+    <div id="ev-load" class="loading"><div class="spin"></div> Cargando...</div>
+    <div id="ev-empty" class="empty" style="display:none"><div class="eico">📋</div><div>Sin eventos registrados</div></div>
+  </div>
+</div>
+
+<!-- DETALLE -->
+<div class="screen" id="screen-detalle"><div id="det"></div></div>
+
+<!-- MENÚ -->
+<div class="screen" id="screen-menu">
+  <div class="ph"><div class="pt">Gestión de <span>Menú</span></div><div class="ps">Precios por persona — editables</div></div>
+  <div class="card" id="menu-body"><div class="loading"><div class="spin"></div></div></div>
+</div>
+
+<!-- COSTOS -->
+<div class="screen" id="screen-costos">
+  <div class="ph"><div class="pt">Gestión de <span>Costos</span></div><div class="ps">Costos de referencia por rubro</div></div>
+  <div class="card" id="costos-body"><div class="loading"><div class="spin"></div></div></div>
+</div>
+
+</div><!-- /main -->
+
 <script>
-const SB='https://oajmytptnivekxjawjow.supabase.co';
-const SK='sb_publishable_uP2fZf9XP6a9AQAb1UZdYg_rwCO2jPT';
-const H={'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK};
+// ===== SUPABASE =====
+const SB = 'https://oajmytptnivekxjawjow.supabase.co';
+const SK = 'sb_publishable_uP2fZf9XP6a9AQAb1UZdYg_rwCO2jPT';
+const H = {
+  'Content-Type':'application/json',
+  'apikey': SK,
+  'Authorization': 'Bearer ' + SK,
+  'Prefer': 'return=representation'
+};
 
-async function GET(t,q=''){const r=await fetch(`${SB}/rest/v1/${t}?${q}`,{headers:H});if(!r.ok)throw new Error(await r.text());return r.json();}
-async function POST(t,d){const r=await fetch(`${SB}/rest/v1/${t}`,{method:'POST',headers:{...H,'Prefer':'return=representation','Accept-Profile':'public'},body:JSON.stringify(d)});if(!r.ok){const err=await r.text();console.error('POST error:',err);throw new Error(err);}return r.json();}
-async function PATCH(t,id,d){const r=await fetch(`${SB}/rest/v1/${t}?id=eq.${id}`,{method:'PATCH',headers:{...H,'Prefer':'return=representation'},body:JSON.stringify(d)});if(!r.ok)throw new Error(await r.text());return r.json();}
-async function DEL(t,id){const r=await fetch(`${SB}/rest/v1/${t}?id=eq.${id}`,{method:'DELETE',headers:H});if(!r.ok)throw new Error(await r.text());}
+async function dbGet(table, query=''){
+  const r = await fetch(`${SB}/rest/v1/${table}?${query}`, {headers: H});
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+async function dbPost(table, data){
+  const r = await fetch(`${SB}/rest/v1/${table}`, {
+    method:'POST', headers: H, body: JSON.stringify(data)
+  });
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+async function dbPatch(table, id, data){
+  const r = await fetch(`${SB}/rest/v1/${table}?id=eq.${id}`, {
+    method:'PATCH', headers: H, body: JSON.stringify(data)
+  });
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+async function dbDel(table, id){
+  const r = await fetch(`${SB}/rest/v1/${table}?id=eq.${id}`, {
+    method:'DELETE', headers: H
+  });
+  if(!r.ok) throw new Error(await r.text());
+}
 
-// ===== SERVICIOS (menú Maikels) =====
-const SERVICIOS_DEFAULT = [
-  {key:'basico', nombre:'Básico', precio:15500, desc:'Pizza libre + 10 toppings'},
-  {key:'clasico1', nombre:'Clásico 1', precio:17500, desc:'Pizza libre + 20 toppings'},
-  {key:'clasico2', nombre:'Clásico 2', precio:19000, desc:'Pizza libre + 20 toppings + entradas'},
-  {key:'premium', nombre:'Premium', precio:28000, desc:'Pizza libre + 20 toppings + entradas + bebida + mini tortitas'},
+// ===== MENU / COSTOS (localStorage) =====
+const SVC_DEF = [
+  {key:'basico',    nombre:'Básico',    precio:15500, desc:'Pizza libre + 10 toppings'},
+  {key:'clasico1',  nombre:'Clásico 1', precio:17500, desc:'Pizza libre + 20 toppings'},
+  {key:'clasico2',  nombre:'Clásico 2', precio:19000, desc:'Pizza libre + 20 toppings + entradas'},
+  {key:'premium',   nombre:'Premium',   precio:28000, desc:'Pizza libre + 20 toppings + entradas + bebida + tortitas'},
+];
+const TOP_BAS = ['Jamón cocido','Cherrys','Rúcula','Salchicha','Cebolla salteada','Morrón asado','Parmesano','Orégano','Aceitunas','Salsa de ajo'];
+const TOP_AGR = ['Roquefort','Pesto de albahaca','Jamón crudo','Cebolla al limón con tomillo','Champiñones','Tomate asado con orégano y sriracha','Panceta','Pepperoni','Cebolla caramelizada al Malbec'];
+const CST_DEF = [
+  {key:'mp',    nombre:'Materia prima por pizza',    precio:0, desc:'Harina, levadura, tomate, queso'},
+  {key:'per',   nombre:'Personal por evento',        precio:0, desc:'Costo total del personal'},
+  {key:'naf',   nombre:'Nafta / Traslado',           precio:0, desc:'Combustible por evento'},
+  {key:'cel',   nombre:'Porción celíaco / Sin TACC', precio:0, desc:'Costo extra por porción especial'},
+  {key:'ent',   nombre:'Entrada por persona',        precio:0, desc:'Costo de entradas'},
+  {key:'tor',   nombre:'Torta por evento',           precio:0, desc:'Costo estimado de tortas'},
+  {key:'beb',   nombre:'Bebida por persona',         precio:0, desc:'Costo de bebida'},
+  {key:'otro',  nombre:'Otros gastos',               precio:0, desc:'Gastos varios'},
 ];
 
-const TOPPINGS_BASICOS = ['Jamón cocido','Cherrys','Rúcula','Salchicha','Cebolla salteada','Morrón asado','Parmesano','Orégano','Aceitunas','Salsa de ajo'];
-const TOPPINGS_AGREGADOS = ['Roquefort','Pesto de albahaca','Jamón crudo','Cebolla al limón con tomillo','Champiñones','Tomate asado con orégano y sriracha','Panceta','Pepperoni','Cebolla caramelizada al Malbec'];
+let svcs  = JSON.parse(localStorage.getItem('mk_svcs')  || 'null') || JSON.parse(JSON.stringify(SVC_DEF));
+let csts  = JSON.parse(localStorage.getItem('mk_csts')  || 'null') || JSON.parse(JSON.stringify(CST_DEF));
+let evs   = [];
+let selSvc = null;
+let calY   = new Date().getFullYear();
+let calM   = new Date().getMonth();
+let calSel = null;
 
-let servicios = JSON.parse(localStorage.getItem('mk_servicios') || 'null') || SERVICIOS_DEFAULT;
-let eventos = [];
-let calYear = new Date().getFullYear();
-let calMonth = new Date().getMonth();
-let calSelectedDay = null;
-let selectedSvc = null;
-
-function saveServicios(){ localStorage.setItem('mk_servicios', JSON.stringify(servicios)); }
+function saveSvcs(){ localStorage.setItem('mk_svcs', JSON.stringify(svcs)); }
+function saveCsts(){ localStorage.setItem('mk_csts', JSON.stringify(csts)); }
 
 // ===== HELPERS =====
-function toast(m,t=''){const el=document.getElementById('toast');el.textContent=m;el.className='toast show'+(t?' '+t:'');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),2500);}
-function ff(f){if(!f)return'—';const s=(f+'').split('T')[0].split('-');const mn=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];return `${s[2]} ${mn[parseInt(s[1])-1]} ${s[0]}`;}
-function tl(t){return{social:'Social',corporativo:'Corporativo',casamiento:'Casamiento',cumpleanos:'Cumpleaños',graduacion:'Graduación',otro:'Otro'}[t]||t;}
-function eb(e){const c={pendiente:'bg',confirmado:'bb',completado:'bgr',cancelado:'br'};const l={pendiente:'Pendiente',confirmado:'Confirmado',completado:'Completado',cancelado:'Cancelado'};return `<span class="badge ${c[e]||'bgy'}">${l[e]||e}</span>`;}
-function $n(id){return parseFloat(document.getElementById(id)?.value)||0;}
-function $v(id){return document.getElementById(id)?.value||'';}
-function setV(id,v){const el=document.getElementById(id);if(el)el.value=v||'';}
-function fmtP(n){return '$'+(parseFloat(n)||0).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});}
-
-function updateBadge(){
-  const n=eventos.filter(e=>e.estado==='pendiente').length;
-  const d=document.getElementById('nbadge-d');
-  const m=document.getElementById('nbadge-m');
-  if(d){d.textContent=n;d.style.display=n?'inline-flex':'none';}
-  if(m){m.setAttribute('data-count',n);}
+function toast(m, t=''){
+  const el = document.getElementById('toast');
+  el.textContent = m;
+  el.className = 'toast show' + (t ? ' ' + t : '');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 2800);
 }
+function N(id){ return parseFloat(document.getElementById(id)?.value) || 0; }
+function V(id){ return document.getElementById(id)?.value || ''; }
+function fmtM(n){ return '$' + (parseFloat(n)||0).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtD(f){ if(!f) return '—'; const s = (f+'').split('T')[0].split('-'); const mn=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']; return `${s[2]} ${mn[parseInt(s[1])-1]} ${s[0]}`; }
+function tlbl(t){ return {social:'Social',corporativo:'Corporativo',casamiento:'Casamiento',cumpleanos:'Cumpleaños',graduacion:'Graduación',otro:'Otro'}[t]||t; }
+function ebadge(e){ const c={pendiente:'bpend',confirmado:'bconf',completado:'bcomp',cancelado:'bcanc'}; const l={pendiente:'Pendiente',confirmado:'Confirmado',completado:'Completado',cancelado:'Cancelado'}; return `<span class="badge ${c[e]||'bgray'}">${l[e]||e}</span>`; }
+function updBadge(){ const n=evs.filter(e=>e.estado==='pendiente').length; const d=document.getElementById('nb-d'); const m=document.getElementById('nb-m'); if(d){d.textContent=n;d.style.display=n?'inline-flex':'none';} }
 
 // ===== NAVIGATION =====
 function go(name){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.dtab,.bnav-item').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.dtab,.bitem').forEach(t=>t.classList.remove('active'));
   document.getElementById('screen-'+name).classList.add('active');
-  const map={dashboard:0,calendario:1,nuevo:2,eventos:3,menu:4,costos:5};
+  const map = {dashboard:0,calendario:1,nuevo:2,eventos:3,menu:4,costos:5};
   if(map[name]!==undefined){
     document.querySelectorAll('.dtab')[map[name]]?.classList.add('active');
-    document.querySelectorAll('.bnav-item')[map[name]]?.classList.add('active');
+    document.querySelectorAll('.bitem')[map[name]]?.classList.add('active');
   }
-  if(name==='dashboard')renderDash();
-  if(name==='calendario'){loadEventos().then(()=>renderCal());}
-  if(name==='eventos')loadEventos();
-  if(name==='nuevo')renderSvcSelector();
-  if(name==='menu')renderMenu();
-  if(name==='costos')renderCostos();
+  if(name==='dashboard')  renderDash();
+  if(name==='calendario') loadEvs().then(()=>renderCal());
+  if(name==='eventos')    loadEvs();
+  if(name==='nuevo')      initNuevo();
+  if(name==='menu')       renderMenu();
+  if(name==='costos')     renderCostos();
 }
 
-// ===== DONUT CHART =====
-function makeDonut(data, container){
-  if(!data.length){container.innerHTML='<div class="empty"><div class="empty-t">Sin datos aún</div></div>';return;}
-  const total=data.reduce((s,d)=>s+d.val,0);
-  const colors=['#F5B800','#22C55E','#60A5FA','#A78BFA','#EF4444','#F97316'];
-  let offset=0;
-  const r=54,cx=70,cy=70,circ=2*Math.PI*r;
-  let paths='';
+// ===== DONUT =====
+function donut(data, id){
+  const el = document.getElementById(id);
+  if(!data.length){el.innerHTML='<div class="empty" style="padding:1rem;font-size:12px;">Sin datos aún</div>';return;}
+  const total = data.reduce((s,d)=>s+d.v,0);
+  const colors = ['#F5B800','#22C55E','#60A5FA','#A78BFA','#EF4444','#F97316'];
+  const R=52, CX=65, CY=65, CIRC=2*Math.PI*R;
+  let off=0, paths='';
   data.forEach((d,i)=>{
-    const pct=d.val/total;
-    const dash=pct*circ;
-    const gap=circ-dash;
-    paths+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${colors[i%colors.length]}" stroke-width="16" stroke-dasharray="${dash} ${gap}" stroke-dashoffset="${-offset*circ}" transform="rotate(-90,${cx},${cy})" opacity=".9"/>`;
-    offset+=pct;
+    const pct=d.v/total, dash=pct*CIRC, gap=CIRC-dash;
+    paths+=`<circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="${colors[i%6]}" stroke-width="15" stroke-dasharray="${dash} ${gap}" stroke-dashoffset="${-off*CIRC}" transform="rotate(-90,${CX},${CY})"/>`;
+    off+=pct;
   });
-  const legend=data.map((d,i)=>`<div class="leg-item"><div class="leg-dot" style="background:${colors[i%colors.length]}"></div><div class="leg-label">${d.label}</div><div class="leg-val">${d.val}</div><div class="leg-pct">${Math.round(d.val/total*100)}%</div></div>`).join('');
-  container.innerHTML=`<div class="donut-wrap">
-    <svg class="donut-svg" viewBox="0 0 140 140"><circle cx="70" cy="70" r="54" fill="none" stroke="var(--surface3)" stroke-width="16"/>${paths}<text x="70" y="70" text-anchor="middle" dy=".3em" fill="var(--gold)" font-size="18" font-weight="700" font-family="Bebas Neue">${total}</text></svg>
-    <div class="donut-legend">${legend}</div>
-  </div>`;
+  const leg = data.map((d,i)=>`<div class="li"><div class="ld" style="background:${colors[i%6]}"></div><div class="ll">${d.l}</div><div class="lv">${d.v}</div><div class="lp">${Math.round(d.v/total*100)}%</div></div>`).join('');
+  el.innerHTML=`<div class="dw"><svg width="130" height="130" viewBox="0 0 130 130"><circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="var(--s3)" stroke-width="15"/>${paths}<text x="${CX}" y="${CY}" text-anchor="middle" dy=".35em" fill="var(--gold)" font-size="17" font-weight="700" font-family="Bebas Neue">${total}</text></svg><div class="leg">${leg}</div></div>`;
 }
 
 // ===== DASHBOARD =====
 async function renderDash(){
-  document.getElementById('dash-date').textContent=new Date().toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('d-date').textContent = new Date().toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   try{
-    eventos=await GET('eventos','order=fecha.asc');
-    updateBadge();
-    const today=new Date().toISOString().split('T')[0];
-    const comp=eventos.filter(e=>e.estado==='completado');
-    const pend=eventos.filter(e=>e.estado==='pendiente'||e.estado==='confirmado');
-    const ingresos=comp.reduce((s,e)=>s+(parseFloat(e.total_cobrado)||0),0);
-    const costos=comp.reduce((s,e)=>s+(parseFloat(e.costo_materia_prima)||0)+(parseFloat(e.extras_total)||0),0);
-    const porCobrar=eventos.filter(e=>e.estado!=='cancelado'&&e.estado!=='completado').reduce((s,e)=>s+(parseFloat(e.resta_abonar)||0),0);
+    evs = await dbGet('eventos','order=fecha.asc');
+    updBadge();
+    const today = new Date().toISOString().split('T')[0];
+    const comp  = evs.filter(e=>e.estado==='completado');
+    const pend  = evs.filter(e=>e.estado==='pendiente'||e.estado==='confirmado');
+    const ingr  = comp.reduce((s,e)=>s+(parseFloat(e.total_cobrado)||0),0);
+    const cost  = comp.reduce((s,e)=>s+(parseFloat(e.costo_materia_prima)||0)+(parseFloat(e.extras_total)||0),0);
+    const pcob  = evs.filter(e=>e.estado!=='cancelado'&&e.estado!=='completado').reduce((s,e)=>s+(parseFloat(e.resta_abonar)||0),0);
 
-    document.getElementById('dash-stats').innerHTML=`
-      <div class="sc"><div class="sl">Total eventos</div><div class="sv w">${eventos.length}</div></div>
+    document.getElementById('d-stats').innerHTML=`
+      <div class="sc"><div class="sl">Total eventos</div><div class="sv w">${evs.length}</div></div>
       <div class="sc"><div class="sl">Pendientes</div><div class="sv">${pend.length}</div></div>
-      <div class="sc"><div class="sl">Por cobrar</div><div class="sv b">${fmtP(porCobrar)}</div></div>
-      <div class="sc"><div class="sl">Ganancia neta</div><div class="sv ${ingresos-costos>=0?'g':'r'}">${fmtP(ingresos-costos)}</div></div>
+      <div class="sc"><div class="sl">Por cobrar</div><div class="sv b">${fmtM(pcob)}</div></div>
+      <div class="sc"><div class="sl">Ganancia neta</div><div class="sv ${ingr-cost>=0?'g':'r'}">${fmtM(ingr-cost)}</div></div>
     `;
 
-    // Donut 1 — por tipo
-    const tipos={};
-    eventos.forEach(e=>{const k=tl(e.tipo);tipos[k]=(tipos[k]||0)+1;});
-    makeDonut(Object.entries(tipos).map(([label,val])=>({label,val})),document.getElementById('chart-tipo'));
+    // Charts
+    const tipos={};evs.forEach(e=>{const k=tlbl(e.tipo);tipos[k]=(tipos[k]||0)+1;});
+    donut(Object.entries(tipos).map(([l,v])=>({l,v})),'ch-tipo');
 
-    // Donut 2 — cobros
-    const cobrado=eventos.reduce((s,e)=>s+(parseFloat(e.sena)||0),0);
-    const pendCobro=eventos.filter(e=>e.estado!=='cancelado'&&e.estado!=='completado').reduce((s,e)=>s+(parseFloat(e.resta_abonar)||0),0);
-    const completadoCobro=comp.reduce((s,e)=>s+(parseFloat(e.total_cobrado)||0),0);
-    makeDonut([
-      {label:'Completados',val:Math.round(completadoCobro)},
-      {label:'Señas recibidas',val:Math.round(cobrado)},
-      {label:'Por cobrar',val:Math.round(pendCobro)},
-    ].filter(d=>d.val>0),document.getElementById('chart-cobros'));
+    const svc={};evs.forEach(e=>{if(e.servicio_tipo){const s=svcs.find(x=>x.key===e.servicio_tipo);svc[s?s.nombre:e.servicio_tipo]=(svc[s?s.nombre:e.servicio_tipo]||0)+1;}});
+    donut(Object.entries(svc).map(([l,v])=>({l,v})),'ch-svcs');
 
-    // Donut 3 — servicios
-    const svcs={};
-    eventos.forEach(e=>{if(e.servicio_tipo){svcs[e.servicio_tipo]=(svcs[e.servicio_tipo]||0)+1;}});
-    makeDonut(Object.entries(svcs).map(([label,val])=>({label,val})),document.getElementById('chart-servicios'));
+    const cobData=[
+      {l:'Completados', v:comp.length},
+      {l:'Confirmados', v:evs.filter(e=>e.estado==='confirmado').length},
+      {l:'Pendientes',  v:evs.filter(e=>e.estado==='pendiente').length},
+      {l:'Cancelados',  v:evs.filter(e=>e.estado==='cancelado').length},
+    ].filter(d=>d.v>0);
+    donut(cobData,'ch-cobros');
 
-    // Próximos
-    const upcoming=eventos.filter(e=>e.fecha>=today&&e.estado!=='cancelado').slice(0,5);
-    document.getElementById('dash-up').innerHTML=upcoming.length
-      ?upcoming.map(e=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:0.5px solid var(--border);cursor:pointer;" onclick="verDet(${e.id})">
-        <div><div style="font-size:13px;font-weight:600;">${e.nombre_evento}</div><div style="font-size:11px;color:var(--muted);margin-top:1px;">${ff(e.fecha)}${e.horario_inicio?' · '+e.horario_inicio:''} · ${e.cant_invitados||0} inv.</div></div>
-        <div style="text-align:right;"><div style="font-size:12px;color:var(--gold);font-weight:700;">${fmtP(e.total_cobrado)}</div>${eb(e.estado)}</div>
-      </div>`).join('')
-      :'<div class="empty" style="padding:1.5rem;"><div class="empty-t">Sin eventos próximos</div></div>';
+    const up = evs.filter(e=>e.fecha>=today&&e.estado!=='cancelado').slice(0,5);
+    document.getElementById('d-up').innerHTML = up.length
+      ? up.map(e=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:.5px solid var(--b);cursor:pointer;" onclick="verDet(${e.id})">
+          <div><div style="font-size:13px;font-weight:600;">${e.nombre_evento||'—'}</div><div style="font-size:10px;color:var(--mut);margin-top:1px;">${fmtD(e.fecha)}${e.horario_inicio?' · '+e.horario_inicio:''} · ${e.cant_invitados||0} inv.</div></div>
+          <div style="text-align:right;"><div style="font-size:12px;color:var(--gold);font-weight:700;">${fmtM(e.total_cobrado)}</div>${ebadge(e.estado)}</div>
+        </div>`).join('')
+      : '<div class="empty" style="padding:1rem;"><div>Sin eventos próximos</div></div>';
 
   }catch(err){
-    document.getElementById('dash-stats').innerHTML=`<div style="color:var(--red);padding:1rem;font-size:13px;grid-column:1/-1;">⚠ Error conectando a Supabase. Ejecuta el setup.sql primero.</div>`;
-    console.error(err);
+    document.getElementById('d-stats').innerHTML=`<div style="color:var(--red);padding:1rem;font-size:12px;grid-column:1/-1;">⚠ Error: ${err.message}</div>`;
   }
 }
 
 // ===== CALENDARIO =====
-function calNav(dir){calMonth+=dir;if(calMonth>11){calMonth=0;calYear++;}if(calMonth<0){calMonth=11;calYear--;}renderCal();}
-function calGoToday(){calYear=new Date().getFullYear();calMonth=new Date().getMonth();calSelectedDay=new Date().toISOString().split('T')[0];renderCal();showDayEvents(calSelectedDay);}
+function calNav(d){ calM+=d; if(calM>11){calM=0;calY++;} if(calM<0){calM=11;calY--;} renderCal(); }
+function calToday(){ calY=new Date().getFullYear();calM=new Date().getMonth();calSel=new Date().toISOString().split('T')[0];renderCal();showDay(calSel); }
 
 function renderCal(){
-  const months=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  document.getElementById('cal-month-label').textContent=`${months[calMonth]} ${calYear}`;
+  const MN=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  document.getElementById('cal-label').textContent=`${MN[calM]} ${calY}`;
   const today=new Date().toISOString().split('T')[0];
-  const firstDay=new Date(calYear,calMonth,1).getDay();
-  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
-  const daysInPrev=new Date(calYear,calMonth,0).getDate();
-
-  // Map events by date
+  const first=new Date(calY,calM,1).getDay();
+  const days=new Date(calY,calM+1,0).getDate();
+  const prev=new Date(calY,calM,0).getDate();
   const evMap={};
-  eventos.forEach(e=>{
-    const d=(e.fecha+'').split('T')[0];
-    if(!evMap[d])evMap[d]=[];
-    evMap[d].push(e);
-  });
-
-  const dayNames=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-  let html=dayNames.map(d=>`<div class="cal-day-name">${d}</div>`).join('');
-
-  // Prev month days
-  const startPad=firstDay===0?6:firstDay-1;
-  for(let i=startPad;i>0;i--){
-    const day=daysInPrev-i+1;
-    html+=`<div class="cal-day other-month"><span class="cal-num">${day}</span></div>`;
-  }
-
-  // Current month
-  for(let d=1;d<=daysInMonth;d++){
-    const dateStr=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const evs=evMap[dateStr]||[];
-    const isToday=dateStr===today;
-    const isSelected=dateStr===calSelectedDay;
-    html+=`<div class="cal-day${isToday?' today':''}${isSelected?' selected':''}" onclick="selectDay('${dateStr}')">
-      <span class="cal-num">${d}</span>
-      ${evs.length?`<div class="cal-dot"></div><div class="cal-count">${evs.length}</div>`:''}
+  evs.forEach(e=>{const d=(e.fecha+'').split('T')[0];if(!evMap[d])evMap[d]=[];evMap[d].push(e);});
+  const DN=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  let h=DN.map(d=>`<div class="cdn">${d}</div>`).join('');
+  const pad=first===0?6:first-1;
+  for(let i=pad;i>0;i--) h+=`<div class="cd om"><span class="cnum">${prev-i+1}</span></div>`;
+  for(let d=1;d<=days;d++){
+    const ds=`${calY}-${String(calM+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const de=evMap[ds]||[];
+    h+=`<div class="cd${ds===today?' today':''}${ds===calSel?' sel':''}" onclick="selectDay('${ds}')">
+      <span class="cnum">${d}</span>
+      ${de.length?`<div class="cdot"></div><div class="ccount">${de.length}</div>`:''}
     </div>`;
   }
-
-  document.getElementById('cal-grid').innerHTML=html;
-
-  if(calSelectedDay){
-    showDayEvents(calSelectedDay);
-  }
+  document.getElementById('cal-grid').innerHTML=h;
+  if(calSel) showDay(calSel);
 }
 
-function selectDay(dateStr){
-  calSelectedDay=dateStr;
-  renderCal();
-  showDayEvents(dateStr);
+function selectDay(ds){ calSel=ds; renderCal(); showDay(ds); }
+
+function showDay(ds){
+  const de=evs.filter(e=>(e.fecha+'').split('T')[0]===ds);
+  const p=ds.split('-');
+  const MN=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  document.getElementById('cal-day-title').textContent=`${parseInt(p[2])} de ${MN[parseInt(p[1])-1]} — ${de.length} evento${de.length!==1?'s':''}`;
+  document.getElementById('cal-list').innerHTML = de.length
+    ? de.map(e=>`<div class="cev" onclick="verDet(${e.id})">
+        <div class="cet">${e.horario_inicio||'—'}</div>
+        <div><div class="cen">${e.nombre_evento||'—'}</div><div class="ced">${e.cant_invitados||0} inv. · ${e.nombre_cliente||''} · ${fmtM(e.total_cobrado)}</div></div>
+        ${ebadge(e.estado)}
+      </div>`).join('')
+    : '<div class="empty" style="padding:1rem;font-size:12px;">Sin eventos este día</div>';
 }
 
-function showDayEvents(dateStr){
-  const evs=eventos.filter(e=>(e.fecha+'').split('T')[0]===dateStr);
-  const parts=dateStr.split('-');
-  const months=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  document.getElementById('cal-day-title').textContent=`${parseInt(parts[2])} de ${months[parseInt(parts[1])-1]} — ${evs.length} evento${evs.length!==1?'s':''}`;
-
-  if(!evs.length){
-    document.getElementById('cal-events-list').innerHTML='<div class="empty" style="padding:1rem;"><div class="empty-t">Sin eventos este día</div></div>';
-    return;
-  }
-  document.getElementById('cal-events-list').innerHTML=evs.map(e=>`
-    <div class="cal-ev-item" onclick="verDet(${e.id})">
-      <div class="cal-ev-time">${e.horario_inicio||'—'}</div>
-      <div><div class="cal-ev-name">${e.nombre_evento}</div><div class="cal-ev-detail">${e.cant_invitados||0} inv. · ${e.nombre_cliente||''} · ${fmtP(e.total_cobrado)}</div></div>
-      ${eb(e.estado)}
-    </div>
-  `).join('');
+// ===== NUEVO EVENTO =====
+function initNuevo(){
+  renderSvcGrid();
+  calcResumen();
 }
 
-// ===== SERVICIO SELECTOR =====
-function renderSvcSelector(){
-  const html=servicios.map(s=>`
-    <label class="svc-card${selectedSvc===s.key?' selected':''}" onclick="selectSvc('${s.key}')">
-      <input type="radio" name="svc" value="${s.key}" ${selectedSvc===s.key?'checked':''}>
-      <div class="svc-name">${s.nombre}</div>
-      <div class="svc-desc">${s.desc}</div>
-      <div class="svc-price">${fmtP(s.precio)}<span style="font-size:11px;color:var(--muted);font-weight:400">/persona</span></div>
-    </label>
-  `).join('');
-  document.getElementById('svc-selector').innerHTML=html;
-
-  // Toppings reference
-  document.getElementById('toppings-ref').innerHTML=`
-    <div class="toppings-box">
-      <div class="tcat">Toppings básicos (Servicio Básico)</div>
-      <div class="toppings-list">${TOPPINGS_BASICOS.map(t=>`<span class="topping-tag">${t}</span>`).join('')}</div>
-    </div>
-    <div class="toppings-box">
-      <div class="tcat">Toppings agregados (Clásico y Premium)</div>
-      <div class="toppings-list">${TOPPINGS_AGREGADOS.map(t=>`<span class="topping-tag">${t}</span>`).join('')}</div>
-    </div>
-  `;
-  calcTotal();
+function renderSvcGrid(){
+  document.getElementById('svc-grid').innerHTML = svcs.map(s=>`
+    <div class="svcc${selSvc===s.key?' sel':''}" onclick="selSvcFn('${s.key}')">
+      <div class="svcn">${s.nombre}</div>
+      <div class="svcd">${s.desc}</div>
+      <div class="svcp">${fmtM(s.precio)}<span style="font-size:10px;color:var(--mut);font-weight:400">/persona</span></div>
+    </div>`).join('');
+  document.getElementById('topping-ref').innerHTML=`
+    <div class="tbox"><div class="tcat">Toppings básicos (Servicio Básico)</div><div class="tags">${TOP_BAS.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>
+    <div class="tbox"><div class="tcat">Toppings agregados (Clásico y Premium)</div><div class="tags">${TOP_AGR.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;
 }
 
-function selectSvc(key){
-  selectedSvc=key;
-  document.querySelectorAll('.svc-card').forEach(c=>c.classList.remove('selected'));
-  const el=document.querySelector(`.svc-card[onclick="selectSvc('${key}')"]`);
-  if(el)el.classList.add('selected');
-  // Auto-fill total cobrado
-  const svc=servicios.find(s=>s.key===key);
-  const inv=$n('f-invitados');
-  if(svc&&inv>0){
-    document.getElementById('c-cobrado').value=(svc.precio*inv).toFixed(2);
-  }
-  calcTotal();
+function selSvcFn(key){
+  selSvc=key;
+  document.querySelectorAll('.svcc').forEach(c=>c.classList.remove('sel'));
+  document.querySelectorAll('.svcc')[svcs.findIndex(s=>s.key===key)]?.classList.add('sel');
+  const svc=svcs.find(s=>s.key===key);
+  const inv=N('f-inv');
+  if(svc&&inv>0) document.getElementById('c-cob').value=(svc.precio*inv).toFixed(2);
+  calcResumen();
 }
 
-// ===== CALC =====
-function calcTotal(){
-  const extras=['c-cel','c-ent','c-tor','c-per','c-naf','c-beb','c-otr'];
-  const extSum=extras.reduce((s,id)=>s+$n(id),0);
-  const mp=$n('c-mp');
-  const cobrado=$n('c-cobrado');
-  const seña=$n('c-seña');
-  const resta=Math.max(0,cobrado-seña);
-  const ganancia=cobrado-mp-extSum;
-  const svc=servicios.find(s=>s.key===selectedSvc);
-
-  // Auto-fill total when invitados change
-  const inv=$n('f-invitados');
-  if(svc&&inv>0&&!$n('c-cobrado')){
-    document.getElementById('c-cobrado').value=(svc.precio*inv).toFixed(2);
-  }
-
-  document.getElementById('extras-disp').textContent=fmtP(extSum);
-  document.getElementById('resta-disp').textContent=fmtP(resta);
-  document.getElementById('s-svc').textContent=svc?svc.nombre:'—';
-  document.getElementById('s-cob').textContent=fmtP(cobrado);
-  document.getElementById('s-cost').textContent=fmtP(mp+extSum);
-  const gEl=document.getElementById('s-gan');
-  gEl.textContent=fmtP(ganancia);
-  gEl.style.color=ganancia>=0?'var(--green)':'var(--red)';
-  document.getElementById('s-resta').textContent=fmtP(resta);
+function calcResumen(){
+  const ext=['c-cel','c-ent','c-tor','c-per','c-naf','c-beb','c-otr'];
+  const extSum=ext.reduce((s,id)=>s+N(id),0);
+  const cob=N('c-cob'), mp=N('c-mp'), sena=N('c-sena');
+  const resta=Math.max(0,cob-sena);
+  const gan=cob-mp-extSum;
+  const svc=svcs.find(s=>s.key===selSvc);
+  document.getElementById('r-ext').textContent=fmtM(extSum);
+  document.getElementById('r-resta').textContent=fmtM(resta);
+  document.getElementById('r-svc').textContent=svc?svc.nombre:'—';
+  document.getElementById('r-cob').textContent=fmtM(cob);
+  document.getElementById('r-cost').textContent=fmtM(mp+extSum);
+  const gel=document.getElementById('r-gan'); gel.textContent=fmtM(gan); gel.style.color=gan>=0?'var(--grn)':'var(--red)';
+  document.getElementById('r-resta2').textContent=fmtM(resta);
 }
 
-// ===== GUARDAR EVENTO =====
-async function guardarEvento(){
-  const nombre=$v('f-nombre').trim();
-  const fecha=$v('f-fecha');
-  if(!nombre||!fecha){toast('Nombre y fecha son obligatorios','err');return;}
-  const extras=['c-cel','c-ent','c-tor','c-per','c-naf','c-beb','c-otr'];
-  const extSum=extras.reduce((s,id)=>s+$n(id),0);
-  const cobrado=$n('c-cobrado');
-  const seña=$n('c-seña');
+async function guardar(){
+  const nombre=V('f-nombre').trim(), fecha=V('f-fecha');
+  if(!nombre||!fecha){toast('⚠ Nombre y fecha son obligatorios','err');return;}
   const btn=document.getElementById('btn-save');
-  btn.disabled=true;btn.textContent='Guardando...';
+  btn.disabled=true; btn.textContent='Guardando...';
   try{
-    // Build payload - only include fields that exist in DB
-    const payload = {
-      nombre_evento:nombre,
-      tipo:$v('f-tipo'),
-      fecha,
-      estado:'pendiente',
-      lugar:$v('f-lugar')||null,
-      nombre_cliente:$v('f-cliente')||null,
-      telefono:$v('f-tel')||null,
-      cant_invitados:$n('f-invitados')||0,
-      notas:$v('f-notas')||null,
-      total_cobrado:cobrado,
-      sena:seña,
-      resta_abonar:Math.max(0,cobrado-seña),
+    const ext=['c-cel','c-ent','c-tor','c-per','c-naf','c-beb','c-otr'];
+    const extSum=ext.reduce((s,id)=>s+N(id),0);
+    const cob=N('c-cob'), sena=N('c-sena');
+    const data = {
+      nombre_evento:    nombre,
+      tipo:             V('f-tipo'),
+      fecha:            fecha,
+      estado:           'pendiente',
+      horario_inicio:   V('f-h-ini')    || null,
+      horario_llegada_evento: V('f-h-lleg') || null,
+      horario_partida:  V('f-h-part')   || null,
+      horario_llegada_maikels: V('f-h-mk') || null,
+      lugar:            V('f-lugar')    || null,
+      direccion:        V('f-dir')      || null,
+      nombre_cliente:   V('f-cliente')  || null,
+      telefono:         V('f-tel')      || null,
+      cant_invitados:   N('f-inv')      || 0,
+      extras_info:      V('f-extras')   || null,
+      cant_pizzas:      N('f-piz')      || 0,
+      cant_personal:    N('f-pers')     || 0,
+      nombres_personal: V('f-pnombres') || null,
+      notas:            V('f-notas')    || null,
+      servicio_tipo:    selSvc          || null,
+      total_cobrado:    cob,
+      costo_materia_prima: N('c-mp'),
+      celiacos:         N('c-cel'),
+      entradas:         N('c-ent'),
+      tortas:           N('c-tor'),
+      personal:         N('c-per'),
+      nafta:            N('c-naf'),
+      bebida:           N('c-beb'),
+      otros:            N('c-otr'),
+      extras_total:     extSum,
+      sena:             sena,
+      fecha_sena:       V('c-fecha-sena')  || null,
+      resta_abonar:     Math.max(0,cob-sena),
+      fecha_resto:      V('c-fecha-resto') || null,
     };
-    // Add optional columns safely
-    const optionals = {
-      horario_inicio:$v('f-h-inicio')||null,
-      horario_llegada_evento:$v('f-h-llegada-ev')||null,
-      horario_partida:$v('f-h-partida')||null,
-      horario_llegada_maikels:$v('f-h-llegada-mk')||null,
-      direccion:$v('f-direccion')||null,
-      cant_pizzas:$n('f-pizzas')||0,
-      cant_personal:$n('f-personal-cant')||0,
-      nombres_personal:$v('f-personal-nombres')||null,
-      extras_info:$v('f-extras-info')||null,
-      servicio_tipo:selectedSvc||null,
-      costo_materia_prima:$n('c-mp'),
-      celiacos:$n('c-cel'),
-      entradas:$n('c-ent'),
-      tortas:$n('c-tor'),
-      personal:$n('c-per'),
-      nafta:$n('c-naf'),
-      bebida:$n('c-beb'),
-      otros:$n('c-otr'),
-      extras_total:extSum,
-      fecha_sena:$v('c-fecha-seña')||null,
-      fecha_resto:$v('c-fecha-resto')||null,
-    };
-    // Try to save with all fields, fallback to basic if schema error
-    let saved = false;
-    try {
-      await POST('eventos', {...payload, ...optionals});
-      saved = true;
-    } catch(e) {
-      if(e.message.includes('schema cache') || e.message.includes('column')) {
-        console.warn('Schema cache issue, saving with basic fields only');
-        await POST('eventos', payload);
-        saved = true;
-        toast('⚠ Guardado con campos básicos. Ejecuta el SQL en Supabase para habilitar todos los campos.');
-      } else { throw e; }
-    }
-    if(!saved) throw new Error('No se pudo guardar');
-    toast('Evento guardado ✓');
-    limpiarForm();
+    await dbPost('eventos', data);
+    toast('✓ Evento guardado correctamente');
+    limpiar();
     go('eventos');
-  }catch(err){toast('Error: '+err.message,'err');console.error(err);}
-  finally{btn.disabled=false;btn.textContent='💾 Guardar evento';}
+  }catch(err){
+    console.error(err);
+    toast('Error: ' + err.message, 'err');
+  }finally{
+    btn.disabled=false; btn.textContent='💾 Guardar evento';
+  }
 }
 
-function limpiarForm(){
-  ['f-nombre','f-fecha','f-h-inicio','f-h-llegada-ev','f-h-partida','f-h-llegada-mk',
-   'f-lugar','f-direccion','f-cliente','f-tel','f-invitados','f-extras-info','f-pizzas',
-   'f-personal-cant','f-personal-nombres','f-notas','c-cobrado','c-mp',
-   'c-cel','c-ent','c-tor','c-per','c-naf','c-beb','c-otr',
-   'c-seña','c-fecha-seña','c-fecha-resto'].forEach(id=>setV(id,''));
-  selectedSvc=null;
-  renderSvcSelector();
-  calcTotal();
+function limpiar(){
+  ['f-nombre','f-fecha','f-h-ini','f-h-lleg','f-h-part','f-h-mk','f-lugar','f-dir',
+   'f-cliente','f-tel','f-inv','f-extras','f-piz','f-pers','f-pnombres','f-notas',
+   'c-cob','c-mp','c-cel','c-ent','c-tor','c-per','c-naf','c-beb','c-otr',
+   'c-sena','c-fecha-sena','c-fecha-resto'].forEach(id=>{
+    const el=document.getElementById(id); if(el)el.value='';
+  });
+  selSvc=null;
+  renderSvcGrid();
+  calcResumen();
 }
 
 // ===== EVENTOS =====
-async function loadEventos(){
-  document.getElementById('ev-loading').style.display='flex';
+async function loadEvs(){
+  document.getElementById('ev-load').style.display='flex';
   document.getElementById('ev-empty').style.display='none';
-  document.getElementById('ev-tbody').innerHTML='';
-  try{eventos=await GET('eventos','order=fecha.asc');updateBadge();renderEventos();}
-  catch(err){toast('Error cargando eventos','err');}
-  finally{document.getElementById('ev-loading').style.display='none';}
+  document.getElementById('ev-tb').innerHTML='';
+  try{ evs=await dbGet('eventos','order=fecha.desc'); updBadge(); renderEvs(); }
+  catch(err){ toast('Error cargando eventos','err'); }
+  finally{ document.getElementById('ev-load').style.display='none'; }
 }
 
-function renderEventos(){
-  const fE=$v('fil-e'),fT=$v('fil-t'),fB=($v('fil-b')||'').toLowerCase();
-  let lista=eventos.filter(e=>{
-    if(fE&&e.estado!==fE)return false;
-    if(fT&&e.tipo!==fT)return false;
-    if(fB&&!(e.nombre_evento||'').toLowerCase().includes(fB)&&!(e.nombre_cliente||'').toLowerCase().includes(fB))return false;
+function renderEvs(){
+  const fe=V('fil-e'), ft=V('fil-t'), fb=V('fil-b').toLowerCase();
+  const lista=evs.filter(e=>{
+    if(fe&&e.estado!==fe)return false;
+    if(ft&&e.tipo!==ft)return false;
+    if(fb&&!(e.nombre_evento||'').toLowerCase().includes(fb)&&!(e.nombre_cliente||'').toLowerCase().includes(fb))return false;
     return true;
   });
-  const tbody=document.getElementById('ev-tbody');
-  const empty=document.getElementById('ev-empty');
-  if(!lista.length){tbody.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
-  tbody.innerHTML=lista.map(e=>{
-    const costos=(parseFloat(e.costo_materia_prima)||0)+(parseFloat(e.extras_total)||0);
-    const gan=(parseFloat(e.total_cobrado)||0)-costos;
-    const svc=servicios.find(s=>s.key===e.servicio_tipo);
+  const tb=document.getElementById('ev-tb'), em=document.getElementById('ev-empty');
+  if(!lista.length){tb.innerHTML='';em.style.display='block';return;}
+  em.style.display='none';
+  tb.innerHTML=lista.map(e=>{
+    const cost=(parseFloat(e.costo_materia_prima)||0)+(parseFloat(e.extras_total)||0);
+    const gan=(parseFloat(e.total_cobrado)||0)-cost;
+    const svc=svcs.find(s=>s.key===e.servicio_tipo);
     return `<tr>
-      <td style="font-weight:600;cursor:pointer;color:var(--gold);" onclick="verDet(${e.id})">${e.nombre_evento}</td>
-      <td style="white-space:nowrap">${ff(e.fecha)}</td>
+      <td style="font-weight:600;cursor:pointer;color:var(--gold);" onclick="verDet(${e.id})">${e.nombre_evento||'—'}</td>
+      <td style="white-space:nowrap">${fmtD(e.fecha)}</td>
       <td>${e.cant_invitados||0}</td>
       <td style="font-size:11px">${svc?svc.nombre:'—'}</td>
-      <td style="color:var(--green)">${fmtP(e.total_cobrado)}</td>
-      <td style="color:${gan>=0?'var(--green)':'var(--red)'}">${fmtP(gan)}</td>
-      <td style="color:var(--blue)">${fmtP(e.resta_abonar)}</td>
-      <td>${eb(e.estado)}</td>
-      <td><div style="display:flex;gap:4px;">
-        <button class="btn btn-out btn-sm" onclick="verDet(${e.id})">Ver</button>
-        <select class="ssel" onchange="cambiarEstado(${e.id},this.value)">
+      <td style="color:var(--grn)">${fmtM(e.total_cobrado)}</td>
+      <td style="color:${gan>=0?'var(--grn)':'var(--red)'}">${fmtM(gan)}</td>
+      <td style="color:var(--blu)">${fmtM(e.resta_abonar)}</td>
+      <td>${ebadge(e.estado)}</td>
+      <td><div style="display:flex;gap:3px;">
+        <button class="btn bout bsm" onclick="verDet(${e.id})">Ver</button>
+        <select class="ssel" onchange="cambEst(${e.id},this.value)">
           <option value="">Estado</option>
           <option value="pendiente">Pendiente</option><option value="confirmado">Confirmado</option>
           <option value="completado">Completado</option><option value="cancelado">Cancelado</option>
         </select>
-        <button class="btn btn-del btn-sm" onclick="delEvento(${e.id})">✕</button>
+        <button class="btn bdel bsm" onclick="delEv(${e.id})">✕</button>
       </div></td>
     </tr>`;
   }).join('');
 }
 
-async function cambiarEstado(id,estado){
-  if(!estado)return;
-  try{await PATCH('eventos',id,{estado});const e=eventos.find(ev=>ev.id===id);if(e)e.estado=estado;toast('Estado actualizado');renderEventos();updateBadge();}
-  catch(err){toast('Error','err');}
+async function cambEst(id,est){
+  if(!est)return;
+  try{ await dbPatch('eventos',id,{estado:est}); const e=evs.find(x=>x.id===id); if(e)e.estado=est; toast('Estado actualizado'); renderEvs(); updBadge(); }
+  catch(err){ toast('Error','err'); }
 }
 
-async function delEvento(id){
-  const e=eventos.find(ev=>ev.id===id);
+async function delEv(id){
+  const e=evs.find(x=>x.id===id);
   if(!e||!confirm(`¿Eliminar "${e.nombre_evento}"?`))return;
-  try{await DEL('eventos',id);eventos=eventos.filter(ev=>ev.id!==id);toast('Eliminado');renderEventos();updateBadge();}
-  catch(err){toast('Error','err');}
+  try{ await dbDel('eventos',id); evs=evs.filter(x=>x.id!==id); toast('Eliminado'); renderEvs(); updBadge(); }
+  catch(err){ toast('Error','err'); }
 }
 
 // ===== DETALLE =====
 async function verDet(id){
-  let e=eventos.find(ev=>ev.id===id);
-  if(!e){try{const r=await GET('eventos',`id=eq.${id}`);e=r[0];}catch(err){return;}}
+  let e=evs.find(x=>x.id===id);
+  if(!e){ try{ const r=await dbGet('eventos',`id=eq.${id}`); e=r[0]; }catch(err){return;} }
   if(!e)return;
-  const costos=(parseFloat(e.costo_materia_prima)||0)+(parseFloat(e.extras_total)||0);
-  const gan=(parseFloat(e.total_cobrado)||0)-costos;
-  const svc=servicios.find(s=>s.key===e.servicio_tipo);
-
-  document.getElementById('det-body').innerHTML=`
+  const cost=(parseFloat(e.costo_materia_prima)||0)+(parseFloat(e.extras_total)||0);
+  const gan=(parseFloat(e.total_cobrado)||0)-cost;
+  const svc=svcs.find(s=>s.key===e.servicio_tipo);
+  document.getElementById('det').innerHTML=`
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;flex-wrap:wrap;gap:8px;">
-      <button class="back-btn" onclick="go('eventos')">← Volver</button>
+      <button class="backbtn" onclick="go('eventos')">← Volver</button>
       <div style="display:flex;gap:5px;flex-wrap:wrap;">
-        ${['pendiente','confirmado','completado','cancelado'].map(s=>`<button class="btn btn-sm ${e.estado===s?'btn-gold':'btn-ghost'}" onclick="cambEstDet(${e.id},'${s}')">${s.charAt(0).toUpperCase()+s.slice(1)}</button>`).join('')}
+        ${['pendiente','confirmado','completado','cancelado'].map(s=>`<button class="btn bsm ${e.estado===s?'bgold':'bghost'}" onclick="cEstDet(${e.id},'${s}')">${s.charAt(0).toUpperCase()+s.slice(1)}</button>`).join('')}
       </div>
     </div>
     <div class="dhero">
-      <div>
-        <div class="dclient">${e.nombre_evento}</div>
-        <div class="dmeta">
-          <span class="mpill">📅 ${ff(e.fecha)}</span>
-          ${e.horario_inicio?`<span class="mpill">🕐 ${e.horario_inicio}</span>`:''}
-          <span class="mpill">👥 ${e.cant_invitados||0} invitados</span>
-          ${svc?`<span class="mpill">🍕 ${svc.nombre}</span>`:''}
-          ${e.lugar?`<span class="mpill">📍 ${e.lugar}</span>`:''}
-          ${e.nombre_cliente?`<span class="mpill">👤 ${e.nombre_cliente}</span>`:''}
-          ${e.telefono?`<span class="mpill">📞 ${e.telefono}</span>`:''}
-        </div>
+      <div class="dname">${e.nombre_evento||'—'}</div>
+      <div class="dmeta">
+        <span class="mpill">📅 ${fmtD(e.fecha)}</span>
+        ${e.horario_inicio?`<span class="mpill">🕐 ${e.horario_inicio}</span>`:''}
+        <span class="mpill">👥 ${e.cant_invitados||0} invitados</span>
+        ${svc?`<span class="mpill">🍕 ${svc.nombre}</span>`:''}
+        ${e.lugar?`<span class="mpill">📍 ${e.lugar}</span>`:''}
+        ${e.nombre_cliente?`<span class="mpill">👤 ${e.nombre_cliente}</span>`:''}
+        ${e.telefono?`<span class="mpill">📞 ${e.telefono}</span>`:''}
+        ${ebadge(e.estado)}
       </div>
-      ${eb(e.estado)}
     </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.85rem;">
-      <div class="card">
-        <div class="ct">Horarios y lugar</div>
-        <table class="cost-t">
-          ${e.horario_inicio?`<tr><td class="lc">Inicio del evento</td><td>${e.horario_inicio}</td></tr>`:''}
-          ${e.horario_llegada_evento?`<tr><td class="lc">Llegada al evento</td><td>${e.horario_llegada_evento}</td></tr>`:''}
-          ${e.horario_partida?`<tr><td class="lc">Partida</td><td>${e.horario_partida}</td></tr>`:''}
-          ${e.horario_llegada_maikels?`<tr><td class="lc">Llegada en Maikels</td><td>${e.horario_llegada_maikels}</td></tr>`:''}
-          ${e.direccion?`<tr><td class="lc">Dirección</td><td>${e.direccion}</td></tr>`:''}
-        </table>
+    <div class="dg">
+      <div class="card"><div class="ct">Horarios y lugar</div>
+        ${e.horario_inicio?`<div class="crow"><span class="clabel">Inicio</span><span>${e.horario_inicio}</span></div>`:''}
+        ${e.horario_llegada_evento?`<div class="crow"><span class="clabel">Llegada al evento</span><span>${e.horario_llegada_evento}</span></div>`:''}
+        ${e.horario_partida?`<div class="crow"><span class="clabel">Partida</span><span>${e.horario_partida}</span></div>`:''}
+        ${e.horario_llegada_maikels?`<div class="crow"><span class="clabel">Llegada en Maikels</span><span>${e.horario_llegada_maikels}</span></div>`:''}
+        ${e.direccion?`<div class="crow"><span class="clabel">Dirección</span><span>${e.direccion}</span></div>`:''}
       </div>
-      <div class="card">
-        <div class="ct">Producción</div>
-        <table class="cost-t">
-          <tr><td class="lc">Cant. pizzas</td><td>${e.cant_pizzas||0}</td></tr>
-          <tr><td class="lc">Personal</td><td>${e.cant_personal||0}</td></tr>
-          ${e.nombres_personal?`<tr><td class="lc">Nombres</td><td>${e.nombres_personal}</td></tr>`:''}
-          ${e.extras_info?`<tr><td class="lc">Extras/alérgicos</td><td>${e.extras_info}</td></tr>`:''}
-        </table>
+      <div class="card"><div class="ct">Producción</div>
+        <div class="crow"><span class="clabel">Cant. pizzas</span><span>${e.cant_pizzas||0}</span></div>
+        <div class="crow"><span class="clabel">Personal</span><span>${e.cant_personal||0}</span></div>
+        ${e.nombres_personal?`<div class="crow"><span class="clabel">Nombres</span><span>${e.nombres_personal}</span></div>`:''}
+        ${e.extras_info?`<div class="crow"><span class="clabel">Extras/alérgicos</span><span>${e.extras_info}</span></div>`:''}
+        ${e.notas?`<div style="margin-top:.5rem;padding:8px;background:var(--s3);border-radius:7px;font-size:11px;color:var(--mut2);">${e.notas}</div>`:''}
       </div>
-      <div class="card">
-        <div class="ct">Costos</div>
-        <table class="cost-t">
-          <tr><td class="lc">Materia prima</td><td>${fmtP(e.costo_materia_prima)}</td></tr>
-          ${parseFloat(e.celiacos)>0?`<tr><td class="lc">Celíacos</td><td>${fmtP(e.celiacos)}</td></tr>`:''}
-          ${parseFloat(e.entradas)>0?`<tr><td class="lc">Entradas</td><td>${fmtP(e.entradas)}</td></tr>`:''}
-          ${parseFloat(e.tortas)>0?`<tr><td class="lc">Tortas</td><td>${fmtP(e.tortas)}</td></tr>`:''}
-          ${parseFloat(e.personal)>0?`<tr><td class="lc">Personal</td><td>${fmtP(e.personal)}</td></tr>`:''}
-          ${parseFloat(e.nafta)>0?`<tr><td class="lc">Nafta</td><td>${fmtP(e.nafta)}</td></tr>`:''}
-          ${parseFloat(e.bebida)>0?`<tr><td class="lc">Bebida</td><td>${fmtP(e.bebida)}</td></tr>`:''}
-          ${parseFloat(e.otros)>0?`<tr><td class="lc">Otros</td><td>${fmtP(e.otros)}</td></tr>`:''}
-          <tr class="tot"><td class="lc">Extras total</td><td><span class="val">${fmtP(e.extras_total)}</span></td></tr>
-        </table>
+      <div class="card"><div class="ct">Costos</div>
+        <div class="crow"><span class="clabel">Materia prima</span><span>${fmtM(e.costo_materia_prima)}</span></div>
+        ${parseFloat(e.celiacos)>0?`<div class="crow"><span class="clabel">Celíacos</span><span>${fmtM(e.celiacos)}</span></div>`:''}
+        ${parseFloat(e.entradas)>0?`<div class="crow"><span class="clabel">Entradas</span><span>${fmtM(e.entradas)}</span></div>`:''}
+        ${parseFloat(e.tortas)>0?`<div class="crow"><span class="clabel">Tortas</span><span>${fmtM(e.tortas)}</span></div>`:''}
+        ${parseFloat(e.personal)>0?`<div class="crow"><span class="clabel">Personal</span><span>${fmtM(e.personal)}</span></div>`:''}
+        ${parseFloat(e.nafta)>0?`<div class="crow"><span class="clabel">Nafta</span><span>${fmtM(e.nafta)}</span></div>`:''}
+        ${parseFloat(e.bebida)>0?`<div class="crow"><span class="clabel">Bebida</span><span>${fmtM(e.bebida)}</span></div>`:''}
+        ${parseFloat(e.otros)>0?`<div class="crow"><span class="clabel">Otros</span><span>${fmtM(e.otros)}</span></div>`:''}
+        <div class="ctotal"><span class="clabel">Extras total</span><span class="cval" style="color:var(--gold)">${fmtM(e.extras_total)}</span></div>
       </div>
-      <div class="card">
-        <div class="ct">Cobros</div>
+      <div class="card"><div class="ct">Cobros</div>
         <div class="sumbox">
-          <div class="sumrow"><span>Total cobrado</span><span style="color:var(--gold);font-weight:700;">${fmtP(e.total_cobrado)}</span></div>
-          <div class="sumrow"><span>Costos</span><span style="color:var(--red)">${fmtP(costos)}</span></div>
-          <div class="sumrow tot"><span>Ganancia</span><span style="color:${gan>=0?'var(--green)':'var(--red)'};">${fmtP(gan)}</span></div>
-          <div style="height:8px;"></div>
-          <div class="sumrow"><span>Seña</span><span style="color:var(--green)">${fmtP(e.sena)}</span></div>
-          ${e.fecha_seña?`<div class="sumrow"><span>Fecha seña</span><span>${ff(e.fecha_seña)}</span></div>`:''}
-          <div class="sumrow resta"><span>Resta abonar</span><span>${fmtP(e.resta_abonar)}</span></div>
-          ${e.fecha_resto?`<div class="sumrow"><span>Fecha pago resto</span><span>${ff(e.fecha_resto)}</span></div>`:''}
+          <div class="srow"><span>Total cobrado</span><span style="color:var(--gold);font-weight:700">${fmtM(e.total_cobrado)}</span></div>
+          <div class="srow"><span>Costos</span><span style="color:var(--red)">${fmtM(cost)}</span></div>
+          <div class="srow tot"><span>Ganancia</span><span style="color:${gan>=0?'var(--grn)':'var(--red)'}">${fmtM(gan)}</span></div>
+          <div style="height:6px"></div>
+          <div class="srow"><span>Seña recibida</span><span style="color:var(--grn)">${fmtM(e.sena)}</span></div>
+          ${e.fecha_sena?`<div class="srow"><span>Fecha seña</span><span>${fmtD(e.fecha_sena)}</span></div>`:''}
+          <div class="srow resta"><span>Resta abonar</span><span>${fmtM(e.resta_abonar)}</span></div>
+          ${e.fecha_resto?`<div class="srow"><span>Fecha pago resto</span><span>${fmtD(e.fecha_resto)}</span></div>`:''}
         </div>
-        <div class="brow">
-          <button class="btn btn-out btn-sm" onclick="editarCobro(${e.id},${e.total_cobrado||0},${e.sena||0})">✏ Editar cobros</button>
-        </div>
-        ${e.notas?`<div style="margin-top:.75rem;padding:9px;background:var(--surface3);border-radius:8px;font-size:12px;color:var(--muted2);">${e.notas}</div>`:''}
+        <div class="brow"><button class="btn bout bsm" onclick="editCobro(${e.id},${e.total_cobrado||0},${e.sena||0})">✏ Editar cobros</button></div>
       </div>
-    </div>
-  `;
-
+    </div>`;
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-detalle').classList.add('active');
-  document.querySelectorAll('.dtab,.bnav-item').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.dtab,.bitem').forEach(t=>t.classList.remove('active'));
 }
 
-async function cambEstDet(id,estado){await cambiarEstado(id,estado);verDet(id);}
+async function cEstDet(id,est){ await cambEst(id,est); verDet(id); }
 
-async function editarCobro(id,totalActual,señaActual){
-  const nuevo=prompt(`Editar total cobrado (actual: ${fmtP(totalActual)}):`,parseFloat(totalActual).toFixed(2));
-  if(nuevo===null)return;
-  const t=parseFloat(nuevo);
-  if(isNaN(t)||t<0){toast('Valor inválido','err');return;}
-  const nuevaSeña=prompt(`Editar seña (actual: ${fmtP(señaActual)}):`,parseFloat(señaActual).toFixed(2));
-  if(nuevaSeña===null)return;
-  const s=parseFloat(nuevaSeña)||0;
+async function editCobro(id,tc,se){
+  const nt=prompt(`Total cobrado (actual: ${fmtM(tc)}):`, parseFloat(tc).toFixed(2));
+  if(nt===null)return;
+  const ns=prompt(`Seña recibida (actual: ${fmtM(se)}):`, parseFloat(se).toFixed(2));
+  if(ns===null)return;
+  const t=parseFloat(nt)||0, s=parseFloat(ns)||0;
   try{
-    await PATCH('eventos',id,{total_cobrado:t,sena:s,resta_abonar:Math.max(0,t-s)});
-    const e=eventos.find(ev=>ev.id===id);
-    if(e){e.total_cobrado=t;e.sena=s;e.resta_abonar=Math.max(0,t-s);}
-    toast('Cobros actualizados ✓');
-    verDet(id);
+    await dbPatch('eventos',id,{total_cobrado:t,sena:s,resta_abonar:Math.max(0,t-s)});
+    const e=evs.find(x=>x.id===id); if(e){e.total_cobrado=t;e.sena=s;e.resta_abonar=Math.max(0,t-s);}
+    toast('Cobros actualizados ✓'); verDet(id);
   }catch(err){toast('Error','err');}
 }
 
 // ===== MENÚ =====
 function renderMenu(){
-  const html=`
+  document.getElementById('menu-body').innerHTML=`
     <div class="ct">Servicios Maikels — Precio por persona</div>
-    <div style="margin-bottom:1rem;">
-      ${servicios.map((s,i)=>`
-        <div class="menu-row">
-          <div>
-            <div class="mn">${s.nombre}</div>
-            <div class="md">${s.desc}</div>
-          </div>
-          <div class="mp">
-            <input type="number" value="${s.precio}" step="100" onchange="updateSvcPrecio(${i},this.value)" style="width:110px;text-align:right;color:var(--gold);font-weight:700;font-size:14px;">
-          </div>
-        </div>
-      `).join('')}
-    </div>
-    <div class="brow"><button class="btn btn-gold btn-sm" onclick="guardarPrecios()">💾 Guardar precios</button><button class="btn btn-ghost btn-sm" onclick="resetPrecios()">Restaurar predeterminados</button></div>
-
-    <div style="height:1rem;"></div>
-    <div class="ct">Toppings básicos (Servicio Básico)</div>
-    <div class="toppings-list" style="margin-bottom:1rem;">${TOPPINGS_BASICOS.map(t=>`<span class="topping-tag">${t}</span>`).join('')}</div>
-
-    <div class="ct">Toppings agregados (Clásico 1, Clásico 2 y Premium)</div>
-    <div class="toppings-list">${TOPPINGS_AGREGADOS.map(t=>`<span class="topping-tag">${t}</span>`).join('')}</div>
-  `;
-  document.getElementById('menu-body').innerHTML=html;
-}
-
-function updateSvcPrecio(idx,val){
-  servicios[idx].precio=parseFloat(val)||0;
-}
-
-function guardarPrecios(){
-  saveServicios();
-  toast('Precios guardados ✓');
-}
-
-function resetPrecios(){
-  if(!confirm('¿Restaurar precios predeterminados del PDF?'))return;
-  servicios=JSON.parse(JSON.stringify(SERVICIOS_DEFAULT));
-  saveServicios();
-  renderMenu();
-  toast('Precios restaurados');
-}
-
-
-// ===== COSTOS FIJOS =====
-const COSTOS_DEFAULT = [
-  {key:'materia_prima_pp', nombre:'Materia prima por pizza', precio:0, desc:'Costo de harina, levadura, tomate, queso por pizza'},
-  {key:'personal_pp', nombre:'Personal por evento', precio:0, desc:'Costo total del personal por evento'},
-  {key:'nafta_pp', nombre:'Nafta / Traslado', precio:0, desc:'Combustible y traslado estimado por evento'},
-  {key:'celiaco_pp', nombre:'Porción celíaco / Sin TACC', precio:0, desc:'Costo extra por porción especial'},
-  {key:'entrada_pp', nombre:'Entrada por persona', precio:0, desc:'Costo de entradas por persona'},
-  {key:'torta_pp', nombre:'Torta por evento', precio:0, desc:'Costo estimado de tortas por evento'},
-  {key:'bebida_pp', nombre:'Bebida por persona', precio:0, desc:'Costo de bebida por persona'},
-  {key:'otros_pp', nombre:'Otros gastos', precio:0, desc:'Gastos varios no contemplados'},
-];
-
-let costosConfig = JSON.parse(localStorage.getItem('mk_costos') || 'null') || JSON.parse(JSON.stringify(COSTOS_DEFAULT));
-function saveCostos(){ localStorage.setItem('mk_costos', JSON.stringify(costosConfig)); }
-
-function renderCostos(){
-  const html = `
-    <div class="ct">Costos de referencia por rubro</div>
-    <div style="margin-bottom:.5rem;font-size:12px;color:var(--muted);">Estos valores son de referencia para tu control interno. Se pueden editar en cualquier momento.</div>
-    ${costosConfig.map((c,i) => `
-      <div class="menu-row">
-        <div style="flex:1;min-width:0;">
-          <div class="mn">${c.nombre}</div>
-          <div class="md">${c.desc}</div>
-        </div>
-        <div class="mp" style="display:flex;align-items:center;gap:6px;">
-          <span style="font-size:11px;color:var(--muted);">$</span>
-          <input type="number" value="${c.precio}" step="100" min="0"
-            style="width:120px;text-align:right;color:var(--gold);font-weight:700;font-size:14px;background:var(--surface3);border:1px solid var(--border-gold);border-radius:7px;padding:6px 9px;"
-            onchange="updateCosto(${i},this.value)">
-        </div>
-      </div>
-    `).join('')}
+    ${svcs.map((s,i)=>`
+      <div class="mrow">
+        <div style="flex:1;min-width:0"><div class="mname">${s.nombre}</div><div class="mdesc">${s.desc}</div></div>
+        <input class="mpinput" type="number" value="${s.precio}" step="500" min="0" onchange="svcs[${i}].precio=parseFloat(this.value)||0">
+      </div>`).join('')}
     <div class="brow">
-      <button class="btn btn-gold btn-sm" onclick="guardarCostos()">💾 Guardar costos</button>
-      <button class="btn btn-ghost btn-sm" onclick="resetCostos()">Restaurar predeterminados</button>
+      <button class="btn bgold bsm" onclick="saveSvcs();toast('Precios guardados ✓')">💾 Guardar precios</button>
+      <button class="btn bghost bsm" onclick="if(confirm('¿Restaurar precios originales?')){svcs=JSON.parse(JSON.stringify(SVC_DEF));saveSvcs();renderMenu();toast('Restaurado');}">Restaurar</button>
     </div>
+    <div style="height:1rem"></div>
+    <div class="ct">Toppings básicos</div>
+    <div class="tags" style="margin-bottom:.75rem">${TOP_BAS.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    <div class="ct">Toppings agregados (Clásico y Premium)</div>
+    <div class="tags">${TOP_AGR.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
   `;
-  document.getElementById('costos-body').innerHTML = html;
 }
 
-function updateCosto(idx, val){ costosConfig[idx].precio = parseFloat(val)||0; }
-function guardarCostos(){ saveCostos(); toast('Costos guardados ✓'); }
-function resetCostos(){
-  if(!confirm('¿Restaurar todos los costos a $0?')) return;
-  costosConfig = JSON.parse(JSON.stringify(COSTOS_DEFAULT));
-  saveCostos(); renderCostos(); toast('Costos restaurados');
+// ===== COSTOS =====
+function renderCostos(){
+  document.getElementById('costos-body').innerHTML=`
+    <div class="ct">Costos de referencia por rubro</div>
+    <div style="font-size:11px;color:var(--mut);margin-bottom:.85rem;">Valores de referencia para tu control interno. No afectan el cálculo automático.</div>
+    ${csts.map((c,i)=>`
+      <div class="mrow">
+        <div style="flex:1;min-width:0"><div class="mname">${c.nombre}</div><div class="mdesc">${c.desc}</div></div>
+        <input class="mpinput" type="number" value="${c.precio}" step="100" min="0" onchange="csts[${i}].precio=parseFloat(this.value)||0">
+      </div>`).join('')}
+    <div class="brow">
+      <button class="btn bgold bsm" onclick="saveCsts();toast('Costos guardados ✓')">💾 Guardar costos</button>
+      <button class="btn bghost bsm" onclick="if(confirm('¿Restaurar a $0?')){csts=JSON.parse(JSON.stringify(CST_DEF));saveCsts();renderCostos();toast('Restaurado');}">Restaurar</button>
+    </div>
+  `;
 }
 
 // ===== INIT =====
