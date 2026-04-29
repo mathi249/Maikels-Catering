@@ -680,7 +680,7 @@ async function loadEvs(){
   document.getElementById('ev-load').style.display='flex';
   document.getElementById('ev-empty').style.display='none';
   document.getElementById('ev-tb').innerHTML='';
-  try{ evs=await dbGet('order=fecha.desc'); updBadge(); renderEvs(); }
+  try{ evs=await dbGet; updBadge(); renderEvs(); }
   catch(err){ toast('Error cargando: '+err.message,'err'); }
   finally{ document.getElementById('ev-load').style.display='none'; }
 }
