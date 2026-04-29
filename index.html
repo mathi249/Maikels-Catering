@@ -530,7 +530,7 @@ async function renderDash(){
   document.getElementById('d-date').textContent=new Date().toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   document.getElementById('d-stats').innerHTML='<div class="loading" style="grid-column:1/-1"><div class="spin"></div></div>';
   try{
-    evs = await dbGet('order=fecha.asc');
+    evs = await dbGet();
     updBadge();
     const today=new Date().toISOString().split('T')[0];
     const comp=evs.filter(e=>e.estado==='completado');
