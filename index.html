@@ -383,28 +383,64 @@ tr:last-child td{border-bottom:none;}tr:hover td{background:var(--s2);}
 </div>
 <script>
 // ===== BASE DE DATOS LOCAL =====
-const DB_KEY = 'mk_eventos';
+// ===== SUPABASE CONFIG =====
+const SUPABASE_URL = 'https://TU-PROJECT-ID.supabase.co';           // ← REEMPLAZA con tu URL
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // ← PEGA tu ANON KEY completa aquí
 
-function dbLoad(){ try{ return JSON.parse(localStorage.getItem(DB_KEY)||'[]'); }catch(e){ return []; } }
-function dbSave(data){ localStorage.setItem(DB_KEY, JSON.stringify(data)); }
+let supabaseClient = null;
 
-async function dbGet(q=''){ return dbLoad(); }
-async function dbInsert(data){
-  const all = dbLoad();
-  const nuevo = {...data, id: Date.now(), created_at: new Date().toISOString()};
-  all.push(nuevo);
-  dbSave(all);
-  return [nuevo];
+async function initSupabase() {
+    if (supabaseClient) return supabaseClient;
+    try {
+        supabaseClient = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        console.log("✅ Supabase conectado correctamente");
+        return supabaseClient;
+    } catch (error) {
+        console.error("Error conectando Supabase:", error);
+        toast("Error al conectar con la base de datos", "err");
+        return null;
+    }
 }
-async function dbUpdate(id, data){
-  const all = dbLoad();
-  const idx = all.findIndex(e=>e.id===id);
-  if(idx>=0){ all[idx]={...all[idx],...data}; dbSave(all); return [all[idx]]; }
-  return [];
+
+// ===== FUNCIONES CON SUPABASE =====
+async function dbGet() {
+    await initSupabase();
+    const { data, error } = await supabaseClient
+        .from('eventos')
+        .select('*')
+        .order('fecha', { ascending: false });
+    if (error) throw error;
+    return data || [];
 }
-async function dbDelete(id){
-  const all = dbLoad().filter(e=>e.id!==id);
-  dbSave(all);
+
+async function dbInsert(data) {
+    await initSupabase();
+    const { data: newData, error } = await supabaseClient
+        .from('eventos')
+        .insert([data])
+        .select();
+    if (error) throw error;
+    return newData;
+}
+
+async function dbUpdate(id, updates) {
+    await initSupabase();
+    const { data, error } = await supabaseClient
+        .from('eventos')
+        .update(updates)
+        .eq('id', id)
+        .select();
+    if (error) throw error;
+    return data;
+}
+
+async function dbDelete(id) {
+    await initSupabase();
+    const { error } = await supabaseClient
+        .from('eventos')
+        .delete()
+        .eq('id', id);
+    if (error) throw error;
 }
 
 // ===== LOCAL CONFIG (menu/costos stay in localStorage) =====
